@@ -4,7 +4,10 @@
   "scripts": {
     "cy-open": "cypress open --config-file=cypress.config.ts",
     "cy-run": "cypress run --config-file=cypress.config.ts",
-    "compile": "tsc -b"
+    "compile": "tsc -b",
+    "lint": "eslint --cache --ext .ts,.js .",
+    "prettier": "prettier --check 'cypress/**/*.{ts,js}'",
+    "prettier:fix": "prettier --write 'cypress/**/*.{ts,js}'"
   },
   "dependencies": {
     "cypress": "^10.0.3",
@@ -14,6 +17,15 @@
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
-    "@babel/preset-typescript": "^7.17.12"
+    "@babel/preset-typescript": "^7.17.12",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.6.2"
   }
 }

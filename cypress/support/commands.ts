@@ -75,7 +75,7 @@ Cypress.Commands.add("handleGoogle", () => {
 
   // prevent google analytics from loading and replace it with a stub before every
   // single page load including all new page navigations
-  cy.on("window:before:load", (win) => {
+  cy.on("window:before:load", win => {
     if (!Object.getOwnPropertyDescriptor(win, "ga")) {
       Object.defineProperty(win, "ga", {
         configurable: false,
@@ -101,5 +101,5 @@ Cypress.Commands.add("visitViewport", (device: Cypress.ViewportPreset) => {
 
 Cypress.on(
   "uncaught:exception",
-  (err) => !err.message.includes("ResizeObserver loop limit exceeded")
+  err => !err.message.includes("ResizeObserver loop limit exceeded"),
 );
