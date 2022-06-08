@@ -18,7 +18,6 @@ export const clickOpts: Partial<Cypress.ClickOptions> = {
   scrollBehavior: false,
 };
 
-// TODO: Set username and password secrets in github
 const username = Cypress.env("TEST_USERNAME");
 const password = Cypress.env("TEST_PASSWORD");
 
