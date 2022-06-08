@@ -2,6 +2,8 @@
 
 A suite of Cypress tests that runs against Hosted DoltDB (hosted.doltdb.com)
 
+![Run all Cypress tests](<https://github.com/dolthub/hosted-cypress/workflows/Tests%20(Hosted%20Prod)/badge.svg>)
+
 ## Installation
 
 ```bash
