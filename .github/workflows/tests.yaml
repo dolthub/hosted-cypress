@@ -32,7 +32,6 @@ jobs:
         with:
           install: false
           browser: chrome
-          headless: true
           config-file: cypress.config.ts
         env:
           CYPRESS_TEST_USERNAME: ${{ secrets.CYPRESS_TEST_USERNAME }}

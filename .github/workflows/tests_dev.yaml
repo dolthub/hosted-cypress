@@ -16,7 +16,6 @@
         with:
           install: false
           browser: chrome
-          headless: true
         env:
           CYPRESS_BASE_URL: https://hosteddoltdb.hosteddev.ld-corp.com
           CYPRESS_TEST_USERNAME: ${{ secrets.CYPRESS_TEST_USERNAME }}
