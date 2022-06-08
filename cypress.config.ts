@@ -5,6 +5,6 @@ export default defineConfig({
   video: false,
   e2e: {
     baseUrl: "https://hosted.doltdb.com",
-    specPattern: "cypress/integration/**/*.{js,jsx,ts,tsx}",
+    specPattern: "cypress/integration/**/*.spec.{js,jsx,ts,tsx}",
   },
 });
