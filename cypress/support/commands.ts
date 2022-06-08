@@ -25,6 +25,14 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 export const defaultTimeout = 10000;
+const opts: Partial<Cypress.Timeoutable> = {
+  timeout: defaultTimeout,
+};
+const clickOpts: Partial<Cypress.ClickOptions> = { scrollBehavior: false };
+
+// TODO: Set username and password secrets in github
+const username = Cypress.env("TEST_USERNAME");
+const password = Cypress.env("TEST_PASSWORD");
 
 // Ensures page has loaded before running tests
 // Reference: https://www.cypress.io/blog/2018/02/05/when-can-the-test-start/
@@ -69,6 +77,72 @@ Cypress.Commands.add("visitAndWait", (path: string) => {
   }).then(waitForAppStart);
 });
 
+Cypress.Commands.add(
+  "loginAsCypressTestingAfterNavigateToSignin",
+  (redirectValue?: string) => {
+    if (!password || !username) {
+      throw new Error("Username or password env not set");
+    }
+
+    cy.visitAndWait("/signin");
+    cy.visitViewport("macbook-15");
+    completeLoginForCypressTesting();
+    ensureSuccessfulLogin(redirectValue);
+  },
+);
+
+Cypress.Commands.add(
+  "loginAsCypressTestingFromSigninPageWithRedirect",
+  (redirectValue: string) => {
+    cy.location("pathname", opts).should("eq", `/signin`);
+    cy.location("search", opts)
+      .should("eq", `?redirect=%2F${redirectValue}`)
+      .then(() => {
+        completeLoginForCypressTesting();
+        ensureSuccessfulLogin(redirectValue);
+      });
+  },
+);
+
+function ensureSuccessfulLogin(redirectValue?: string) {
+  // Must set cookie for localhost so navbar renders correctly
+  if (Cypress.env("LOCAL")) {
+    cy.setCookie("hostedToken", "fake-token");
+  }
+  if (redirectValue) {
+    cy.location("pathname", opts).should("include", `/${redirectValue}`);
+  } else {
+    cy.location("pathname", opts).should("include", "/deployments");
+  }
+  cy.get("[data-cy=navbar-menu-name]", opts).should("be.visible");
+}
+
+function completeLoginForCypressTesting() {
+  // TODO
+  // Check that email form has rendered
+  // cy.get("[data-cy=signin-email-form]", opts).should("be.visible");
+  // // Enter username and password in inputs
+  // cy.get("input[name=username]", opts)
+  //   .should("be.visible")
+  //   .type(username, { ...clickOpts, log: false });
+  // cy.get("input[name=username]").should("have.value", username);
+  // cy.get("input[name=password]", opts)
+  //   .should("be.visible")
+  //   .type(password, { ...clickOpts, log: false })
+  //   .type("{enter}", clickOpts);
+}
+
+Cypress.Commands.add("signout", isMobile => {
+  if (!isMobile) {
+    cy.get("[data-cy=navbar-menu-name]", opts).click(clickOpts);
+    cy.get("[data-cy=sign-out-button-desktop]", opts).click(clickOpts);
+  } else {
+    cy.get("[data-cy=mobile-navbar-menu-button]", opts).click(clickOpts);
+    cy.get("[data-cy=sign-out-button-mobile]", opts).click(clickOpts);
+  }
+  cy.clearCookie("hostedToken");
+});
+
 Cypress.Commands.add("handleGoogle", () => {
   // create the stub here
   const ga = cy.stub().as("ga");
@@ -86,8 +160,13 @@ Cypress.Commands.add("handleGoogle", () => {
   });
 });
 
-Cypress.Commands.add("visitPage", (currentPage: string) => {
+Cypress.Commands.add("visitPage", (currentPage: string, loggedIn: boolean) => {
   cy.handleGoogle();
+
+  if (loggedIn) {
+    // If page tests require a user to be logged in, go to signin page and log in test user
+    cy.loginAsCypressTestingAfterNavigateToSignin();
+  }
 
   // 404 page should be rendered when page not found
   cy.visitAndWait(currentPage);

@@ -4,6 +4,11 @@
   "scripts": {
     "cy-open": "cypress open --config-file=cypress.config.ts",
     "cy-run": "cypress run --config-file=cypress.config.ts",
+    "cy-chrome": "cypress run --browser chrome --headless --config-file=cypress.config.ts",
+    "cy-open-dev": "CYPRESS_BASE_URL=https://hosteddoltdb.hosteddev.ld-corp.com cypress open --config-file=cypress.config.ts",
+    "cy-run-dev": "CYPRESS_BASE_URL=https://hosteddoltdb.hosteddev.ld-corp.com cypress run --config-file=cypress.config.ts",
+    "cy-open-local": "CYPRESS_LOCAL=true && CYPRESS_NUM_TESTS_KEPT_IN_MEMORY=0 && CYPRESS_BASE_URL=http://localhost:3001 cypress open --config-file=cypress.config.ts",
+    "cy-run-local": "CYPRESS_LOCAL=true && CYPRESS_BASE_URL=http://localhost:3001 cypress run --config-file=cypress.config.ts",
     "ci": "npm-run-all prettier compile lint",
     "compile": "tsc -b",
     "lint": "eslint --cache --ext .ts,.js .",
