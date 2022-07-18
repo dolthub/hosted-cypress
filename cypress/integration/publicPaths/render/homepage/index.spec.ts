@@ -7,6 +7,7 @@ const currentPage = "/";
 
 describe(`${pageName} renders expected components on different devices`, () => {
   const tests = [
+    
     newExpectation(
       "renders container",
       "[data-cy=homepage-container]",
@@ -15,6 +16,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
         "The easiest way to build with Dolt.",
       ),
     ),
+
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
