@@ -37,6 +37,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
+    newExpectation(
+      "should find link to video",
+      "[data-cy=steps-container]",
+      newShouldArgs("be.visible.and.contain", "Watch the Video"),
+    ),
+
     newExpectationWithScrollIntoView(
       "should scroll to Features header",
       "[data-cy=features-container]",
@@ -73,6 +79,24 @@ describe(`${pageName} renders expected components on different devices`, () => {
       "[data-cy=compare-container",
       newShouldArgs("be.visible.and.contain", "Which Dolt is right for you?"),
       true,
+    ),
+
+    newExpectation(
+      "should find link to Get Started",
+      "[data-cy=compare-container]",
+      newShouldArgs("be.visible.and.contain", "Get started"),
+    ),
+
+    newExpectation(
+      "should find link to Launch",
+      "[data-cy=compare-container]",
+      newShouldArgs("be.visible.and.contain", "Launch a database"),
+    ),
+
+    newExpectation(
+      "should find link to DoltHub",
+      "[data-cy=compare-container]",
+      newShouldArgs("be.visible.and.contain", "Visit DoltHub"),
     ),
   ];
 
