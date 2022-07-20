@@ -19,13 +19,15 @@ describe(`${pageName} renders expected components on different devices`, () => {
         "The easiest way to build with Dolt.",
       ),
     ),
+
     newExpectation(
-      "Should find top button",
+      "should find launch database button",
       "[data-cy=top-database-button",
       newShouldArgs("be.visible.and.contain", "Launch a database"),
     ),
+
     newExpectation(
-      "Should find top link",
+      "should find pricing link",
       "[data-cy=top-pricing-button]",
       newShouldArgs("be.visible.and.contain", "View pricing"),
     ),
@@ -60,18 +62,16 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    newExpectationWithScrollIntoView(
+    newExpectation(
       "should scroll to Features mariaDB link",
       "[data-cy=features-link-mariaDB]",
       newShouldArgs("be.visible.and.contain", "MariaDB SkySQL"),
-      true,
     ),
 
-    newExpectationWithScrollIntoView(
+    newExpectation(
       "should scroll to Features team link",
       "[data-cy=features-link-team]",
       newShouldArgs("be.visible.and.contain", "Learn about the team"),
-      true,
     ),
 
     newExpectationWithScrollIntoView(
@@ -82,21 +82,13 @@ describe(`${pageName} renders expected components on different devices`, () => {
     ),
 
     newExpectation(
-      "should find link to Get Started",
+      "should find table links for each dolt service",
       "[data-cy=compare-container]",
-      newShouldArgs("be.visible.and.contain", "Get started"),
-    ),
-
-    newExpectation(
-      "should find link to Launch",
-      "[data-cy=compare-container]",
-      newShouldArgs("be.visible.and.contain", "Launch a database"),
-    ),
-
-    newExpectation(
-      "should find link to DoltHub",
-      "[data-cy=compare-container]",
-      newShouldArgs("be.visible.and.contain", "Visit DoltHub"),
+      newShouldArgs("be.visible.and.contain", [
+        "Visit DoltHub",
+        "Get started",
+        "Launch a database",
+      ]),
     ),
   ];
 
