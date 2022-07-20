@@ -12,7 +12,7 @@ const currentPage = "/";
 describe(`${pageName} renders expected components on different devices`, () => {
   const tests = [
     newExpectation(
-      "renders container",
+      "renders Top container",
       "[data-cy=top-container]",
       newShouldArgs(
         "be.visible.and.contain",
@@ -55,21 +55,20 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    newExpectationWithScrollIntoView(
-      "should scroll to Features aws link",
+    newExpectation(
+      "should find to Features aws link",
       "[data-cy=features-link-awsRDS]",
       newShouldArgs("be.visible.and.contain", "AWS RDS"),
-      true,
     ),
 
     newExpectation(
-      "should scroll to Features mariaDB link",
+      "should find to Features mariaDB link",
       "[data-cy=features-link-mariaDB]",
       newShouldArgs("be.visible.and.contain", "MariaDB SkySQL"),
     ),
 
     newExpectation(
-      "should scroll to Features team link",
+      "should find to Features team link",
       "[data-cy=features-link-team]",
       newShouldArgs("be.visible.and.contain", "Learn about the team"),
     ),
