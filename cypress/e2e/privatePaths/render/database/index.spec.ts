@@ -46,17 +46,15 @@ describe(pageName, () => {
       "[data-cy=repo-data-table-empty]",
       notExist,
     ),
-    // TODO
-    // newExpectation(
-    //   "should not find database table data",
-    //   "[data-cy=repo-data-table]",
-    //   notExist,
-    // ),
   ];
 
   const desktopAndIpadTests = (isIpad = false): Tests => [
     ...commonTests,
-    // TODO: Exit button
+    newExpectation(
+      "should find desktop database table data",
+      "[data-cy=desktop-repo-data-table]",
+      beVisible,
+    ),
     ...testRepoHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
     ...tableExpectations(false, false, 3, testTable),
@@ -84,6 +82,11 @@ describe(pageName, () => {
 
   const mobileTests = [
     ...commonTests,
+    newExpectation(
+      "should find mobile database table data",
+      "[data-cy=mobile-repo-data-table]",
+      beVisible,
+    ),
     ...testMobileRepoHeaderNav(ownerName, depName, dbName),
     ...tableExpectations(false, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
