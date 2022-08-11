@@ -37,7 +37,7 @@ const signedInMobileLinks = [
   "[data-cy=navbar-deployments]",
   "[data-cy=navbar-organizations]",
   "[data-cy=navbar-settings]",
-  "[data-cy=navbar-sign-out-button-mobile]",
+  "[data-cy=sign-out-button-mobile]",
 ];
 
 export const testSignedOutNavbar: Tests = [

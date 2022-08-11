@@ -62,11 +62,12 @@ export const iPad2ForAppLayout = (
   tests: Tests,
   skipNavbar = false,
   skipFooter = false,
+  loggedIn = false,
 ): Device =>
   iPad2(
     pageName,
-    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter),
-    false,
+    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
+    loggedIn,
   );
 
 export const iPhoneXForAppLayout = (
@@ -74,11 +75,12 @@ export const iPhoneXForAppLayout = (
   tests: Tests,
   skipNavbar = false,
   skipFooter = false,
+  loggedIn = false,
 ): Device =>
   iPhoneX(
     pageName,
-    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter),
-    false,
+    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
+    loggedIn,
   );
 
 export const mobileDevicesForAppLayout = (
