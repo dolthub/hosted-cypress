@@ -175,6 +175,11 @@ export const testRepoHeaderForAll = (
   const loggedOutRepoHeaderTests = isIpad
     ? [
         ...testCommonHeader(depName, ownerName, dbName),
+        newExpectation(
+          "should have exit button",
+          "[data-cy=database-exit-button]",
+          beVisible,
+        ),
         // newExpectation(
         //   "should not have repo clone button",
         //   "[data-cy=repo-clone-button]",
@@ -189,6 +194,11 @@ export const testRepoHeaderForAll = (
       ]
     : [
         ...testCommonHeader(depName, ownerName, dbName),
+        newExpectation(
+          "should have exit button",
+          "[data-cy=database-exit-button]",
+          beVisible,
+        ),
         // newExpectationWithClickFlows(
         //   "should have repo clone button",
         //   "[data-cy=repo-clone-button]",
@@ -215,6 +225,11 @@ export const testMobileRepoHeaderNav = (
   dbName: string,
 ): Expectation[] => [
   ...testCommonHeader(ownerName, depName, dbName),
+  newExpectation(
+    "should have exit button",
+    "[data-cy=mobile-database-exit-icon]",
+    beVisible,
+  ),
   // newExpectation(
   //   "should not have clone button",
   //   "[data-cy=repo-clone-button]",
