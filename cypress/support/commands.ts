@@ -117,18 +117,17 @@ function ensureSuccessfulLogin(redirectValue?: string) {
 }
 
 function completeLoginForCypressTesting() {
-  // TODO
   // Check that email form has rendered
-  // cy.get("[data-cy=signin-email-form]", opts).should("be.visible");
-  // // Enter username and password in inputs
-  // cy.get("input[name=username]", opts)
-  //   .should("be.visible")
-  //   .type(username, { ...clickOpts, log: false });
-  // cy.get("input[name=username]").should("have.value", username);
-  // cy.get("input[name=password]", opts)
-  //   .should("be.visible")
-  //   .type(password, { ...clickOpts, log: false })
-  //   .type("{enter}", clickOpts);
+  cy.get("[data-cy=signin-email-form]", opts).should("be.visible");
+  // Enter username and password in inputs
+  cy.get("input[name=username]", opts)
+    .should("be.visible")
+    .type(username, { ...clickOpts, log: false });
+  cy.get("input[name=username]").should("have.value", username);
+  cy.get("input[name=password]", opts)
+    .should("be.visible")
+    .type(password, { ...clickOpts, log: false })
+    .type("{enter}", clickOpts);
 }
 
 Cypress.Commands.add("signout", isMobile => {

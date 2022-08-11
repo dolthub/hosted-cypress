@@ -2,7 +2,7 @@
   "name": "hosted-cypress",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "cy-open": "cypress open",
+    "cy-open": "cypress open --config numTestsKeptInMemory=0",
     "cy-run": "cypress run",
     "cy-chrome": "cypress run --browser chrome",
     "cy-open-dev": "cypress open --config baseUrl=https://hosteddoltdb.hosteddev.ld-corp.com",
