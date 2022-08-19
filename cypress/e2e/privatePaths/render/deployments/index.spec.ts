@@ -17,7 +17,7 @@ describe(pageName, () => {
     pageName,
     tests,
     false,
-    false,
+    true,
     true,
   );
   runTestsForDevices({ currentPage, devices });

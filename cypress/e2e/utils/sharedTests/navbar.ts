@@ -48,7 +48,17 @@ export const testSignedOutNavbar: Tests = [
   ),
 ];
 
-export const testSignedInNavbar: Tests = [
+export const testSignedInNavbar = (hasClosedLeftNav = false): Tests => [
+  ...(hasClosedLeftNav
+    ? [
+        newExpectationWithClickFlows(
+          "should open left nav",
+          "[data-cy=left-navbar-open-button]",
+          beVisible,
+          [newClickFlow("[data-cy=left-navbar-open-button]", [])],
+        ),
+      ]
+    : []),
   newExpectation(
     "should have signed in navbar and correct links",
     signedInLinks,

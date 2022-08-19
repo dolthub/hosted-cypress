@@ -40,8 +40,9 @@ describe(pageName, () => {
     tests,
     tests,
     false,
-    false,
+    true,
     loggedIn,
+    true,
   );
   runTestsForDevices({ currentPage, devices });
 });
