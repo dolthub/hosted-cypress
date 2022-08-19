@@ -100,8 +100,15 @@ export const desktopDevicesForAppLayout = (
   skipNavbar = false,
   skipFooter = false,
   loggedIn = false,
+  hasClosedLeftNav = false,
 ) => {
-  const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
+  const t = getAppLayoutTests(
+    tests,
+    skipNavbar,
+    skipFooter,
+    loggedIn,
+    hasClosedLeftNav,
+  );
   return [macbook15(pageName, t, loggedIn), macbook11(pageName, t, loggedIn)];
 };
 
@@ -112,6 +119,7 @@ export const allDevicesForAppLayout = (
   skipNavbar = false,
   skipFooter = false,
   loggedIn = false,
+  hasClosedLeftNav = false,
 ) => [
   ...desktopDevicesForAppLayout(
     pageName,
@@ -119,6 +127,7 @@ export const allDevicesForAppLayout = (
     skipNavbar,
     skipFooter,
     loggedIn,
+    hasClosedLeftNav,
   ),
   ...mobileDevicesForAppLayout(
     pageName,
@@ -134,10 +143,13 @@ function getAppLayoutTests(
   skipNavbar = false,
   skipFooter = false,
   loggedIn = false,
+  hasClosedLeftNav = false,
 ) {
   if (skipNavbar && skipFooter) return tests;
   if (skipNavbar) return [...tests, ...testFooter];
-  const navbarTests = loggedIn ? testSignedInNavbar : testSignedOutNavbar;
+  const navbarTests = loggedIn
+    ? testSignedInNavbar(hasClosedLeftNav)
+    : testSignedOutNavbar;
   if (skipFooter) return [...navbarTests, ...tests];
   return [...navbarTests, ...tests, ...testFooter];
 }
