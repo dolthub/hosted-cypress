@@ -42,7 +42,6 @@ describe(pageName, () => {
     false,
     true,
     loggedIn,
-    true,
   );
   runTestsForDevices({ currentPage, devices });
 });
