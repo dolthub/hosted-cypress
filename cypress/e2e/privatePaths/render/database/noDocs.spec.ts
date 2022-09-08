@@ -12,7 +12,7 @@ import {
 
 const pageName = "Docs (no docs exist) page";
 const ownerName = "dolthub";
-const depName = "us-jails";
+const depName = "us-jails-2";
 const dbName = "us_jails";
 const currentBranch = "main";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/doc/${currentBranch}`;
