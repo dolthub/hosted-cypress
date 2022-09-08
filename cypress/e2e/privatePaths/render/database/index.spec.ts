@@ -28,7 +28,7 @@ import { Tests } from "../../../utils/types";
 
 const pageName = "Default database page";
 const ownerName = "dolthub";
-const depName = "us-jails";
+const depName = "us-jails-2";
 const dbName = "us_jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}`;
 
@@ -51,13 +51,18 @@ describe(pageName, () => {
   const desktopAndIpadTests = (isIpad = false): Tests => [
     ...commonTests,
     newExpectation(
-      "should find desktop database table data",
-      "[data-cy=desktop-db-data-table]",
+      "should not find database table data",
+      "[data-cy=db-data-table]",
+      notExist,
+    ),
+    newExpectation(
+      "should find doc markdown",
+      "[data-cy=db-doc-markdown]",
       beVisible,
     ),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
-    ...tableExpectations(false, false, 3, testTable),
+    ...tableExpectations(true, false, 3, testTable),
     // ...testClickDeleteRow(
     //   "error-modal",
     //   newShouldArgs("be.visible.and.contain", ["No authentication", "sign in"]),
@@ -83,12 +88,17 @@ describe(pageName, () => {
   const mobileTests = [
     ...commonTests,
     newExpectation(
-      "should find mobile database table data",
+      "should not find mobile database table data",
       "[data-cy=mobile-db-data-table]",
+      notExist,
+    ),
+    newExpectation(
+      "should find doc markdown",
+      "[data-cy=db-doc-markdown]",
       beVisible,
     ),
     ...testMobileDBHeaderNav(ownerName, depName, dbName),
-    ...tableExpectations(false, false, 3, testTable, true),
+    ...tableExpectations(true, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
     testQueryCatalogSection(hasBranch, 0, undefined, true),
     testSchemaSection(hasBranch, 3, testTable, true),

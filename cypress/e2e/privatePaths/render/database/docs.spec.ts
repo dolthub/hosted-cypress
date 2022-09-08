@@ -10,9 +10,9 @@ import {
   testMobileDBHeaderNav,
 } from "../../../utils/sharedTests/dbHeaderNav";
 
-const pageName = "Docs (no docs exist) page";
+const pageName = "Docs page";
 const ownerName = "dolthub";
-const depName = "us-jails";
+const depName = "us-jails-2";
 const dbName = "us_jails";
 const currentBranch = "main";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/doc/${currentBranch}`;
@@ -26,22 +26,24 @@ describe(pageName, () => {
 
   const commonTests = [
     newExpectation(
-      "should not find doc markdown",
-      "[data-cy=db-doc-markdown]",
+      "should not have no docs header",
+      "[data-cy=no-docs-found]",
       notExist,
     ),
     newExpectation(
-      "should have no docs header",
-      "[data-cy=no-docs-found]",
-      newShouldArgs(
-        "be.visible.and.contain",
-        `No docs found for ${ownerName}/${depName}`,
-      ),
+      "should not have instructions to add a doc",
+      "[data-cy=add-docs-instructions]",
+      notExist,
     ),
     newExpectation(
-      "should have instructions to add a doc",
-      "[data-cy=add-docs-instructions]",
-      newShouldArgs("be.visible.and.contain", "Adding a doc using SQL"),
+      "should find docs list",
+      "[data-cy=db-docs-list] > li",
+      newShouldArgs("be.visible.and.have.length", 2),
+    ),
+    newExpectation(
+      "should find doc markdown",
+      "[data-cy=db-doc-markdown]",
+      newShouldArgs("be.visible.and.contain", "README.md"),
     ),
   ];
 

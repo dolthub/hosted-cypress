@@ -4,7 +4,7 @@ import { newExpectation, newShouldArgs } from "../../../utils/helpers";
 
 const pageName = "Deployment workbench page";
 const ownerName = "dolthub";
-const depName = "us-jails";
+const depName = "us-jails-2";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=workbench`;
 
 const loggedIn = true;
