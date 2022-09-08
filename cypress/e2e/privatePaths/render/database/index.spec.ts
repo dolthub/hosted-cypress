@@ -88,12 +88,17 @@ describe(pageName, () => {
   const mobileTests = [
     ...commonTests,
     newExpectation(
-      "should find mobile database table data",
+      "should not find mobile database table data",
       "[data-cy=mobile-db-data-table]",
+      notExist,
+    ),
+    newExpectation(
+      "should find doc markdown",
+      "[data-cy=db-doc-markdown]",
       beVisible,
     ),
     ...testMobileDBHeaderNav(ownerName, depName, dbName),
-    ...tableExpectations(false, false, 3, testTable, true),
+    ...tableExpectations(true, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
     testQueryCatalogSection(hasBranch, 0, undefined, true),
     testSchemaSection(hasBranch, 3, testTable, true),
