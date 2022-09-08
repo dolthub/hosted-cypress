@@ -11,8 +11,8 @@ import {
   newShouldArgs,
 } from "../../../utils/helpers";
 import {
-  testMobileRepoHeaderNav,
-  testRepoHeaderWithBranch,
+  testDBHeaderWithBranch,
+  testMobileDBHeaderNav,
 } from "../../../utils/sharedTests/dbHeaderNav";
 import {
   tableExpectations,
@@ -43,7 +43,7 @@ describe(pageName, () => {
   const commonTests = [
     newExpectation(
       "should not find empty database",
-      "[data-cy=repo-data-table-empty]",
+      "[data-cy=db-data-table-empty]",
       notExist,
     ),
   ];
@@ -52,10 +52,10 @@ describe(pageName, () => {
     ...commonTests,
     newExpectation(
       "should find desktop database table data",
-      "[data-cy=desktop-repo-data-table]",
+      "[data-cy=desktop-db-data-table]",
       beVisible,
     ),
-    ...testRepoHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
     ...tableExpectations(false, false, 3, testTable),
     // ...testClickDeleteRow(
@@ -84,16 +84,16 @@ describe(pageName, () => {
     ...commonTests,
     newExpectation(
       "should find mobile database table data",
-      "[data-cy=mobile-repo-data-table]",
+      "[data-cy=mobile-db-data-table]",
       beVisible,
     ),
-    ...testMobileRepoHeaderNav(ownerName, depName, dbName),
+    ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...tableExpectations(false, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
     testQueryCatalogSection(hasBranch, 0, undefined, true),
     testSchemaSection(hasBranch, 3, testTable, true),
     newExpectationWithClickFlows(
-      "should click button to close repo nav",
+      "should click button to close db nav",
       "[data-cy=close-table-nav-button]",
       beVisible,
       [

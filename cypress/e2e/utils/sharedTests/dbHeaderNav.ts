@@ -27,7 +27,7 @@ const notBeVisible = newShouldArgs("not.be.visible");
 //   hasDocs: boolean,
 // ) =>
 //   newClickFlow(
-//     "[data-cy=repo-dropdown-button]",
+//     "[data-cy=db-dropdown-button]",
 //     loggedIn
 //       ? [
 //           newExpectation(
@@ -64,7 +64,7 @@ const notBeVisible = newShouldArgs("not.be.visible");
 //             beVisible,
 //           ),
 //         ],
-//     "[data-cy=repo-dropdown-button]",
+//     "[data-cy=db-dropdown-button]",
 //   );
 
 export const testTabs = (visibility: ShouldArgs): Expectation[] => {
@@ -73,7 +73,7 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
     // DATABASE TAB
     newExpectation(
       `should ${tabsVisibility}have Database tab`,
-      "[data-cy=repo-database-tab]",
+      "[data-cy=db-database-tab]",
       visibility,
     ),
 
@@ -81,14 +81,14 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
 
     newExpectation(
       `should ${tabsVisibility}have About tab`,
-      "[data-cy=repo-about-tab]",
+      "[data-cy=db-about-tab]",
       visibility,
     ),
 
     // COMMIT LOG TAB
     newExpectation(
       `should ${tabsVisibility}have Commit Log tab`,
-      "[data-cy=repo-commit-log-tab]",
+      "[data-cy=db-commit-log-tab]",
       visibility,
     ),
 
@@ -96,7 +96,7 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
 
     newExpectation(
       `should ${tabsVisibility}have Tag List tab`,
-      "[data-cy=repo-releases-tab]",
+      "[data-cy=db-releases-tab]",
       visibility,
     ),
 
@@ -104,7 +104,7 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
 
     // newExpectation(
     //   `should ${tabsVisibility}have Pull Requests tab`,
-    //   "[data-cy=repo-pull-requests-tab]",
+    //   "[data-cy=db-pull-requests-tab]",
     //   visibility,
     // ),
   ];
@@ -112,9 +112,9 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
 
 // SETTINGS TAB
 
-// export const testRepoSettingsTab = newExpectation(
-//   "should have Repo Settings section for user with write perms",
-//   "[data-cy=repo-settings-tab]",
+// export const testDBSettingsTab = newExpectation(
+//   "should have DB Settings section for user with write perms",
+//   "[data-cy=db-settings-tab]",
 //   beVisible,
 // );
 
@@ -125,54 +125,54 @@ export const testCommonHeader = (
 ): Expectation[] => [
   newExpectation(
     "should have database header",
-    "[data-cy=repository-page-header]",
+    "[data-cy=db-page-header]",
     beVisible,
   ),
   newExpectation(
     "should have owner's name",
-    "[data-cy=repo-breadcrumbs]",
+    "[data-cy=db-breadcrumbs]",
     newShouldArgs("be.visible.and.contain", ownerName),
   ),
   newExpectation(
     "should have deployment's name",
-    "[data-cy=repo-breadcrumbs]",
+    "[data-cy=db-breadcrumbs]",
     newShouldArgs("be.visible.and.contain", depName),
   ),
   newExpectation(
     "should have database's name",
-    "[data-cy=repo-db-breadcrumb-link]",
+    "[data-cy=dep-db-breadcrumb-link]",
     newShouldArgs("be.visible.and.contain", dbName),
   ),
   // newExpectation(
-  //   "should have repo last updated",
+  //   "should have db last updated",
   //   "[data-cy=updated-at]",
   //   newShouldArgs("be.visible"),
   // ),
   // newExpectation(
-  //   "should have repo's size",
-  //   "[data-cy=repo-size]",
+  //   "should have db's size",
+  //   "[data-cy=db-size]",
   //   newShouldArgs("be.visible"),
   // ),
   // newExpectation(
-  //   "should have repo star button",
-  //   "[data-cy=repo-star]",
+  //   "should have db star button",
+  //   "[data-cy=db-star]",
   //   beVisible,
   // ),
   // newExpectation(
-  //   "should have repo fork button",
-  //   "[data-cy=repo-fork-button]",
+  //   "should have db fork button",
+  //   "[data-cy=db-fork-button]",
   //   beVisible,
   // ),
 ];
 
-export const testRepoHeaderForAll = (
+export const testDBHeaderForAll = (
   ownerName: string,
   depName: string,
   dbName: string,
   // hasDocs: boolean,
   isIpad = false,
 ): Tests => {
-  const loggedOutRepoHeaderTests = isIpad
+  const loggedOutDBHeaderTests = isIpad
     ? [
         ...testCommonHeader(depName, ownerName, dbName),
         newExpectation(
@@ -181,8 +181,8 @@ export const testRepoHeaderForAll = (
           beVisible,
         ),
         // newExpectation(
-        //   "should not have repo clone button",
-        //   "[data-cy=repo-clone-button]",
+        //   "should not have db clone button",
+        //   "[data-cy=db-clone-button]",
         //   notBeVisible,
         // ),
         ...testTabs(beVisible),
@@ -200,26 +200,26 @@ export const testRepoHeaderForAll = (
           beVisible,
         ),
         // newExpectationWithClickFlows(
-        //   "should have repo clone button",
-        //   "[data-cy=repo-clone-button]",
+        //   "should have db clone button",
+        //   "[data-cy=db-clone-button]",
         //   beVisible,
         //   [cloneClickFlow],
         // ),
         ...testTabs(beVisible),
         // newExpectationWithClickFlows(
         //   "should have functioning nav dropdown",
-        //   "[data-cy=repo-dropdown-button]",
+        //   "[data-cy=db-dropdown-button]",
         //   beVisible,
         //   [databaseDropdownClickFlow(loggedIn, hasDocs)],
         // ),
       ];
 
-  // const loggedInRepoHeaderTests = [testRepoSettingsTab];
+  // const loggedInDBHeaderTests = [testDBSettingsTab];
 
-  return loggedOutRepoHeaderTests;
+  return loggedOutDBHeaderTests;
 };
 
-export const testMobileRepoHeaderNav = (
+export const testMobileDBHeaderNav = (
   ownerName: string,
   depName: string,
   dbName: string,
@@ -232,23 +232,23 @@ export const testMobileRepoHeaderNav = (
   ),
   // newExpectation(
   //   "should not have clone button",
-  //   "[data-cy=repo-clone-button]",
+  //   "[data-cy=db-clone-button]",
   //   notBeVisible,
   // ),
   // newExpectation(
   //   "should not have nav dropdown",
-  //   "[data-cy=repo-dropdown-button]",
+  //   "[data-cy=db-dropdown-button]",
   //   notBeVisible,
   // ),
   ...testTabs(notBeVisible),
   // newExpectation(
-  //   "should not have Repo Settings section",
-  //   "[data-cy=repo-settings-tab]",
+  //   "should not have DB Settings section",
+  //   "[data-cy=db-settings-tab]",
   //   notExist,
   // ),
 ];
 
-export const testRepoHeaderWithBranch = (
+export const testDBHeaderWithBranch = (
   ownerName: string,
   depName: string,
   dbName: string,
@@ -256,10 +256,10 @@ export const testRepoHeaderWithBranch = (
   // hasDocs: boolean,
   isIpad = false,
 ): Tests => [
-  ...testRepoHeaderForAll(ownerName, depName, dbName, isIpad),
+  ...testDBHeaderForAll(ownerName, depName, dbName, isIpad),
   // newExpectationWithClickFlows(
   //   "should open create fork modal on fork button click",
-  //   "[data-cy=repo-fork-button]",
+  //   "[data-cy=db-fork-button]",
   //   beVisible,
   //   [forkButtonClickFlow(loggedIn)],
   // ),

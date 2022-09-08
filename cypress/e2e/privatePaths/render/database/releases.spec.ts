@@ -6,8 +6,8 @@ import {
 } from "../../../utils/devices";
 import { newExpectation, newShouldArgs } from "../../../utils/helpers";
 import {
-  testMobileRepoHeaderNav,
-  testRepoHeaderWithBranch,
+  testDBHeaderWithBranch,
+  testMobileDBHeaderNav,
 } from "../../../utils/sharedTests/dbHeaderNav";
 
 const pageName = "Releases page";
@@ -58,12 +58,12 @@ describe(pageName, () => {
   ];
 
   const desktopAndIpadTests = (isIpad = false) => [
-    ...testRepoHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     ...commonTests,
   ];
 
   const mobileTests = [
-    ...testMobileRepoHeaderNav(ownerName, depName, dbName),
+    ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...commonTests,
   ];
 

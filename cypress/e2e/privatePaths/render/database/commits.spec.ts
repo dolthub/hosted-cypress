@@ -6,8 +6,8 @@ import {
 } from "../../../utils/devices";
 import { newExpectation, newShouldArgs } from "../../../utils/helpers";
 import {
-  testMobileRepoHeaderNav,
-  testRepoHeaderWithBranch,
+  testDBHeaderWithBranch,
+  testMobileDBHeaderNav,
 } from "../../../utils/sharedTests/dbHeaderNav";
 
 const pageName = "Commit log page";
@@ -44,7 +44,7 @@ describe(pageName, () => {
   ];
 
   const desktopAndIpadTests = (isIpad = false) => [
-    ...testRepoHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     ...commonTests,
     newExpectation(
       "should find first commit commit links",
@@ -64,7 +64,7 @@ describe(pageName, () => {
   ];
 
   const mobileTests = [
-    ...testMobileRepoHeaderNav(ownerName, depName, dbName),
+    ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...commonTests,
     newExpectation(
       "should find first commit commit ID",
