@@ -6,8 +6,8 @@ import {
 } from "../../../utils/devices";
 import { newExpectation, newShouldArgs } from "../../../utils/helpers";
 import {
-  testMobileRepoHeaderNav,
-  testRepoHeaderWithBranch,
+  testDBHeaderWithBranch,
+  testMobileDBHeaderNav,
 } from "../../../utils/sharedTests/dbHeaderNav";
 
 const pageName = "Docs (no docs exist) page";
@@ -27,7 +27,7 @@ describe(pageName, () => {
   const commonTests = [
     newExpectation(
       "should not find doc markdown",
-      "[data-cy=repo-doc-markdown]",
+      "[data-cy=db-doc-markdown]",
       notExist,
     ),
     newExpectation(
@@ -46,12 +46,12 @@ describe(pageName, () => {
   ];
 
   const desktopAndIpadTests = (isIpad = false) => [
-    ...testRepoHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     ...commonTests,
   ];
 
   const mobileTests = [
-    ...testMobileRepoHeaderNav(ownerName, depName, dbName),
+    ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...commonTests,
   ];
 

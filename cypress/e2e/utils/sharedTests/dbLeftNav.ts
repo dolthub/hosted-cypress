@@ -73,10 +73,10 @@ export const checkSchemaClickflow: ClickFlow = newClickFlow(
 // TABLES
 
 const testTableEditClickFlow = (testTable: string): ClickFlow =>
-  newClickFlow(`[data-cy=repo-tables-table-${testTable}-edit]`, [
+  newClickFlow(`[data-cy=db-tables-table-${testTable}-edit]`, [
     newExpectation(
       "",
-      `[data-cy=repo-tables-table-editing]`,
+      `[data-cy=db-tables-table-editing]`,
       newShouldArgs("be.visible.and.contain", "Editing"),
     ),
   ]);
@@ -88,13 +88,13 @@ export const conditionalEditButtonTest = (
   const editExpectation: Expectation = loggedIn
     ? newExpectationWithClickFlows(
         "should have an Edit button",
-        `[data-cy=repo-tables-table-${testTable}-edit]`,
+        `[data-cy=db-tables-table-${testTable}-edit]`,
         beVisible,
         [testTableEditClickFlow(testTable)],
       )
     : newExpectation(
         "should not have an Edit button",
-        `[data-cy=repo-tables-table-${testTable}-edit]`,
+        `[data-cy=db-tables-table-${testTable}-edit]`,
         notExist,
       );
 
@@ -103,20 +103,20 @@ export const conditionalEditButtonTest = (
 
 const testTablePlayClickFlow = (testTable: string): ClickFlow =>
   newClickFlow(
-    `[data-cy=repo-tables-table-${testTable}-play]`,
+    `[data-cy=db-tables-table-${testTable}-play]`,
     [
       newExpectation(
         "should show a list of columns",
-        `[data-cy=repo-tables-table-${testTable}-column-list]`,
+        `[data-cy=db-tables-table-${testTable}-column-list]`,
         beVisible,
       ),
       newExpectation(
         "should show 'viewing'",
-        `[data-cy=repo-tables-table-viewing]`,
+        `[data-cy=db-tables-table-viewing]`,
         newShouldArgs("be.visible.and.contain", "Viewing"),
       ),
     ],
-    `[data-cy=repo-tables-table-${testTable}]`,
+    `[data-cy=db-tables-table-${testTable}]`,
   );
 
 export const conditionalPlayButtonTest = (
@@ -127,7 +127,7 @@ export const conditionalPlayButtonTest = (
     ? [
         newExpectationWithClickFlows(
           `should have test table ${testTable}`,
-          `[data-cy=repo-tables-table-${testTable}]`,
+          `[data-cy=db-tables-table-${testTable}]`,
           beVisible,
           [testTablePlayClickFlow(testTable)],
         ),
@@ -135,12 +135,12 @@ export const conditionalPlayButtonTest = (
     : [
         newExpectation(
           "should show a list of columns",
-          `[data-cy=repo-tables-table-${testTable}-column-list]`,
+          `[data-cy=db-tables-table-${testTable}-column-list]`,
           beVisible,
         ),
         newExpectation(
           "should show 'viewing'",
-          `[data-cy=repo-tables-table-viewing]`,
+          `[data-cy=db-tables-table-viewing]`,
           newShouldArgs("be.visible.and.contain", "Viewing"),
         ),
       ];
@@ -156,15 +156,15 @@ export const conditionalViewTableMobileTest = (
     ? [
         newExpectationWithClickFlows(
           `should have test table ${testTable}`,
-          `[data-cy=repo-tables-table-${testTable}-mobile]`,
+          `[data-cy=db-tables-table-${testTable}-mobile]`,
           beVisible,
           [
             newClickFlow(
-              `[data-cy=repo-tables-table-${testTable}-mobile] a`,
+              `[data-cy=db-tables-table-${testTable}-mobile] a`,
               [
                 newExpectation(
                   "should show table",
-                  `[data-cy=mobile-repo-data-table]`,
+                  `[data-cy=mobile-db-data-table]`,
                   beVisible,
                 ),
               ],
@@ -174,14 +174,14 @@ export const conditionalViewTableMobileTest = (
         ),
         newExpectation(
           "should show 'viewing'",
-          `[data-cy=repo-tables-table-viewing-mobile]`,
+          `[data-cy=db-tables-table-viewing-mobile]`,
           newShouldArgs("be.visible.and.contain", "Viewing"),
         ),
       ]
     : [
         newExpectation(
           "should show 'viewing'",
-          `[data-cy=repo-tables-table-viewing-mobile]`,
+          `[data-cy=db-tables-table-viewing-mobile]`,
           newShouldArgs("be.visible.and.contain", "Viewing"),
         ),
       ];
@@ -192,12 +192,12 @@ export const conditionalViewTableMobileTest = (
 const emptyTablesExpectation: Tests = [
   newExpectation(
     "should show empty tables message",
-    "[data-cy=repo-tables-empty]",
+    "[data-cy=db-tables-empty]",
     beVisible,
   ),
   newExpectationWithScrollIntoView(
     "should have an Add New Table button",
-    "[data-cy=repo-tables-add-table]",
+    "[data-cy=db-tables-add-table]",
     beVisible,
     true,
   ),
@@ -214,7 +214,7 @@ const notEmptyTableExpectations = (
     ? [
         newExpectation(
           `should have table list with ${tableLen} items`,
-          "[data-cy=repo-tables-table-list] > ol > li",
+          "[data-cy=db-tables-table-list] > ol > li",
           newShouldArgs("be.visible.and.have.length", tableLen),
         ),
 
@@ -223,7 +223,7 @@ const notEmptyTableExpectations = (
     : [
         newExpectation(
           `should have table list with ${tableLen} items`,
-          "[data-cy=repo-tables-table-list] > ol > li",
+          "[data-cy=db-tables-table-list] > ol > li",
           newShouldArgs("be.visible.and.have.length", tableLen),
         ),
 
@@ -231,7 +231,7 @@ const notEmptyTableExpectations = (
         conditionalEditButtonTest(loggedIn, testTable),
         // newExpectationWithScrollIntoView(
         //   "should have an Add New Table button",
-        //   "[data-cy=repo-tables-add-table]",
+        //   "[data-cy=db-tables-add-table]",
         //   beVisible,
         //   true,
         // ),
@@ -316,7 +316,7 @@ export const testClickDeleteRow = (
   return [
     newExpectationWithClickFlows(
       "should click first row dropdown button",
-      "[data-cy=desktop-repo-data-table-row-0-col-0]",
+      "[data-cy=desktop-db-data-table-row-0-col-0]",
       beVisible,
       [
         newClickFlow(
@@ -347,10 +347,10 @@ export const testClickDeleteRow = (
 // VIEWS
 
 const testViewClickFlow = (testView: string): ClickFlow =>
-  newClickFlow(`[data-cy=repo-views-view-${testView}]`, [
+  newClickFlow(`[data-cy=db-views-view-${testView}]`, [
     newExpectation(
       "",
-      `[data-cy=repo-views-view-button-${testView}]`,
+      `[data-cy=db-views-view-button-${testView}]`,
       newShouldArgs("be.visible.and.contain", "Viewing"),
     ),
     newExpectation(
@@ -363,11 +363,11 @@ const testViewClickFlow = (testView: string): ClickFlow =>
 const testViewMobile = (testView: string): Expectation[] => [
   newExpectationWithClickFlows(
     "should click view",
-    `[data-cy=repo-views-view-${testView}]`,
+    `[data-cy=db-views-view-${testView}]`,
     beVisible,
     [
       newClickFlow(
-        `[data-cy=repo-views-view-${testView}]`,
+        `[data-cy=db-views-view-${testView}]`,
         [
           newExpectation(
             "",
@@ -384,7 +384,7 @@ const testViewMobile = (testView: string): Expectation[] => [
   ),
   newExpectation(
     "",
-    `[data-cy=repo-views-view-button-${testView}]`,
+    `[data-cy=db-views-view-button-${testView}]`,
     newShouldArgs("be.visible.and.contain", "Viewing"),
   ),
   newExpectation(
@@ -396,8 +396,8 @@ const testViewMobile = (testView: string): Expectation[] => [
 
 export const emptyViewsExpectation = (hasBranch: boolean): Expectation =>
   hasBranch
-    ? newExpectation("", "[data-cy=repo-no-views]", beVisible)
-    : newExpectation("", "[data-cy=repo-views-empty]", beVisible);
+    ? newExpectation("", "[data-cy=db-no-views]", beVisible)
+    : newExpectation("", "[data-cy=db-views-empty]", beVisible);
 
 const notEmptyViewsExpectations = (
   viewsLen: number,
@@ -408,7 +408,7 @@ const notEmptyViewsExpectations = (
     ? [
         newExpectation(
           "",
-          "[data-cy=repo-views-list] > li",
+          "[data-cy=db-views-list] > li",
           newShouldArgs("be.visible.and.have.length", viewsLen),
         ),
         ...testViewMobile(testView),
@@ -416,12 +416,12 @@ const notEmptyViewsExpectations = (
     : [
         newExpectation(
           "",
-          "[data-cy=repo-views-list] > li",
+          "[data-cy=db-views-list] > li",
           newShouldArgs("be.visible.and.have.length", viewsLen),
         ),
         newExpectationWithClickFlows(
           "should successfully execute a view",
-          `[data-cy=repo-views-view-${testView}]`,
+          `[data-cy=db-views-view-${testView}]`,
           beVisible,
           [testViewClickFlow(testView)],
         ),
@@ -451,7 +451,7 @@ export const testViewsSection = (
     throw new Error("Cannot have viewsLen > 0 and no testView");
   }
   return newExpectationWithClickFlows(
-    "should have repo Views section",
+    "should have db Views section",
     "[data-cy=tab-views]",
     beVisible,
     [viewsClickFlow(hasBranch, viewsLen, testView, isMobile)],
@@ -461,10 +461,10 @@ export const testViewsSection = (
 // QUERY CATALOG
 
 const testQueryClickFlow = (testQuery: string): ClickFlow =>
-  newClickFlow(`[data-cy=repo-query-button-${testQuery}]`, [
+  newClickFlow(`[data-cy=db-query-button-${testQuery}]`, [
     newExpectation(
       "",
-      `[data-cy=repo-query-viewing-${testQuery}]`,
+      `[data-cy=db-query-viewing-${testQuery}]`,
       newShouldArgs("be.visible.and.contain", "Viewing"),
     ),
     newExpectation(
@@ -477,11 +477,11 @@ const testQueryClickFlow = (testQuery: string): ClickFlow =>
 const testQueryMobile = (testQuery: string): Expectation[] => [
   newExpectationWithClickFlows(
     "should successfully execute a query",
-    `[data-cy=repo-query-list-query-${testQuery}]`,
+    `[data-cy=db-query-list-query-${testQuery}]`,
     beVisible,
     [
       newClickFlow(
-        `[data-cy=repo-query-button-${testQuery}]`,
+        `[data-cy=db-query-button-${testQuery}]`,
         [
           newExpectation(
             "",
@@ -498,15 +498,15 @@ const testQueryMobile = (testQuery: string): Expectation[] => [
   ),
   newExpectation(
     "",
-    `[data-cy=repo-query-viewing-${testQuery}]`,
+    `[data-cy=db-query-viewing-${testQuery}]`,
     newShouldArgs("be.visible.and.contain", "Viewing"),
   ),
 ];
 
 export const emptyQueriesExpectation = (hasBranch: boolean): Expectation =>
   hasBranch
-    ? newExpectation("", "[data-cy=repo-no-queries]", beVisible)
-    : newExpectation("", "[data-cy=repo-queries-empty]", beVisible);
+    ? newExpectation("", "[data-cy=db-no-queries]", beVisible)
+    : newExpectation("", "[data-cy=db-queries-empty]", beVisible);
 
 const notEmptyQueriesExpectations = (
   queryLen: number,
@@ -517,13 +517,13 @@ const notEmptyQueriesExpectations = (
     ? [
         newExpectationWithScrollIntoView(
           "should render link to see more queries",
-          "[data-cy=repo-query-see-all]",
+          "[data-cy=db-query-see-all]",
           beVisible,
           true,
         ),
         newExpectation(
           "",
-          "[data-cy=repo-query-list] > li",
+          "[data-cy=db-query-list] > li",
           newShouldArgs("be.visible.and.have.length", queryLen),
         ),
         ...testQueryMobile(testQuery),
@@ -531,18 +531,18 @@ const notEmptyQueriesExpectations = (
     : [
         newExpectationWithScrollIntoView(
           "should render link to see more queries",
-          "[data-cy=repo-query-see-all]",
+          "[data-cy=db-query-see-all]",
           beVisible,
           true,
         ),
         newExpectation(
           "",
-          "[data-cy=repo-query-list] > li",
+          "[data-cy=db-query-list] > li",
           newShouldArgs("be.visible.and.have.length", queryLen),
         ),
         newExpectationWithClickFlows(
           "should successfully execute a query",
-          `[data-cy=repo-query-list-query-${testQuery}]`,
+          `[data-cy=db-query-list-query-${testQuery}]`,
           beVisible,
           [testQueryClickFlow(testQuery)],
         ),
@@ -572,7 +572,7 @@ export const testQueryCatalogSection = (
     throw new Error("Cannot have queryLen > 0 and no testQuery");
   }
   return newExpectationWithClickFlows(
-    "should have repo Query Catalog section",
+    "should have db Query Catalog section",
     "[data-cy=tab-queries]",
     beVisible,
     [queryCatalogClickFlow(hasBranch, queryLen, testQuery, isMobile)],
@@ -582,10 +582,10 @@ export const testQueryCatalogSection = (
 // SCHEMAS
 
 const testSchemaClickFlow = (testSchema: string): ClickFlow =>
-  newClickFlow(`[data-cy=repo-tables-schema-${testSchema}-play]`, [
+  newClickFlow(`[data-cy=db-tables-schema-${testSchema}-play]`, [
     newExpectation(
       "",
-      `[data-cy=repo-tables-schema-${testSchema}]`,
+      `[data-cy=db-tables-schema-${testSchema}]`,
       newShouldArgs("be.visible.and.contain", "Viewing"),
     ),
     newExpectation(
@@ -604,16 +604,16 @@ const testSchemaMobile = (
 ): Expectation[] => [
   newExpectation(
     "",
-    "[data-cy=repo-tables-schema-list] > ol > li",
+    "[data-cy=db-tables-schema-list] > ol > li",
     newShouldArgs("be.visible.and.have.length", schemaLen),
   ),
   newExpectationWithClickFlows(
     "should successfully execute a schema",
-    `[data-cy=repo-tables-schema-${testSchema}]`,
+    `[data-cy=db-tables-schema-${testSchema}]`,
     beVisible,
     [
       newClickFlow(
-        `[data-cy=repo-tables-schema-${testSchema}-play]`,
+        `[data-cy=db-tables-schema-${testSchema}-play]`,
         [
           newExpectation(
             "",
@@ -630,15 +630,15 @@ const testSchemaMobile = (
   ),
   newExpectation(
     "",
-    `[data-cy=repo-tables-schema-${testSchema}]`,
+    `[data-cy=db-tables-schema-${testSchema}]`,
     newShouldArgs("be.visible.and.contain", "Viewing"),
   ),
 ];
 
 export const emptySchemaExpectation = (hasBranch: boolean): Expectation =>
   hasBranch
-    ? newExpectation("", "[data-cy=repo-tables-empty]", beVisible)
-    : newExpectation("", "[data-cy=repo-schemas-empty]", beVisible);
+    ? newExpectation("", "[data-cy=db-tables-empty]", beVisible)
+    : newExpectation("", "[data-cy=db-schemas-empty]", beVisible);
 
 const notEmptySchemaExpectations = (
   schemaLen: number,
@@ -650,12 +650,12 @@ const notEmptySchemaExpectations = (
     : [
         newExpectation(
           "",
-          "[data-cy=repo-tables-schema-list] > ol > li",
+          "[data-cy=db-tables-schema-list] > ol > li",
           newShouldArgs("be.visible.and.have.length", schemaLen),
         ),
         newExpectationWithClickFlows(
           "should successfully execute a schema",
-          `[data-cy=repo-tables-schema-${testSchema}]`,
+          `[data-cy=db-tables-schema-${testSchema}]`,
           beVisible,
           [testSchemaClickFlow(testSchema)],
         ),
@@ -689,7 +689,7 @@ export const testSchemaSection = (
     throw new Error("Cannot have schemaLen > 0 and no testSchema");
   }
   return newExpectationWithClickFlows(
-    "should have repo Schema section",
+    "should have db Schema section",
     "[data-cy=tab-schemas]",
     beVisible,
     [schemaClickFlow(hasBranch, schemaLen, testSchema, isMobile)],
