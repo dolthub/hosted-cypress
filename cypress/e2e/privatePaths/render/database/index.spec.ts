@@ -51,13 +51,18 @@ describe(pageName, () => {
   const desktopAndIpadTests = (isIpad = false): Tests => [
     ...commonTests,
     newExpectation(
-      "should find desktop database table data",
-      "[data-cy=desktop-db-data-table]",
+      "should not find database table data",
+      "[data-cy=db-data-table]",
+      notExist,
+    ),
+    newExpectation(
+      "should find doc markdown",
+      "[data-cy=db-doc-markdown]",
       beVisible,
     ),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
-    ...tableExpectations(false, false, 3, testTable),
+    ...tableExpectations(true, false, 3, testTable),
     // ...testClickDeleteRow(
     //   "error-modal",
     //   newShouldArgs("be.visible.and.contain", ["No authentication", "sign in"]),
