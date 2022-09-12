@@ -8,7 +8,7 @@ import {
   newShouldArgs,
 } from "../../../utils/helpers";
 
-const pageName = "PricingPage";
+const pageName = "Pricing Page";
 const currentPage = "/pricing";
 
 describe(`${pageName} renders expected components on different devices`, () => {
@@ -34,7 +34,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
   const tests = [
     newExpectation(
-      "renders Info container",
+      "should find Info container",
       "[data-cy=info-container]",
       beVisible,
     ),
@@ -54,7 +54,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     ),
 
     newExpectationWithScrollIntoView(
-      "renders Table container",
+      "should find Table container",
       "[data-cy=table-container]",
       beVisible,
       true,
