@@ -38,12 +38,6 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    // newExpectation(
-    //   "should find link to video",
-    //   "[data-cy=steps-container]",
-    //   newShouldArgs("be.visible.and.contain", "Watch the Video"),
-    // ),
-
     findAndContains("steps-container", "Watch the Video"),
 
     newExpectationWithScrollIntoView(
