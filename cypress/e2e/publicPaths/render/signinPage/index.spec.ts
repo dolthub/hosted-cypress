@@ -70,10 +70,10 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
     newExpectationWithClickFlows(
       "should click to create one",
-      "[data-cy=signin-create-account]",
+      "[data-cy=signin-create-account-button]",
       beVisibleAndContain("Create one"),
       [
-        newClickFlow("[data-cy=signin-create-account]", [
+        newClickFlow("[data-cy=signin-create-account-button]", [
           findAndBeVisible("signin-create-account-google"),
         ]),
       ],
