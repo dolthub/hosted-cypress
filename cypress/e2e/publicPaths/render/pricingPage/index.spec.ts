@@ -1,8 +1,11 @@
+import {
+  findAndBeVisible,
+  findAndContains,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
 import {
   newClickFlow,
-  newExpectation,
   newExpectationWithClickFlows,
   newExpectationWithScrollIntoView,
   newShouldArgs,
@@ -16,7 +19,36 @@ describe(`${pageName} renders expected components on different devices`, () => {
   const beVisibleAndContain = (value: string) =>
     newShouldArgs("be.visible.and.contain", value);
 
-  const cards = ["Standard", "Large", "Enterprise"];
+  const headerWithCardsFindAndContains = [
+    {
+      dataCy: "pricing-header",
+      text: "Pricing",
+    },
+    {
+      dataCy: "Standard-card",
+      text: "Standard",
+    },
+    {
+      dataCy: "Large-card",
+      text: "Large",
+    },
+    {
+      dataCy: "Enterprise-card",
+      text: "Enterprise",
+    },
+  ];
+
+  const pillsFindAndContains = [
+    {
+      datacy: "left-pill-toggle-button",
+      text: "Hour",
+    },
+    {
+      datacy: "right-pill-toggle-button",
+      text: "Month",
+    },
+  ];
+
   const dropdowns = [
     {
       datacy: "zone-dropdown",
@@ -33,24 +65,10 @@ describe(`${pageName} renders expected components on different devices`, () => {
   ];
 
   const tests = [
-    newExpectation(
-      "should find Info container",
-      "[data-cy=info-container]",
-      beVisible,
-    ),
+    findAndBeVisible("info-container"),
 
-    newExpectation(
-      "should find pricing header",
-      "[data-cy=pricing-header",
-      beVisibleAndContain("Pricing"),
-    ),
-
-    ...cards.map(card =>
-      newExpectation(
-        `should find ${card} Card`,
-        `[data-cy=${card}-card]`,
-        beVisibleAndContain(card),
-      ),
+    ...headerWithCardsFindAndContains.map(find =>
+      findAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
@@ -60,11 +78,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    newExpectation(
-      "should find dropdowns",
-      "[data-cy=pricing-dropdowns]",
-      beVisible,
-    ),
+    findAndBeVisible("pricing-dropdowns"),
 
     ...dropdowns.map(dropdown =>
       newExpectationWithClickFlows(
@@ -79,11 +93,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
               beVisibleAndContain(dropdown.valueToClick),
               [
                 newClickFlow(`[id=${dropdown.optionId}]`, [
-                  newExpectation(
-                    "should find dropdown with updated value",
-                    `[data-cy=${dropdown.datacy}]`,
-                    beVisibleAndContain(dropdown.valueToClick),
-                  ),
+                  findAndContains(dropdown.datacy, dropdown.valueToClick),
                 ]),
               ],
             ),
@@ -92,16 +102,8 @@ describe(`${pageName} renders expected components on different devices`, () => {
       ),
     ),
 
-    newExpectation(
-      "should find left half pill button",
-      "[data-cy=left-pill-toggle-button]",
-      beVisibleAndContain("Hour"),
-    ),
-
-    newExpectation(
-      "should find right half pill button",
-      "[data-cy=right-pill-toggle-button]",
-      beVisibleAndContain("Month"),
+    ...pillsFindAndContains.map(find =>
+      findAndContains(find.datacy, find.text),
     ),
 
     newExpectationWithScrollIntoView(

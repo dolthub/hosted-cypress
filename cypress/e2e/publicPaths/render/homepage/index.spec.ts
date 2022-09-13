@@ -5,72 +5,56 @@ import {
   newExpectationWithScrollIntoView,
   newShouldArgs,
 } from "../../../utils/helpers";
+import {
+  findAndContains,
+  beVisibleAndContain,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Homepage";
 const currentPage = "/";
 
 describe(`${pageName} renders expected components on different devices`, () => {
+  const topContainerFindAndContains = [
+    { dataCy: "top-container", text: "The easiest way to build with Dolt." },
+    { dataCy: "top-database-button", text: "Launch a database" },
+    { dataCy: "top-pricing-button", text: "View pricing" },
+  ];
+
+  const featuresFindAndContains = [
+    { dataCy: "features-link-awsRDS", text: "AWS RDS" },
+    { dataCy: "features-link-mariaDB", text: "MariaDB SkySQL" },
+    { dataCy: "features-link-team", text: "Learn about the team " },
+  ];
+
   const tests = [
-    newExpectation(
-      "renders Top container",
-      "[data-cy=top-container]",
-      newShouldArgs(
-        "be.visible.and.contain",
-        "The easiest way to build with Dolt.",
-      ),
-    ),
-
-    newExpectation(
-      "should find launch database button",
-      "[data-cy=top-database-button",
-      newShouldArgs("be.visible.and.contain", "Launch a database"),
-    ),
-
-    newExpectation(
-      "should find pricing link",
-      "[data-cy=top-pricing-button]",
-      newShouldArgs("be.visible.and.contain", "View pricing"),
+    ...topContainerFindAndContains.map(find =>
+      findAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
       "should scroll to Steps header",
       "[data-cy=steps-container]",
-      newShouldArgs("be.visible.and.contain", "Get started in minutes"),
+      beVisibleAndContain("Get started in minutes"),
       true,
     ),
 
-    newExpectation(
-      "should find link to video",
-      "[data-cy=steps-container]",
-      newShouldArgs("be.visible.and.contain", "Watch the Video"),
-    ),
+    // newExpectation(
+    //   "should find link to video",
+    //   "[data-cy=steps-container]",
+    //   newShouldArgs("be.visible.and.contain", "Watch the Video"),
+    // ),
+
+    findAndContains("steps-container", "Watch the Video"),
 
     newExpectationWithScrollIntoView(
       "should scroll to Features header",
       "[data-cy=features-container]",
-      newShouldArgs(
-        "be.visible.and.contain",
-        "Let the Dolt experts run your database for you",
-      ),
+      beVisibleAndContain("Let the Dolt experts run your database for you"),
       true,
     ),
 
-    newExpectation(
-      "should find to Features aws link",
-      "[data-cy=features-link-awsRDS]",
-      newShouldArgs("be.visible.and.contain", "AWS RDS"),
-    ),
-
-    newExpectation(
-      "should find to Features mariaDB link",
-      "[data-cy=features-link-mariaDB]",
-      newShouldArgs("be.visible.and.contain", "MariaDB SkySQL"),
-    ),
-
-    newExpectation(
-      "should find to Features team link",
-      "[data-cy=features-link-team]",
-      newShouldArgs("be.visible.and.contain", "Learn about the team"),
+    ...featuresFindAndContains.map(find =>
+      findAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
