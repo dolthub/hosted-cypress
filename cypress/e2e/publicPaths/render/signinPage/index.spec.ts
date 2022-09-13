@@ -6,11 +6,11 @@ import {
 } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
-  findAndBeVisible,
-  findAndContains,
+  shouldFindAndBeVisible,
+  shouldFindAndContains,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Signinpage";
+const pageName = "Signin page";
 const currentPage = "/signin";
 
 describe(`${pageName} renders expected components on different devices`, () => {
@@ -38,9 +38,9 @@ describe(`${pageName} renders expected components on different devices`, () => {
   ];
 
   const tests = [
-    findAndContains("signin-tab", "Sign In"),
+    shouldFindAndContains("signin-tab", "Sign In"),
 
-    ...signUpBeVisibleDataCys.map(dataCy => findAndBeVisible(dataCy)),
+    ...signUpBeVisibleDataCys.map(dataCy => shouldFindAndBeVisible(dataCy)),
 
     newExpectationWithClickFlows(
       "should find recover text",
@@ -49,7 +49,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       [
         newClickFlow("[data-cy=signin-forgot-password]", [
           ...recoverModalFindAndContains.map(test =>
-            findAndContains(test.datacy, test.text),
+            shouldFindAndContains(test.datacy, test.text),
           ),
           newExpectationWithClickFlows(
             "should close recover modal",
@@ -57,7 +57,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
             beVisibleAndContain("cancel"),
             [
               newClickFlow("[data-cy=recover-cancel]", [
-                findAndContains(
+                shouldFindAndContains(
                   "signin-forgot-password",
                   "Forgot username or password?",
                 ),
@@ -74,7 +74,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Create one"),
       [
         newClickFlow("[data-cy=signin-create-account-button]", [
-          findAndBeVisible("signin-create-account-google"),
+          shouldFindAndBeVisible("signin-create-account-google"),
         ]),
       ],
     ),
@@ -85,14 +85,19 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign up with Email"),
       [
         newClickFlow("[data-cy=signin-create-account-email]", [
-          findAndBeVisible("signup-email-form"),
+          shouldFindAndBeVisible("signup-email-form"),
         ]),
       ],
     ),
 
-    ...createAccountVisibleDataCys.map(dataCy => findAndBeVisible(dataCy)),
+    ...createAccountVisibleDataCys.map(dataCy =>
+      shouldFindAndBeVisible(dataCy),
+    ),
 
-    findAndContains("create-account-with-email-button", "Sign up with Email"),
+    shouldFindAndContains(
+      "create-account-with-email-button",
+      "Sign up with Email",
+    ),
 
     newExpectationWithClickFlows(
       "should return back to create account tab",
@@ -100,7 +105,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign up with Google instead"),
       [
         newClickFlow("[data-cy=signup-go-back]", [
-          findAndBeVisible("signin-create-account-google"),
+          shouldFindAndBeVisible("signin-create-account-google"),
         ]),
       ],
     ),
@@ -111,7 +116,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign in"),
       [
         newClickFlow("[data-cy=signin-have-account]", [
-          findAndBeVisible("signin-signin-google"),
+          shouldFindAndBeVisible("signin-signin-google"),
         ]),
       ],
     ),

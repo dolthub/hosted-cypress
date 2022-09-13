@@ -6,7 +6,7 @@ import {
   newShouldArgs,
 } from "../../../utils/helpers";
 import {
-  findAndContains,
+  shouldFindAndContains,
   beVisibleAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
@@ -28,7 +28,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
   const tests = [
     ...topContainerFindAndContains.map(find =>
-      findAndContains(find.dataCy, find.text),
+      shouldFindAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
@@ -38,7 +38,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    findAndContains("steps-container", "Watch the Video"),
+    shouldFindAndContains("steps-container", "Watch the Video"),
 
     newExpectationWithScrollIntoView(
       "should scroll to Features header",
@@ -48,7 +48,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     ),
 
     ...featuresFindAndContains.map(find =>
-      findAndContains(find.dataCy, find.text),
+      shouldFindAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(

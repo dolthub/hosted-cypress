@@ -1,6 +1,6 @@
 import {
-  findAndBeVisible,
-  findAndContains,
+  shouldFindAndBeVisible,
+  shouldFindAndContains,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
@@ -65,10 +65,10 @@ describe(`${pageName} renders expected components on different devices`, () => {
   ];
 
   const tests = [
-    findAndBeVisible("info-container"),
+    shouldFindAndBeVisible("info-container"),
 
     ...headerWithCardsFindAndContains.map(find =>
-      findAndContains(find.dataCy, find.text),
+      shouldFindAndContains(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
@@ -78,7 +78,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    findAndBeVisible("pricing-dropdowns"),
+    shouldFindAndBeVisible("pricing-dropdowns"),
 
     ...dropdowns.map(dropdown =>
       newExpectationWithClickFlows(
@@ -93,7 +93,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
               beVisibleAndContain(dropdown.valueToClick),
               [
                 newClickFlow(`[id=${dropdown.optionId}]`, [
-                  findAndContains(dropdown.datacy, dropdown.valueToClick),
+                  shouldFindAndContains(dropdown.datacy, dropdown.valueToClick),
                 ]),
               ],
             ),
@@ -103,7 +103,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     ),
 
     ...pillsFindAndContains.map(find =>
-      findAndContains(find.datacy, find.text),
+      shouldFindAndContains(find.datacy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
