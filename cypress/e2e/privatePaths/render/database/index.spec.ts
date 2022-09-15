@@ -131,13 +131,7 @@ describe(pageName, () => {
       skipFooter,
       loggedIn,
     ),
-    iPad2ForAppLayout(
-      pageName,
-      desktopAndIpadTests(true),
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
+    iPad2ForAppLayout(pageName, mobileTests, skipNavbar, skipFooter, loggedIn),
     iPhoneXForAppLayout(
       pageName,
       mobileTests,
