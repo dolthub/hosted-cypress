@@ -18,7 +18,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     "signin-forms",
     "signin-signin-google",
     "signin-username-input",
-    "signin-passward-input",
+    "signin-password-input",
   ];
   const createAccountVisibleDataCys = [
     "create-account-email-input",
