@@ -1,12 +1,12 @@
 import { runTestsForDevices } from "../../../utils";
 import { desktopDevicesForAppLayout } from "../../../utils/devices";
 import { newExpectation, newShouldArgs } from "../../../utils/helpers";
+import { beVisible } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployments page";
 const currentPage = "/deployments";
 
 describe(pageName, () => {
-  const beVisible = newShouldArgs("be.visible");
   const tests = [
     newExpectation(
       "should have deployments header",

@@ -23,7 +23,7 @@ const signedInLinks = [
   "[data-cy=navbar-organizations]",
 ];
 
-const signedOutLinks = [...sharedLinks, "[data-cy=navbar-signin"];
+const signedOutLinks = [...sharedLinks, "[data-cy=navbar-signin]"];
 
 const signedOutMobileLinks = [
   "[data-cy=navbar-documentation]",
