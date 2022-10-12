@@ -1,24 +1,18 @@
-import {
-  shouldFindAndBeVisible,
-  shouldFindAndContains,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
+import { newExpectationWithScrollIntoView } from "../../../utils/helpers";
 import {
-  newClickFlow,
-  newExpectationWithClickFlows,
-  newExpectationWithScrollIntoView,
-  newShouldArgs,
-} from "../../../utils/helpers";
+  beVisible,
+  beVisibleAndContain,
+  shouldFindAndBeVisible,
+  shouldFindAndContain,
+  shouldSelectOption,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Pricing Page";
 const currentPage = "/pricing";
 
 describe(`${pageName} renders expected components on different devices`, () => {
-  const beVisible = newShouldArgs("be.visible");
-  const beVisibleAndContain = (value: string) =>
-    newShouldArgs("be.visible.and.contain", value);
-
   const headerWithCardsFindAndContains = [
     {
       dataCy: "pricing-header",
@@ -40,26 +34,28 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
   const pillsFindAndContains = [
     {
-      datacy: "left-pill-toggle-button",
+      dataCy: "left-pill-toggle-button",
       text: "Hour",
     },
     {
-      datacy: "right-pill-toggle-button",
+      dataCy: "right-pill-toggle-button",
       text: "Month",
     },
   ];
 
   const dropdowns = [
     {
-      datacy: "zone-dropdown",
+      dataCy: "zone-dropdown",
       currentValue: "us-west-2",
-      optionId: "react-select-2-option-1",
+      selectorIdx: 2,
+      optionIdx: 1,
       valueToClick: "us-east-1",
     },
     {
-      datacy: "instance-dropdown",
+      dataCy: "instance-dropdown",
       currentValue: "M4",
-      optionId: "react-select-4-option-2",
+      selectorIdx: 4,
+      optionIdx: 2,
       valueToClick: "R5B",
     },
   ];
@@ -68,7 +64,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     shouldFindAndBeVisible("info-container"),
 
     ...headerWithCardsFindAndContains.map(find =>
-      shouldFindAndContains(find.dataCy, find.text),
+      shouldFindAndContain(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(
@@ -80,30 +76,18 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
     shouldFindAndBeVisible("pricing-dropdowns"),
 
-    ...dropdowns.map(dropdown =>
-      newExpectationWithClickFlows(
-        `show find and click on ${dropdown.datacy}`,
-        `[data-cy=${dropdown.datacy}]`,
-        beVisibleAndContain(dropdown.currentValue),
-        [
-          newClickFlow(`[data-cy=${dropdown.datacy}]`, [
-            newExpectationWithClickFlows(
-              `show find and click on ${dropdown.valueToClick}`,
-              `[id=${dropdown.optionId}]`,
-              beVisibleAndContain(dropdown.valueToClick),
-              [
-                newClickFlow(`[id=${dropdown.optionId}]`, [
-                  shouldFindAndContains(dropdown.datacy, dropdown.valueToClick),
-                ]),
-              ],
-            ),
-          ]),
-        ],
+    ...dropdowns.map(d =>
+      shouldSelectOption(
+        d.valueToClick,
+        d.dataCy,
+        d.selectorIdx,
+        d.optionIdx,
+        d.currentValue,
       ),
     ),
 
     ...pillsFindAndContains.map(find =>
-      shouldFindAndContains(find.datacy, find.text),
+      shouldFindAndContain(find.dataCy, find.text),
     ),
 
     newExpectationWithScrollIntoView(

@@ -7,7 +7,7 @@ import {
 import {
   beVisibleAndContain,
   shouldFindAndBeVisible,
-  shouldFindAndContains,
+  shouldFindAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Signin page";
@@ -28,19 +28,19 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
   const recoverModalFindAndContains = [
     {
-      datacy: "recover-msg",
+      dataCy: "recover-msg",
       text: "Enter your email below to receive your username and a link to reset your password.",
     },
     {
-      datacy: "recover-password-submit-button",
+      dataCy: "recover-password-submit-button",
       text: "Submit",
     },
   ];
 
   const tests = [
-    shouldFindAndContains("signin-tab", "Sign In"),
+    shouldFindAndContain("signin-tab", "Sign In"),
 
-    ...signUpBeVisibleDataCys.map(dataCy => shouldFindAndBeVisible(dataCy)),
+    ...signUpBeVisibleDataCys.map(shouldFindAndBeVisible),
 
     newExpectationWithClickFlows(
       "should find recover text",
@@ -49,7 +49,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       [
         newClickFlow("[data-cy=signin-forgot-password]", [
           ...recoverModalFindAndContains.map(test =>
-            shouldFindAndContains(test.datacy, test.text),
+            shouldFindAndContain(test.dataCy, test.text),
           ),
           newExpectationWithClickFlows(
             "should close recover modal",
@@ -57,7 +57,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
             beVisibleAndContain("cancel"),
             [
               newClickFlow("[data-cy=recover-cancel]", [
-                shouldFindAndContains(
+                shouldFindAndContain(
                   "signin-forgot-password",
                   "Forgot username or password?",
                 ),
@@ -94,7 +94,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       shouldFindAndBeVisible(dataCy),
     ),
 
-    shouldFindAndContains(
+    shouldFindAndContain(
       "create-account-with-email-button",
       "Sign up with Email",
     ),
