@@ -1,6 +1,10 @@
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation, newShouldArgs } from "../../../utils/helpers";
+import { newExpectation } from "../../../utils/helpers";
+import {
+  beVisibleAndContain,
+  haveLength,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Terms page";
 const currentPage = "/terms";
@@ -10,15 +14,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
     newExpectation(
       "should render terms page with title",
       "[data-cy=terms-page] header",
-      newShouldArgs("be.visible.and.contain", [
-        "Terms Of Service",
-        "Last Updated:",
-      ]),
+      beVisibleAndContain(["Terms Of Service", "Last Updated:"]),
     ),
     newExpectation(
       "should render terms page with 12 sections",
       "[data-cy=terms-page] section",
-      newShouldArgs("be.visible.and.have.length", 12),
+      haveLength(12),
     ),
   ];
 

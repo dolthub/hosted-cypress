@@ -11,7 +11,7 @@ import {
 import {
   beVisible,
   notExist,
-  shouldFindAndBeVisible,
+  shouldBeVisible,
   shouldFindAndContain,
   shouldNotExist,
   shouldSelectOption,
@@ -23,9 +23,9 @@ const currentPage = "/support";
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("create-support-ticket", "Create a support ticket"),
-    shouldFindAndBeVisible("active-new-ticket-tab"),
-    shouldFindAndBeVisible("view-tickets-tab"),
-    shouldFindAndBeVisible("support-form"),
+    shouldBeVisible("active-new-ticket-tab"),
+    shouldBeVisible("view-tickets-tab"),
+    shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
     newExpectation(
       "should have disabled submit button",
@@ -34,7 +34,7 @@ describe(pageName, () => {
     ),
     shouldSelectOption("dolthub/us-jails", "deployment-select", 2, 1),
     shouldSelectOption("Critical", "impact-select", 3, 1),
-    shouldFindAndBeVisible("critical-err"),
+    shouldBeVisible("critical-err"),
     shouldSelectOption("dolthub/us-jails-2", "deployment-select", 2, 0),
     newExpectationWithClickFlows(
       "should remove inactive deployment",

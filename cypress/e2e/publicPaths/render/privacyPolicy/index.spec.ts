@@ -1,6 +1,10 @@
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation, newShouldArgs } from "../../../utils/helpers";
+import { newExpectation } from "../../../utils/helpers";
+import {
+  beVisibleAndContain,
+  haveLength,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Privacy policy page";
 const currentPage = "/privacy-policy";
@@ -10,15 +14,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
     newExpectation(
       "should render privacy policy page with title",
       "[data-cy=privacy-policy-page] header",
-      newShouldArgs("be.visible.and.contain", [
-        "Privacy Policy",
-        "Last Updated:",
-      ]),
+      beVisibleAndContain(["Privacy Policy", "Last Updated:"]),
     ),
     newExpectation(
       "should render privacy policy page with 8 sections",
       "[data-cy=privacy-policy-page] section",
-      newShouldArgs("be.visible.and.have.length", 8),
+      haveLength(8),
     ),
   ];
 

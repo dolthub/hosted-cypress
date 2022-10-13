@@ -4,7 +4,7 @@ import { newExpectationWithScrollIntoView } from "../../../utils/helpers";
 import {
   beVisible,
   beVisibleAndContain,
-  shouldFindAndBeVisible,
+  shouldBeVisible,
   shouldFindAndContain,
   shouldSelectOption,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
@@ -61,7 +61,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
   ];
 
   const tests = [
-    shouldFindAndBeVisible("info-container"),
+    shouldBeVisible("info-container"),
 
     ...headerWithCardsFindAndContains.map(find =>
       shouldFindAndContain(find.dataCy, find.text),
@@ -74,7 +74,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    shouldFindAndBeVisible("pricing-dropdowns"),
+    shouldBeVisible("pricing-dropdowns"),
 
     ...dropdowns.map(d =>
       shouldSelectOption(
