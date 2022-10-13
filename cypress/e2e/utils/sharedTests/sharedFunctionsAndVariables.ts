@@ -16,6 +16,8 @@ export const beChecked = newShouldArgs("be.checked");
 export const notBeChecked = newShouldArgs("not.be.checked");
 export const haveLength = (length: number) =>
   newShouldArgs("be.visible.and.have.length", length);
+export const haveLengthAtLeast = (length: number) =>
+  newShouldArgs("be.visible.and.have.length.of.at.least", length);
 
 export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
   newExpectation(
