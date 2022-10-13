@@ -6,7 +6,7 @@ import {
 } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
-  shouldFindAndBeVisible,
+  shouldBeVisible,
   shouldFindAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
@@ -40,7 +40,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
   const tests = [
     shouldFindAndContain("signin-tab", "Sign In"),
 
-    ...signUpBeVisibleDataCys.map(shouldFindAndBeVisible),
+    ...signUpBeVisibleDataCys.map(dataCy => shouldBeVisible(dataCy)),
 
     newExpectationWithClickFlows(
       "should find recover text",
@@ -74,7 +74,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Create one"),
       [
         newClickFlow("[data-cy=signin-create-account-button]", [
-          shouldFindAndBeVisible("signin-create-account-google"),
+          shouldBeVisible("signin-create-account-google"),
         ]),
       ],
     ),
@@ -85,14 +85,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign up with Email"),
       [
         newClickFlow("[data-cy=signin-create-account-email]", [
-          shouldFindAndBeVisible("signup-email-form"),
+          shouldBeVisible("signup-email-form"),
         ]),
       ],
     ),
 
-    ...createAccountVisibleDataCys.map(dataCy =>
-      shouldFindAndBeVisible(dataCy),
-    ),
+    ...createAccountVisibleDataCys.map(dataCy => shouldBeVisible(dataCy)),
 
     shouldFindAndContain(
       "create-account-with-email-button",
@@ -105,7 +103,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign up with Google instead"),
       [
         newClickFlow("[data-cy=signup-go-back]", [
-          shouldFindAndBeVisible("signin-create-account-google"),
+          shouldBeVisible("signin-create-account-google"),
         ]),
       ],
     ),
@@ -116,7 +114,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
       beVisibleAndContain("Sign in"),
       [
         newClickFlow("[data-cy=signin-have-account]", [
-          shouldFindAndBeVisible("signin-signin-google"),
+          shouldBeVisible("signin-signin-google"),
         ]),
       ],
     ),

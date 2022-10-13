@@ -10,24 +10,27 @@ export const beVisible = newShouldArgs("be.visible");
 export const notBeVisible = newShouldArgs("not.be.visible");
 export const notExist = newShouldArgs("not.exist");
 export const exist = newShouldArgs("exist");
-export const beVisibleAndContain = (value: string) =>
+export const beVisibleAndContain = (value: string | string[]) =>
   newShouldArgs("be.visible.and.contain", value);
 export const beChecked = newShouldArgs("be.checked");
 export const notBeChecked = newShouldArgs("not.be.checked");
+export const haveLength = (length: number) =>
+  newShouldArgs("be.visible.and.have.length", length);
 
-export const shouldFindAndBeVisible = (dataCy: string): Expectation =>
+export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
   newExpectation(
-    `should find ${getDesc(dataCy)}`,
+    `should find ${desc ?? getDesc(dataCy)}`,
     `[data-cy=${dataCy}]`,
     beVisible,
   );
 
 export const shouldFindAndContain = (
   dataCy: string,
-  text: string,
+  text: string | string[],
+  desc?: string,
 ): Expectation =>
   newExpectation(
-    `should find ${getDesc(dataCy)}`,
+    `should find ${desc ?? getDesc(dataCy)}`,
     `[data-cy=${dataCy}]`,
     beVisibleAndContain(text),
   );

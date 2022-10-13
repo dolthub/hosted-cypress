@@ -1,6 +1,11 @@
 import { runTestsForDevices } from "../../../utils";
 import { allDevicesForAppLayout } from "../../../utils/devices";
 import { newExpectation, newShouldArgs } from "../../../utils/helpers";
+import {
+  beVisibleAndContain,
+  haveLength,
+  shouldFindAndContain,
+} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Reset password page";
 const fakeToken = "this-is-a-fake-token";
@@ -8,28 +13,25 @@ const currentPage = `/recover-password?token=${fakeToken}`;
 
 describe(`${pageName} renders expected components on different devices`, () => {
   const tests = [
-    newExpectation(
-      "should have reset password component with correct title",
-      "[data-cy=reset-password-page]",
-      newShouldArgs("be.visible.and.contain", [
-        "Reset your password",
-        "Please enter a new password below.",
-      ]),
+    shouldFindAndContain(
+      "reset-password-page",
+      ["Reset your password", "Please enter a new password below."],
+      "reset password component with correct title",
     ),
     newExpectation(
       "should have reset password form with inputs",
       "[data-cy=reset-password-form] input",
-      newShouldArgs("be.visible.and.have.length", 2),
+      haveLength(2),
     ),
     newExpectation(
       "should have new password input",
       "[data-cy=reset-password-form] div:first-of-type",
-      newShouldArgs("be.visible.and.contain", "New Password"),
+      beVisibleAndContain("New Password"),
     ),
     newExpectation(
       "should have confirm password input",
       "[data-cy=reset-password-form] div:last-of-type",
-      newShouldArgs("be.visible.and.contain", "Confirm Password"),
+      beVisibleAndContain("Confirm Password"),
     ),
     newExpectation(
       "should have submit button",
