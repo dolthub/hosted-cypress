@@ -14,7 +14,7 @@ const currentPage = `/recover-password?token=${fakeToken}`;
 describe(`${pageName} renders expected components on different devices`, () => {
   const tests = [
     shouldFindAndContain(
-      "[data-cy=reset-password-page]",
+      "reset-password-page",
       ["Reset your password", "Please enter a new password below."],
       "reset password component with correct title",
     ),
