@@ -1,7 +1,6 @@
 import { runTestsForDevices } from "../../../utils";
 import { desktopDevicesForAppLayout } from "../../../utils/devices";
 import { newExpectation } from "../../../utils/helpers";
-import { changeBranch } from "../../../utils/sharedTests/changeBranch";
 import { testDBHeaderWithBranch } from "../../../utils/sharedTests/dbHeaderNav";
 import {
   beVisible,
@@ -17,18 +16,20 @@ const currentDep = "us-jails-2";
 const dbName = "us_jails";
 const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 const currentPage = `${pullsPage}?filter=all`;
-const destinationBranch = "delete-rows";
+// const destinationBranch = "delete-rows";
 
 describe(pageName, () => {
-  const changeBranchParams = {
-    isLeftNavClosed: true,
-    currentTabDataCy: "pull-requests-table",
-    destinationBranch,
-    destinationURL: `/${pullsPage}?refName=${destinationBranch}`,
-  };
+  // const changeBranchParams = {
+  //   isLeftNavClosed: true,
+  //   currentTabDataCy: "pull-requests-table",
+  //   destinationBranch,
+  //   destinationURL: `/${pullsPage}?refName=${destinationBranch}`,
+  // };
 
   const desktopAndIpadTests = (isIpad = false) => [
     ...testDBHeaderWithBranch(currentDep, currentOwner, dbName, isIpad),
+    // TODO: Uncomment when this issue is fixed https://github.com/dolthub/dolthub-issues/issues/343
+    // ...changeBranch(changeBranchParams),
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),
     newExpectation(
@@ -56,7 +57,6 @@ describe(pageName, () => {
       "[data-cy=pull-requests-row-1] [data-cy=pull-state-label]",
       beVisible,
     ),
-    ...changeBranch(changeBranchParams),
   ];
 
   const devices = desktopDevicesForAppLayout(
