@@ -19,12 +19,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
       text: "Pricing",
     },
     {
-      dataCy: "Standard-card",
-      text: "Standard",
+      dataCy: "Trial-card",
+      text: "Trial",
     },
     {
-      dataCy: "Large-card",
-      text: "Large",
+      dataCy: "Standard-card",
+      text: "Standard",
     },
     {
       dataCy: "Enterprise-card",
