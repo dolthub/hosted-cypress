@@ -6,38 +6,44 @@ import {
 } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
-  shouldBeVisible,
   shouldFindAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Organization page: Account tab";
-const currentPage = "/organizations/testorg?tab=account";
+const pageName = "Organization page: Members tab";
+const currentPage = "/organizations/testorg?tab=members";
 const loggedIn = true;
 
-const organizationFormFindAndContains = [
+const addMemberModalFindAndContains = [
   {
-    datacy: "account-label",
-  },
-  {
-    datacy: "account-name",
-  },
-  {
-    datacy: "account-email",
-  },
-];
-
-const organizationDeleteModalFinAndContains = [
-  {
-    datacy: "delete-organization-button",
-    text: "Delete Organization",
+    datacy: "add-member-button",
+    text: "Add member",
   },
   {
     datacy: "modal-title",
-    text: "Delete testorg?",
+    text: "Add member to testorg",
   },
   {
-    datacy: "account-modal-cancel-button",
+    datacy: "add-member-modal-cancel-button",
     text: "cancel",
+  },
+];
+
+const editMemberFindAndContains = [
+  {
+    datacy: "cypresstesting-popup-button",
+    text: "Edit",
+  },
+  {
+    datacy: "cypresstesting-member",
+    text: "Member",
+  },
+  {
+    datacy: "cypresstesting-owner",
+    text: "Owner",
+  },
+  {
+    datacy: "cypresstesting-remove",
+    text: "Remove",
   },
 ];
 
@@ -45,11 +51,7 @@ describe(pageName, () => {
   const tests = [
     shouldFindAndContain("organization-header", "organizations / testorg"),
 
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
-    ),
-
-    ...organizationDeleteModalFinAndContains.map(test =>
+    ...addMemberModalFindAndContains.map(test =>
       test.datacy.includes("button")
         ? newExpectationWithClickFlows(
             `should find ${test.text}`,
@@ -60,8 +62,15 @@ describe(pageName, () => {
         : shouldFindAndContain(test.datacy, test.text),
     ),
 
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
+    ...editMemberFindAndContains.map(test =>
+      test.datacy.includes("button")
+        ? newExpectationWithClickFlows(
+            `should find ${test.text}`,
+            `[data-cy=${test.datacy}]`,
+            beVisibleAndContain(test.text),
+            [newClickFlow(`[data-cy=${test.datacy}]`, [])],
+          )
+        : shouldFindAndContain(test.datacy, test.text),
     ),
   ];
   const devices = allDevicesForAppLayout(

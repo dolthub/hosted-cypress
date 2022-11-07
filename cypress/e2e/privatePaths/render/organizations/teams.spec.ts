@@ -6,37 +6,24 @@ import {
 } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
-  shouldBeVisible,
   shouldFindAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Organization page: Account tab";
-const currentPage = "/organizations/testorg?tab=account";
+const pageName = "Organization page: Members tab";
+const currentPage = "/organizations/testorg?tab=teams";
 const loggedIn = true;
 
-const organizationFormFindAndContains = [
+const addTeamModalFindAndContains = [
   {
-    datacy: "account-label",
-  },
-  {
-    datacy: "account-name",
-  },
-  {
-    datacy: "account-email",
-  },
-];
-
-const organizationDeleteModalFinAndContains = [
-  {
-    datacy: "delete-organization-button",
-    text: "Delete Organization",
+    datacy: "create-team-button",
+    text: "Create Team",
   },
   {
     datacy: "modal-title",
-    text: "Delete testorg?",
+    text: "Create team",
   },
   {
-    datacy: "account-modal-cancel-button",
+    datacy: "cancel-button",
     text: "cancel",
   },
 ];
@@ -45,11 +32,7 @@ describe(pageName, () => {
   const tests = [
     shouldFindAndContain("organization-header", "organizations / testorg"),
 
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
-    ),
-
-    ...organizationDeleteModalFinAndContains.map(test =>
+    ...addTeamModalFindAndContains.map(test =>
       test.datacy.includes("button")
         ? newExpectationWithClickFlows(
             `should find ${test.text}`,
@@ -60,9 +43,7 @@ describe(pageName, () => {
         : shouldFindAndContain(test.datacy, test.text),
     ),
 
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
-    ),
+    shouldFindAndContain("testTeam-link", "testTeam"),
   ];
   const devices = allDevicesForAppLayout(
     pageName,
