@@ -9,18 +9,30 @@ import {
   shouldFindAndContain,
 } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Organization page: Teams tab";
-const currentPage = "/organizations/testorg?tab=teams";
+const pageName = "Organization page: Team tab";
+const currentPage = "/organizations/testorg?tab=teams&teamName=testTeam";
 const loggedIn = true;
 
 const addTeamModalFindAndContains = [
   {
-    datacy: "create-team-button",
-    text: "Create Team",
+    datacy: "team-link",
+    text: "teams / testTeam",
+  },
+  {
+    datacy: "profile-team-name",
+    text: "TtestTeam",
+  },
+  {
+    datacy: "profile-team-description",
+    text: "Fighting for Justice",
+  },
+  {
+    datacy: "profile-add-member-button",
+    text: "Add Member",
   },
   {
     datacy: "modal-title",
-    text: "Create team",
+    text: "Add Team Member",
   },
   {
     datacy: "cancel-button",
@@ -42,8 +54,6 @@ describe(pageName, () => {
           )
         : shouldFindAndContain(test.datacy, test.text),
     ),
-
-    shouldFindAndContain("testTeam-link", "testTeam"),
   ];
   const devices = allDevicesForAppLayout(
     pageName,
