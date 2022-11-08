@@ -1,30 +1,27 @@
-import { runTestsForDevices } from "../../../utils";
-import {
-  iPad2ForAppLayout,
-  iPhoneXForAppLayout,
-  macbook15ForAppLayout,
-} from "../../../utils/devices";
-import {
-  newClickFlow,
-  newExpectation,
-  newExpectationWithClickFlows,
-  newShouldArgs,
-} from "../../../utils/helpers";
 import {
   testDBHeaderWithBranch,
   testMobileDBHeaderNav,
-} from "../../../utils/sharedTests/dbHeaderNav";
+} from "@sharedTests/dbHeaderNav";
 import {
   tableExpectations,
   testQueryCatalogSection,
   testSchemaSection,
   testViewsSection,
-} from "../../../utils/sharedTests/dbLeftNav";
+} from "@sharedTests/dbLeftNav";
+import { testSqlConsole, testSqlConsoleMobile } from "@sharedTests/sqlEditor";
 import {
-  testSqlConsole,
-  testSqlConsoleMobile,
-} from "../../../utils/sharedTests/sqlEditor";
-import { Tests } from "../../../utils/types";
+  iPad2ForAppLayout,
+  iPhoneXForAppLayout,
+  macbook15ForAppLayout,
+} from "@utils/devices";
+import {
+  newClickFlow,
+  newExpectation,
+  newExpectationWithClickFlows,
+  newShouldArgs,
+} from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
+import { Tests } from "@utils/types";
 
 const pageName = "Default database page";
 const ownerName = "dolthub";

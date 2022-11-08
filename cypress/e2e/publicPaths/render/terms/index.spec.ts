@@ -1,10 +1,10 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
   haveLength,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newExpectation } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Terms page";
 const currentPage = "/terms";

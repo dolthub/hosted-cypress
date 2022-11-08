@@ -1,14 +1,14 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
+import {
+  beVisibleAndContain,
+  shouldFindAndContain,
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
 import {
   newExpectation,
   newExpectationWithScrollIntoView,
   newShouldArgs,
-} from "../../../utils/helpers";
-import {
-  beVisibleAndContain,
-  shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Homepage";
 const currentPage = "/";

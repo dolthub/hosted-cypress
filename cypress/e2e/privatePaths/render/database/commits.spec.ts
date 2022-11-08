@@ -1,14 +1,14 @@
-import { runTestsForDevices } from "../../../utils";
+import {
+  testDBHeaderWithBranch,
+  testMobileDBHeaderNav,
+} from "@sharedTests/dbHeaderNav";
 import {
   iPad2ForAppLayout,
   iPhoneXForAppLayout,
   macbook15ForAppLayout,
-} from "../../../utils/devices";
-import { newExpectation, newShouldArgs } from "../../../utils/helpers";
-import {
-  testDBHeaderWithBranch,
-  testMobileDBHeaderNav,
-} from "../../../utils/sharedTests/dbHeaderNav";
+} from "@utils/devices";
+import { newExpectation, newShouldArgs } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Commit log page";
 const ownerName = "dolthub";

@@ -1,11 +1,11 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation, newShouldArgs } from "../../../utils/helpers";
 import {
   beVisibleAndContain,
   haveLength,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newExpectation, newShouldArgs } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Reset password page";
 const fakeToken = "this-is-a-fake-token";
