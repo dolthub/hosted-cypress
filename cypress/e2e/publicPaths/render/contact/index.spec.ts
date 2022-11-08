@@ -1,9 +1,9 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
 import {
   shouldBeVisible,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Contact us page";
 const currentPage = "/contact";

@@ -1,14 +1,11 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
-import {
-  newClickFlow,
-  newExpectationWithClickFlows,
-} from "../../../utils/helpers";
 import {
   beVisibleAndContain,
   shouldBeVisible,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Signin page";
 const currentPage = "/signin";

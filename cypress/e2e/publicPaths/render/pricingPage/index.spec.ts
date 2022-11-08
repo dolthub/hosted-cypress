@@ -1,13 +1,13 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectationWithScrollIntoView } from "../../../utils/helpers";
 import {
   beVisible,
   beVisibleAndContain,
   shouldBeVisible,
   shouldFindAndContain,
   shouldSelectOption,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newExpectationWithScrollIntoView } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pricing Page";
 const currentPage = "/pricing";

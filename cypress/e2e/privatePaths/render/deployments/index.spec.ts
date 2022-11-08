@@ -1,7 +1,7 @@
-import { runTestsForDevices } from "../../../utils";
-import { desktopDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation, newShouldArgs } from "../../../utils/helpers";
-import { beVisible } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+import { beVisible } from "@sharedTests/sharedFunctionsAndVariables";
+import { desktopDevicesForAppLayout } from "@utils/devices";
+import { newExpectation, newShouldArgs } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Deployments page";
 const currentPage = "/deployments";

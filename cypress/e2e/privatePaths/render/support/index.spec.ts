@@ -1,13 +1,3 @@
-import { runTestsForDevices } from "../../../utils";
-import { desktopDevicesForAppLayout } from "../../../utils/devices";
-import {
-  newClickFlow,
-  newExpectation,
-  newExpectationWithClickFlows,
-  newExpectationWithTypeString,
-  newShouldArgs,
-  scrollToPosition,
-} from "../../../utils/helpers";
 import {
   beVisible,
   notExist,
@@ -15,7 +5,17 @@ import {
   shouldFindAndContain,
   shouldNotExist,
   shouldSelectOption,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { desktopDevicesForAppLayout } from "@utils/devices";
+import {
+  newClickFlow,
+  newExpectation,
+  newExpectationWithClickFlows,
+  newExpectationWithTypeString,
+  newShouldArgs,
+  scrollToPosition,
+} from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "New support ticket page";
 const currentPage = "/support";

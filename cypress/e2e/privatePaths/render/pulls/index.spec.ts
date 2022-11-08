@@ -1,14 +1,14 @@
-import { runTestsForDevices } from "../../../utils";
-import { desktopDevicesForAppLayout } from "../../../utils/devices";
-import { newExpectation } from "../../../utils/helpers";
-import { testDBHeaderWithBranch } from "../../../utils/sharedTests/dbHeaderNav";
+import { testDBHeaderWithBranch } from "@sharedTests/dbHeaderNav";
 import {
   beVisible,
   haveLength,
   haveLengthAtLeast,
   shouldBeVisible,
   shouldNotExist,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { desktopDevicesForAppLayout } from "@utils/devices";
+import { newExpectation } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page";
 const currentOwner = "dolthub";

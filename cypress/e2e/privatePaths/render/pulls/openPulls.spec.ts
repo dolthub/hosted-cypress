@@ -1,14 +1,14 @@
-import { runTestsForDevices } from "../../../utils";
-import { macbook15ForAppLayout } from "../../../utils/devices";
-import { newExpectation } from "../../../utils/helpers";
-import { changeBranch } from "../../../utils/sharedTests/changeBranch";
-import { testDBHeaderWithBranch } from "../../../utils/sharedTests/dbHeaderNav";
+import { changeBranch } from "@sharedTests/changeBranch";
+import { testDBHeaderWithBranch } from "@sharedTests/dbHeaderNav";
 import {
   beVisibleAndContain,
   haveLength,
   shouldBeVisible,
   shouldNotExist,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
+import { macbook15ForAppLayout } from "@utils/devices";
+import { newExpectation } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page with open pulls";
 const currentOwner = "dolthub";
