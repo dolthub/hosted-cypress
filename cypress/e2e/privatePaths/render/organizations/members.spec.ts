@@ -20,10 +20,6 @@ const addMemberModalFindAndContains = [
     datacy: "modal-title",
     text: "Add member to testorg",
   },
-  // {
-  //   datacy: "add-member-modal-cancel-button",
-  //   text: "cancel",
-  // },
 ];
 
 const editMemberFindAndContains = [

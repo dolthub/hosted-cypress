@@ -1,9 +1,5 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import {
-  newExpectationWithClickFlows,
-  newClickFlow,
-  newExpectation,
-} from "@utils/helpers";
+import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import {
   shouldFindAndContain,
