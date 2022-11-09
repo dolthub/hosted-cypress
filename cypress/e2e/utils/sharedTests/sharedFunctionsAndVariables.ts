@@ -19,6 +19,14 @@ export const haveLength = (length: number) =>
 export const haveLengthAtLeast = (length: number) =>
   newShouldArgs("be.visible.and.have.length.of.at.least", length);
 
+export const shouldFindAndCloseModal = (dataCy: string): Expectation =>
+  newExpectationWithClickFlows(
+    "should find modal cancel button",
+    `[data-cy=${dataCy}] button:last-of-type`,
+    beVisibleAndContain("cancel"),
+    [newClickFlow(`[data-cy=${dataCy}] button:last-of-type`, [])],
+  );
+
 export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
   newExpectation(
     `should find ${desc ?? getDesc(dataCy)}`,

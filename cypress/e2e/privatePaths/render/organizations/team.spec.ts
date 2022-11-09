@@ -4,6 +4,7 @@ import { runTestsForDevices } from "@utils/index";
 import {
   shouldFindAndContain,
   beVisibleAndContain,
+  shouldFindAndCloseModal,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Team tab";
@@ -31,10 +32,6 @@ const addTeamModalFindAndContains = [
     datacy: "modal-title",
     text: "Add Team Member",
   },
-  // {
-  //   datacy: "cancel-button",
-  //   text: "cancel",
-  // },
 ];
 
 describe(pageName, () => {
@@ -52,12 +49,7 @@ describe(pageName, () => {
         : shouldFindAndContain(test.datacy, test.text),
     ),
 
-    newExpectationWithClickFlows(
-      "should find modal cancel button",
-      `[data-cy=add-team-member-modal] button:last-of-type`,
-      beVisibleAndContain("cancel"),
-      [newClickFlow(`[data-cy=add-team-member-modal] button:last-of-type`, [])],
-    ),
+    shouldFindAndCloseModal("add-team-member-modal-buttons"),
   ];
   const devices = allDevicesForAppLayout(
     pageName,

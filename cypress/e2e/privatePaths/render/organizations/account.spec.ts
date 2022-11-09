@@ -9,6 +9,7 @@ import {
   shouldFindAndContain,
   shouldBeVisible,
   beVisibleAndContain,
+  shouldFindAndCloseModal,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Account tab";
@@ -36,10 +37,6 @@ const organizationDeleteModalFinAndContains = [
     datacy: "modal-title",
     text: "Delete testorg?",
   },
-  // {
-  //   datacy: "account-modal-cancel-button",
-  //   text: "cancel",
-  // },
 ];
 
 describe(pageName, () => {
@@ -61,12 +58,7 @@ describe(pageName, () => {
         : shouldFindAndContain(test.datacy, test.text),
     ),
 
-    newExpectationWithClickFlows(
-      "should find modal cancel button",
-      `[data-cy=account-modal] button:last-of-type`,
-      beVisibleAndContain("cancel"),
-      [newClickFlow(`[data-cy=account-modal] button:last-of-type`, [])],
-    ),
+    shouldFindAndCloseModal("account-modal-buttons"),
 
     ...organizationFormFindAndContains.map(test =>
       shouldBeVisible(test.datacy),

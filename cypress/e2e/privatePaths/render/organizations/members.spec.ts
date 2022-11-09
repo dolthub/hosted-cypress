@@ -4,6 +4,7 @@ import { runTestsForDevices } from "@utils/index";
 import {
   shouldFindAndContain,
   beVisibleAndContain,
+  shouldFindAndCloseModal,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Members tab";
@@ -58,14 +59,7 @@ describe(pageName, () => {
           )
         : shouldFindAndContain(test.datacy, test.text),
     ),
-
-    // add-member-modal
-    newExpectationWithClickFlows(
-      "should find modal cancel button",
-      `[data-cy=add-member-modal] button:last-of-type`,
-      beVisibleAndContain("cancel"),
-      [newClickFlow(`[data-cy=add-member-modal] button:last-of-type`, [])],
-    ),
+    shouldFindAndCloseModal("add-member-modal-buttons"),
 
     ...editMemberFindAndContains.map(test =>
       test.datacy.includes("button")
