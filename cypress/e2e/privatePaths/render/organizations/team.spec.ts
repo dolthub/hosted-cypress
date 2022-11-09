@@ -1,13 +1,10 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 import {
-  newClickFlow,
-  newExpectationWithClickFlows,
-} from "../../../utils/helpers";
-import {
-  beVisibleAndContain,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+  beVisibleAndContain,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Team tab";
 const currentPage = "/organizations/testorg?tab=teams&teamName=testTeam";
@@ -34,10 +31,10 @@ const addTeamModalFindAndContains = [
     datacy: "modal-title",
     text: "Add Team Member",
   },
-  {
-    datacy: "cancel-button",
-    text: "cancel",
-  },
+  // {
+  //   datacy: "cancel-button",
+  //   text: "cancel",
+  // },
 ];
 
 describe(pageName, () => {
@@ -53,6 +50,13 @@ describe(pageName, () => {
             [newClickFlow(`[data-cy=${test.datacy}]`, [])],
           )
         : shouldFindAndContain(test.datacy, test.text),
+    ),
+
+    newExpectationWithClickFlows(
+      "should find modal cancel button",
+      `[data-cy=add-team-member-modal] button:last-of-type`,
+      beVisibleAndContain("cancel"),
+      [newClickFlow(`[data-cy=add-team-member-modal] button:last-of-type`, [])],
     ),
   ];
   const devices = allDevicesForAppLayout(

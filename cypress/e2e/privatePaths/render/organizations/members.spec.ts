@@ -1,13 +1,10 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 import {
-  newClickFlow,
-  newExpectationWithClickFlows,
-} from "../../../utils/helpers";
-import {
-  beVisibleAndContain,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+  beVisibleAndContain,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Members tab";
 const currentPage = "/organizations/testorg?tab=members";
@@ -22,15 +19,15 @@ const addMemberModalFindAndContains = [
     datacy: "modal-title",
     text: "Add member to testorg",
   },
-  {
-    datacy: "add-member-modal-cancel-button",
-    text: "cancel",
-  },
+  // {
+  //   datacy: "add-member-modal-cancel-button",
+  //   text: "cancel",
+  // },
 ];
 
 const editMemberFindAndContains = [
   {
-    datacy: "cypresstesting-popup-button",
+    datacy: "edit-button-cypresstesting",
     text: "Edit",
   },
   {
@@ -60,6 +57,14 @@ describe(pageName, () => {
             [newClickFlow(`[data-cy=${test.datacy}]`, [])],
           )
         : shouldFindAndContain(test.datacy, test.text),
+    ),
+
+    // add-member-modal
+    newExpectationWithClickFlows(
+      "should find modal cancel button",
+      `[data-cy=add-member-modal] button:last-of-type`,
+      beVisibleAndContain("cancel"),
+      [newClickFlow(`[data-cy=add-member-modal] button:last-of-type`, [])],
     ),
 
     ...editMemberFindAndContains.map(test =>

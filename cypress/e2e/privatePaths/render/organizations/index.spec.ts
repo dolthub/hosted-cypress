@@ -1,13 +1,15 @@
-import { runTestsForDevices } from "../../../utils";
-import { allDevicesForAppLayout } from "../../../utils/devices";
+import { allDevicesForAppLayout } from "@utils/devices";
 import {
-  newClickFlow,
   newExpectationWithClickFlows,
-} from "../../../utils/helpers";
+  newClickFlow,
+  newExpectationWithScrollIntoView,
+} from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 import {
-  beVisibleAndContain,
   shouldFindAndContain,
-} from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+  beVisibleAndContain,
+  beVisible,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Visit Tabs";
 const currentPage = "/organizations/testorg";
@@ -51,14 +53,22 @@ describe(pageName, () => {
     shouldFindAndContain("organization-header", "organizations / testorg"),
     shouldFindAndContain("create-deployment-button", "Create Deployment"),
 
-    ...orgizationPageFindAndContains.map(test =>
-      newExpectationWithClickFlows(
-        `should find ${test.text}`,
-        `[data-cy=${test.datacy}]`,
-        beVisibleAndContain(test.text),
-        [newClickFlow(`[data-cy=${test.clickToDataCy}]`, [])],
-      ),
-    ),
+    ...orgizationPageFindAndContains
+      .map(test => [
+        newExpectationWithScrollIntoView(
+          "should scroll to next tab",
+          `[data-cy=${test.clickToDataCy}]`,
+          beVisible,
+          true,
+        ),
+        newExpectationWithClickFlows(
+          `should find ${test.text}`,
+          `[data-cy=${test.datacy}]`,
+          beVisibleAndContain(test.text),
+          [newClickFlow(`[data-cy=${test.clickToDataCy}]`, [])],
+        ),
+      ]) // to flatten this 2d array into a 1d array
+      .reduce((prev, next) => prev.concat(next)),
   ];
   const devices = allDevicesForAppLayout(
     pageName,
