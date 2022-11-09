@@ -1,6 +1,6 @@
-import { runTestsForDevices } from "../../../utils";
-import { desktopDevicesForAppLayout } from "../../../utils/devices";
-import { shouldBeVisible } from "../../../utils/sharedTests/sharedFunctionsAndVariables";
+import { shouldBeVisible } from "@sharedTests/sharedFunctionsAndVariables";
+import { desktopDevicesForAppLayout } from "@utils/devices";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Support tickets page";
 const currentPage = "/support?tab=view";
