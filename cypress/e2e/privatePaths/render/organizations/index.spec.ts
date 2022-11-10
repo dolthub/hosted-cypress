@@ -36,11 +36,6 @@ const orgizationPageFindAndContains = [
     text: "Create Team",
     clickToDataCy: "billing",
   },
-  {
-    datacy: "billing-new-subscriber-section",
-    text: "Sign up for a subscription to create deployments.",
-    clickToDataCy: "deployments",
-  },
 ];
 
 describe(pageName, () => {
@@ -64,6 +59,11 @@ describe(pageName, () => {
         ),
       ]) // to flatten this 2d array into a 1d array
       .reduce((prev, next) => prev.concat(next)),
+
+    shouldFindAndContain(
+      "billing-new-subscriber-section",
+      "Sign up for a subscription to create deployments.",
+    ),
   ];
   const devices = allDevicesForAppLayout(
     pageName,
