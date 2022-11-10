@@ -1,14 +1,9 @@
-import { allDevicesForAppLayout } from "@utils/devices";
-import {
-  newExpectationWithClickFlows,
-  newClickFlow,
-  newExpectationWithScrollIntoView,
-} from "@utils/helpers";
+import { iPad2ForAppLayout, macbook15ForAppLayout } from "@utils/devices";
+import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import {
   shouldFindAndContain,
   beVisibleAndContain,
-  beVisible,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Visit Tabs";
@@ -43,36 +38,26 @@ describe(pageName, () => {
     shouldFindAndContain("organization-header", "organizations / testorg"),
     shouldFindAndContain("create-deployment-button", "Create Deployment"),
 
-    ...organizationPageFindAndContains
-      .map(test => [
-        newExpectationWithScrollIntoView(
-          "should scroll to next tab",
-          `[data-cy=${test.clickToDataCy}]`,
-          beVisible,
-          true,
-        ),
-        newExpectationWithClickFlows(
-          `should find ${test.text}`,
-          `[data-cy=${test.datacy}]`,
-          beVisibleAndContain(test.text),
-          [newClickFlow(`[data-cy=${test.clickToDataCy}]`, [])],
-        ),
-      ]) // to flatten this 2d array into a 1d array
-      .reduce((prev, next) => prev.concat(next)),
+    ...organizationPageFindAndContains.map(test =>
+      newExpectationWithClickFlows(
+        `should find ${test.text}`,
+        `[data-cy=${test.datacy}]`,
+        beVisibleAndContain(test.text),
+        [newClickFlow(`[data-cy=${test.clickToDataCy}]`, [])],
+      ),
+    ),
 
     shouldFindAndContain(
       "billing-new-subscriber-section",
       "Sign up for a subscription to create deployments.",
     ),
   ];
-  const devices = allDevicesForAppLayout(
-    pageName,
-    tests,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
+
+  // TODO: add mobile tests
+  const devices = [
+    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
+    iPad2ForAppLayout(pageName, tests, false, true, loggedIn),
+  ];
 
   runTestsForDevices({ currentPage, devices });
 });
