@@ -15,7 +15,7 @@ const pageName = "Organization page: Visit Tabs";
 const currentPage = "/organizations/testorg";
 const loggedIn = true;
 
-const orgizationPageFindAndContains = [
+const organizationPageFindAndContains = [
   {
     datacy: "create-deployment-button",
     text: "Create Deployment",
@@ -43,7 +43,7 @@ describe(pageName, () => {
     shouldFindAndContain("organization-header", "organizations / testorg"),
     shouldFindAndContain("create-deployment-button", "Create Deployment"),
 
-    ...orgizationPageFindAndContains
+    ...organizationPageFindAndContains
       .map(test => [
         newExpectationWithScrollIntoView(
           "should scroll to next tab",
