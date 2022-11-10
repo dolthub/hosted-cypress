@@ -41,11 +41,6 @@ const orgizationPageFindAndContains = [
     text: "Sign up for a subscription to create deployments.",
     clickToDataCy: "deployments",
   },
-  {
-    datacy: "create-deployment-button",
-    text: "Create Deployment",
-    clickToDataCy: "account",
-  },
 ];
 
 describe(pageName, () => {
