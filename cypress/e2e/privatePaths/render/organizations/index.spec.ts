@@ -36,7 +36,6 @@ const organizationPageFindAndContains = [
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("organization-header", "organizations / testorg"),
-    shouldFindAndContain("create-deployment-button", "Create Deployment"),
 
     ...organizationPageFindAndContains.map(test =>
       newExpectationWithClickFlows(
