@@ -5,28 +5,13 @@ import {
   shouldFindAndContain,
   beVisibleAndContain,
   shouldFindAndCloseModal,
-} from "@utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Members tab";
 const currentPage = "/organizations/testorg?tab=members";
 const loggedIn = true;
 
-const addMemberModalFindAndContains = [
-  {
-    datacy: "add-member-button",
-    text: "Add member",
-  },
-  {
-    datacy: "modal-title",
-    text: "Add member to testorg",
-  },
-];
-
 const editMemberFindAndContains = [
-  {
-    datacy: "edit-button-cypresstesting",
-    text: "Edit",
-  },
   {
     datacy: "cypresstesting-member",
     text: "Member",
@@ -44,28 +29,25 @@ const editMemberFindAndContains = [
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("organization-header", "organizations / testorg"),
-
-    ...addMemberModalFindAndContains.map(test =>
-      test.datacy.includes("button")
-        ? newExpectationWithClickFlows(
-            `should find ${test.text}`,
-            `[data-cy=${test.datacy}]`,
-            beVisibleAndContain(test.text),
-            [newClickFlow(`[data-cy=${test.datacy}]`, [])],
-          )
-        : shouldFindAndContain(test.datacy, test.text),
+    newExpectationWithClickFlows(
+      `should find Add member`,
+      `[data-cy=add-member-button]`,
+      beVisibleAndContain("Add member"),
+      [newClickFlow(`[data-cy=add-member-button]`, [])],
     ),
+    shouldFindAndContain("modal-title", "Add member to testorg"),
+
     shouldFindAndCloseModal("add-member-modal-buttons"),
 
+    newExpectationWithClickFlows(
+      `should find Edit`,
+      `[data-cy=edit-button-cypresstesting]`,
+      beVisibleAndContain("Edit"),
+      [newClickFlow(`[data-cy=edit-button-cypresstesting]`, [])],
+    ),
+
     ...editMemberFindAndContains.map(test =>
-      test.datacy.includes("button")
-        ? newExpectationWithClickFlows(
-            `should find ${test.text}`,
-            `[data-cy=${test.datacy}]`,
-            beVisibleAndContain(test.text),
-            [newClickFlow(`[data-cy=${test.datacy}]`, [])],
-          )
-        : shouldFindAndContain(test.datacy, test.text),
+      shouldFindAndContain(test.datacy, test.text),
     ),
   ];
   const devices = allDevicesForAppLayout(

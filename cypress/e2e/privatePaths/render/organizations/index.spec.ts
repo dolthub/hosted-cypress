@@ -4,7 +4,7 @@ import { runTestsForDevices } from "@utils/index";
 import {
   shouldFindAndContain,
   beVisibleAndContain,
-} from "@utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Visit Tabs";
 const currentPage = "/organizations/testorg";
@@ -12,24 +12,24 @@ const loggedIn = true;
 
 const organizationPageFindAndContains = [
   {
+    tabDataCy: "account",
     datacy: "create-deployment-button",
     text: "Create Deployment",
-    clickToDataCy: "account",
   },
   {
+    tabDataCy: "members",
     datacy: "delete-organization-button",
     text: "Delete Organization",
-    clickToDataCy: "members",
   },
   {
+    tabDataCy: "teams",
     datacy: "add-member-button",
     text: "Add member",
-    clickToDataCy: "teams",
   },
   {
+    tabDataCy: "billing",
     datacy: "create-team-button",
     text: "Create Team",
-    clickToDataCy: "billing",
   },
 ];
 
@@ -43,7 +43,7 @@ describe(pageName, () => {
         `should find ${test.text}`,
         `[data-cy=${test.datacy}]`,
         beVisibleAndContain(test.text),
-        [newClickFlow(`[data-cy=${test.clickToDataCy}]`, [])],
+        [newClickFlow(`[data-cy=${test.tabDataCy}]`, [])],
       ),
     ),
 

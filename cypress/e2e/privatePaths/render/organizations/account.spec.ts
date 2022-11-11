@@ -6,59 +6,34 @@ import {
   shouldBeVisible,
   beVisibleAndContain,
   shouldFindAndCloseModal,
-} from "@utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Account tab";
 const currentPage = "/organizations/testorg?tab=account";
 const loggedIn = true;
 
 const organizationFormFindAndContains = [
-  {
-    datacy: "account-label",
-  },
-  {
-    datacy: "account-name",
-  },
-  {
-    datacy: "account-email",
-  },
-];
-
-const organizationDeleteModalFinAndContains = [
-  {
-    datacy: "delete-organization-button",
-    text: "Delete Organization",
-  },
-  {
-    datacy: "modal-title",
-    text: "Delete testorg?",
-  },
+  "account-label",
+  "account-name",
+  "account-email",
 ];
 
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("organization-header", "organizations / testorg"),
 
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
+    ...organizationFormFindAndContains.map(datacy => shouldBeVisible(datacy)),
+
+    newExpectationWithClickFlows(
+      `should find Delete Organization`,
+      `[data-cy=delete-organization-button]`,
+      beVisibleAndContain("Delete Organization"),
+      [newClickFlow(`[data-cy=delete-organization-button]`, [])],
     ),
 
-    ...organizationDeleteModalFinAndContains.map(test =>
-      test.datacy.includes("button")
-        ? newExpectationWithClickFlows(
-            `should find ${test.text}`,
-            `[data-cy=${test.datacy}]`,
-            beVisibleAndContain(test.text),
-            [newClickFlow(`[data-cy=${test.datacy}]`, [])],
-          )
-        : shouldFindAndContain(test.datacy, test.text),
-    ),
+    shouldFindAndContain("modal-title", "Delete testorg?"),
 
     shouldFindAndCloseModal("account-modal-buttons"),
-
-    ...organizationFormFindAndContains.map(test =>
-      shouldBeVisible(test.datacy),
-    ),
   ];
   const devices = allDevicesForAppLayout(
     pageName,

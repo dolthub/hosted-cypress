@@ -5,7 +5,7 @@ import {
   shouldFindAndContain,
   beVisibleAndContain,
   shouldFindAndCloseModal,
-} from "@utils/sharedTests/sharedFunctionsAndVariables";
+} from "@sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Organization page: Team tab";
 const currentPage = "/organizations/testorg?tab=teams&teamName=testTeam";
@@ -24,14 +24,6 @@ const addTeamModalFindAndContains = [
     datacy: "profile-team-description",
     text: "Fighting for Justice",
   },
-  {
-    datacy: "profile-add-member-button",
-    text: "Add Member",
-  },
-  {
-    datacy: "modal-title",
-    text: "Add Team Member",
-  },
 ];
 
 describe(pageName, () => {
@@ -39,15 +31,17 @@ describe(pageName, () => {
     shouldFindAndContain("organization-header", "organizations / testorg"),
 
     ...addTeamModalFindAndContains.map(test =>
-      test.datacy.includes("button")
-        ? newExpectationWithClickFlows(
-            `should find ${test.text}`,
-            `[data-cy=${test.datacy}]`,
-            beVisibleAndContain(test.text),
-            [newClickFlow(`[data-cy=${test.datacy}]`, [])],
-          )
-        : shouldFindAndContain(test.datacy, test.text),
+      shouldFindAndContain(test.datacy, test.text),
     ),
+
+    newExpectationWithClickFlows(
+      `should find Add Member`,
+      `[data-cy=profile-add-member-button]`,
+      beVisibleAndContain("Add Member"),
+      [newClickFlow(`[data-cy=profile-add-member-button]`, [])],
+    ),
+
+    shouldFindAndContain("modal-title", "Add Team Member"),
 
     shouldFindAndCloseModal("add-team-member-modal-buttons"),
   ];
