@@ -3,7 +3,7 @@ import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { beVisibleAndContain } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Deployment workbench page";
+const pageName = "Deployment connectivity page";
 const ownerName = "dolthub";
 const depName = "us-jails-2";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;

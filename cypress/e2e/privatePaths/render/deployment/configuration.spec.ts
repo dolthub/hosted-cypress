@@ -6,7 +6,7 @@ import {
   shouldFindAndContain,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Deployment workbench page";
+const pageName = "Deployment configuration page";
 const ownerName = "dolthub";
 const depName = "us-jails-2";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
