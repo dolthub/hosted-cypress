@@ -28,6 +28,11 @@ const SettingDataCy = [
   "add-collab-radios",
 ];
 
+const FormClickAndFinds = [
+  { clickCy: "radio-team", findCy: "error-msg" },
+  { clickCy: "radio-individual", findCy: "add-individual-form" },
+];
+
 describe(pageName, () => {
   const tests = [
     ...SettingDataCy.map(supportedOverride =>
@@ -38,21 +43,17 @@ describe(pageName, () => {
         true,
       ),
     ),
-    newExpectationWithClickFlows(
-      "should open add team form ",
-      `[data-cy=radio-team]`,
-      beVisible,
-      [newClickFlow(`[data-cy=radio-team]`, [shouldBeVisible("error-msg")])],
-    ),
-    newExpectationWithClickFlows(
-      "should open add individual form ",
-      `[data-cy=radio-individual]`,
-      beVisible,
-      [
-        newClickFlow(`[data-cy=radio-individual]`, [
-          shouldBeVisible("add-individual-form"),
-        ]),
-      ],
+    ...FormClickAndFinds.map(test =>
+      newExpectationWithClickFlows(
+        "should open add team form ",
+        `[data-cy=${test.clickCy}]`,
+        beVisible,
+        [
+          newClickFlow(`[data-cy=${test.clickCy}]`, [
+            shouldBeVisible(test.findCy),
+          ]),
+        ],
+      ),
     ),
   ];
 

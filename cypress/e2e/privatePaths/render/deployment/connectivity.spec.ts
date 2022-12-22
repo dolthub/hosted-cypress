@@ -10,7 +10,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;
 
 const loggedIn = true;
 
-const connectivityFindAndContains = [
+const ConnectivityFindAndContains = [
   { datacy: "connectivity-field-host", text: "Host" },
   { datacy: "connectivity-field-port", text: "Port" },
   { datacy: "connectivity-field-username", text: "Username" },
@@ -21,7 +21,7 @@ const connectivityFindAndContains = [
 
 describe(pageName, () => {
   const tests = [
-    ...connectivityFindAndContains.map(test =>
+    ...ConnectivityFindAndContains.map(test =>
       newExpectationWithScrollIntoView(
         `should scroll to ${test.datacy}`,
         `[data-cy=${test.datacy}]`,
