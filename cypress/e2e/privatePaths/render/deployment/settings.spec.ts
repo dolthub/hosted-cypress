@@ -21,9 +21,6 @@ const SettingDataCy = [
   "collab-header",
   "collab-table",
   "cypresstesting-collab-row",
-  "jasonfulghum-collab-row",
-  "somethingelse-collab-row",
-  "timsehn-collab-row",
   "add-collaborator-header",
   "add-collab-radios",
 ];
