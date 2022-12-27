@@ -11,20 +11,20 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;
 const loggedIn = true;
 
 const ConnectivityFindAndContains = [
-  { datacy: "connectivity-field-host", text: "Host" },
-  { datacy: "connectivity-field-port", text: "Port" },
-  { datacy: "connectivity-field-username", text: "Username" },
-  { datacy: "connectivity-field-password", text: "Password" },
-  { datacy: "instructions-header", text: "Connect to Server" },
-  { datacy: "docs-link", text: "Read the docs" },
+  { dataCy: "connectivity-field-host", text: "Host" },
+  { dataCy: "connectivity-field-port", text: "Port" },
+  { dataCy: "connectivity-field-username", text: "Username" },
+  { dataCy: "connectivity-field-password", text: "Password" },
+  { dataCy: "instructions-header", text: "Connect to Server" },
+  { dataCy: "docs-link", text: "Read the docs" },
 ];
 
 describe(pageName, () => {
   const tests = [
     ...ConnectivityFindAndContains.map(test =>
       newExpectationWithScrollIntoView(
-        `should scroll to ${test.datacy}`,
-        `[data-cy=${test.datacy}]`,
+        `should scroll to ${test.dataCy}`,
+        `[data-cy=${test.dataCy}]`,
         beVisibleAndContain(test.text),
         true,
       ),

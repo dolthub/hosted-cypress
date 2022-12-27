@@ -45,7 +45,7 @@ describe(pageName, () => {
     ),
     ...FormClickAndFinds.map(test =>
       newExpectationWithClickFlows(
-        "should open add team form ",
+        `should find ${test.findCy}`,
         `[data-cy=${test.clickCy}]`,
         beVisible,
         [
