@@ -59,7 +59,7 @@ describe(pageName, () => {
     ),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
-    ...tableExpectations(true, false, 3, testTable),
+    ...tableExpectations(true, true, 3, testTable),
     // ...testClickDeleteRow(
     //   "error-modal",
     //   newShouldArgs("be.visible.and.contain", ["No authentication", "sign in"]),
