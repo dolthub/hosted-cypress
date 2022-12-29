@@ -14,7 +14,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=support`;
 
 const loggedIn = true;
 
-const FormFindAndContains = [
+const formFindAndContains = [
   { dataCy: "deployment-select", text: "Deployment(s)" },
   { dataCy: "impact-select", text: "Impact" },
   { dataCy: "submit-button", text: "Submit" },
@@ -28,7 +28,7 @@ describe(pageName, () => {
       "Create a support ticket",
     ),
     shouldBeVisible("support-form"),
-    ...FormFindAndContains.map(test =>
+    ...formFindAndContains.map(test =>
       newExpectationWithScrollIntoView(
         `should scroll to ${test.text}`,
         `[data-cy=${test.dataCy}]`,

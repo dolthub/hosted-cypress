@@ -17,7 +17,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=settings`;
 
 const loggedIn = true;
 
-const SettingDataCy = [
+const settingDataCys = [
   "collab-header",
   "collab-table",
   "cypresstesting-collab-row",
@@ -25,22 +25,22 @@ const SettingDataCy = [
   "add-collab-radios",
 ];
 
-const FormClickAndFinds = [
+const formClickAndFinds = [
   { clickCy: "radio-team", findCy: "error-msg" },
   { clickCy: "radio-individual", findCy: "add-individual-form" },
 ];
 
 describe(pageName, () => {
   const tests = [
-    ...SettingDataCy.map(supportedOverride =>
+    ...settingDataCys.map(settingDataCy =>
       newExpectationWithScrollIntoView(
-        `should scroll to ${supportedOverride}`,
-        `[data-cy=${supportedOverride}]`,
+        `should scroll to ${settingDataCy}`,
+        `[data-cy=${settingDataCy}]`,
         beVisible,
         true,
       ),
     ),
-    ...FormClickAndFinds.map(test =>
+    ...formClickAndFinds.map(test =>
       newExpectationWithClickFlows(
         `should find ${test.findCy}`,
         `[data-cy=${test.clickCy}]`,

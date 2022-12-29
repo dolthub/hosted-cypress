@@ -10,11 +10,11 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 
 const loggedIn = true;
 
-const Logs = ["newer-pagination-button", "logs", "older-pagination-button"];
+const logs = ["newer-pagination-button", "logs", "older-pagination-button"];
 
 describe(pageName, () => {
   const tests = [
-    ...Logs.map(log =>
+    ...logs.map(log =>
       newExpectationWithScrollIntoView(
         `should scroll to ${log}`,
         `[data-cy=${log}]`,

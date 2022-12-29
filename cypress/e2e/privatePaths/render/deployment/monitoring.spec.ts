@@ -10,7 +10,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=monitoring`;
 
 const loggedIn = true;
 
-const GraphTitles = [
+const graphTitles = [
   "database-connections",
   "database-queries",
   "query-latency",
@@ -23,7 +23,7 @@ const GraphTitles = [
 
 describe(pageName, () => {
   const tests = [
-    ...GraphTitles.map(graphTitle =>
+    ...graphTitles.map(graphTitle =>
       newExpectationWithScrollIntoView(
         `should scroll to ${graphTitle}`,
         `[data-cy=${graphTitle}]`,

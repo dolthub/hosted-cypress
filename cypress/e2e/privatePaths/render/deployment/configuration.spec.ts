@@ -13,7 +13,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
 
 const loggedIn = true;
 
-const SupportedOverrides = [
+const supportedOverrides = [
   "behavior_auto_commit",
   "behavior_read_only",
   "behavior_sysvar_persistence",
@@ -27,7 +27,7 @@ const SupportedOverrides = [
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("configuration-header", "Configuration"),
-    ...SupportedOverrides.map(supportedOverride =>
+    ...supportedOverrides.map(supportedOverride =>
       newExpectationWithScrollIntoView(
         `should scroll to ${supportedOverride}`,
         `[data-cy=${supportedOverride}]`,
