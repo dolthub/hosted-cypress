@@ -32,10 +32,10 @@ const formClickAndFinds = [
 
 describe(pageName, () => {
   const tests = [
-    ...settingDataCys.map(settingDataCy =>
+    ...settingDataCys.map(dataCy =>
       newExpectationWithScrollIntoView(
-        `should scroll to ${settingDataCy}`,
-        `[data-cy=${settingDataCy}]`,
+        `should scroll to ${dataCy}`,
+        `[data-cy=${dataCy}]`,
         beVisible,
         true,
       ),
