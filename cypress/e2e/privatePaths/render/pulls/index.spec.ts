@@ -7,7 +7,10 @@ import {
   shouldNotExist,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
-import { newExpectation } from "@utils/helpers";
+import {
+  newExpectation,
+  newExpectationWithScrollIntoView,
+} from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page";
@@ -41,6 +44,12 @@ describe(pageName, () => {
       "should find at least 5 pulls",
       "[data-cy=pull-requests-table] > tbody > tr",
       haveLengthAtLeast(5),
+    ),
+    newExpectationWithScrollIntoView(
+      `should scroll to pull-requests-row-1`,
+      "[data-cy=pull-requests-row-1]",
+      beVisible,
+      true,
     ),
     newExpectation(
       "should find pull with ID 1 with 5 columns",

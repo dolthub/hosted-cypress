@@ -1,6 +1,7 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { notExist } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment workbench page";
 const ownerName = "dolthub";
@@ -10,8 +11,6 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=workbench`;
 const loggedIn = true;
 
 describe(pageName, () => {
-  const notExist = newShouldArgs("not.exist");
-
   const tests = [
     newExpectation(
       "should have workbench section",
