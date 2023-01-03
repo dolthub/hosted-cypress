@@ -27,7 +27,7 @@
     "@cypress/github-action": "^4.2.2",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.47.1",
-    "eslint": "^8.29.0",
+    "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
