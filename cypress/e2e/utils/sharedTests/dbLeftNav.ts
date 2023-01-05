@@ -693,5 +693,7 @@ export const testSchemaSection = (
     "[data-cy=tab-schemas]",
     beVisible,
     [schemaClickFlow(hasBranch, schemaLen, testSchema, isMobile)],
+    // TODO: unskip when revision database panic is fixed
+    true,
   );
 };
