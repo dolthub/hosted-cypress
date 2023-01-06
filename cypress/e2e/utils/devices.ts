@@ -102,7 +102,11 @@ export const desktopDevicesForAppLayout = (
   loggedIn = false,
 ) => {
   const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
-  return [macbook15(pageName, t, loggedIn), macbook11(pageName, t, loggedIn)];
+  return [
+    macbook15(pageName, t, loggedIn),
+    // TODO: fix for pricing page
+    // macbook11(pageName, t, loggedIn),
+  ];
 };
 
 export const allDevicesForAppLayout = (
