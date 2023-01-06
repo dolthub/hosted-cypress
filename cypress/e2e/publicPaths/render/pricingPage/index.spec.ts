@@ -54,7 +54,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     {
       dataCy: "instance-dropdown",
       currentValue: "M4",
-      selectorIdx: 4,
+      selectorIdx: 5,
       optionIdx: 2,
       valueToClick: "R5B",
     },
