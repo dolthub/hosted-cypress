@@ -8,6 +8,6 @@ updates:
     timezone: America/Los_Angeles
   open-pull-requests-limit: 10
   reviewers:
-  - ElTragon
+  - tbantle22
   labels:
   - dependencies
