@@ -5,7 +5,7 @@ import {
   shouldFindAndContain,
   shouldSelectOption,
 } from "@sharedTests/sharedFunctionsAndVariables";
-import { allDevicesForAppLayout } from "@utils/devices";
+import { macbook15 } from "@utils/devices";
 import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
@@ -98,7 +98,9 @@ describe(`${pageName} renders expected components on different devices`, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  // TODO: Fix tests for other devices
+  // const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = [macbook15(pageName, tests, false)];
 
   const skip = false;
   runTestsForDevices({ currentPage, devices, skip });

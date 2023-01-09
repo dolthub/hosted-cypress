@@ -45,7 +45,7 @@ $ yarn cy-open-local
 $ yarn cy-run-local
 
 # runs specific tests against local server
-$ yarn cy-run-local --spec 'cypress/integration/publicPaths/render/homepage/*'
+$ yarn cy-run-local --spec 'cypress/e2e/publicPaths/render/homepage/*'
 ```
 
 ### Private paths
