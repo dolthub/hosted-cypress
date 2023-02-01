@@ -12,7 +12,7 @@ import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Releases page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const dbName = "us_jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/releases`;
 

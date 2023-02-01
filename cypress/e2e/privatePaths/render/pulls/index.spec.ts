@@ -15,7 +15,7 @@ import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page";
 const currentOwner = "dolthub";
-const currentDep = "us-jails-2";
+const currentDep = "us-jails-3";
 const dbName = "us_jails";
 const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 const currentPage = `${pullsPage}?filter=all`;
@@ -43,9 +43,9 @@ describe(pageName, () => {
       haveLength(5),
     ),
     newExpectation(
-      "should find at least 5 pulls",
+      "should find at least 1 pull",
       "[data-cy=pull-requests-table] > tbody > tr",
-      haveLengthAtLeast(5),
+      haveLengthAtLeast(1),
     ),
     newExpectationWithScrollIntoView(
       `should scroll to pull-requests-row-1`,

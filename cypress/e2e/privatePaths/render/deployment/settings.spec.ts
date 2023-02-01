@@ -12,7 +12,7 @@ import {
 
 const pageName = "Deployment settings page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=settings`;
 
 const loggedIn = true;

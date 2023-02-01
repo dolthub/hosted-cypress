@@ -8,7 +8,7 @@ import {
 
 const pageName = "Deployment configuration page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
 
 const loggedIn = true;

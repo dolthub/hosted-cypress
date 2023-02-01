@@ -5,7 +5,7 @@ import { beVisible } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment logs page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 
 const loggedIn = true;
@@ -36,7 +36,7 @@ describe(pageName, () => {
     true,
     loggedIn,
   );
-  // TODO: Logs are slow to load, causing this test to be flaky at times.
-  const skip = true;
+
+  const skip = false;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

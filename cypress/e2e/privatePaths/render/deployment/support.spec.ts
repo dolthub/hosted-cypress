@@ -9,7 +9,7 @@ import {
 
 const pageName = "Deployment support page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=support`;
 
 const loggedIn = true;

@@ -33,10 +33,10 @@ describe(pageName, () => {
       "[data-cy=submit-button]",
       newShouldArgs("is.disabled"),
     ),
-    shouldSelectOption("dolthub/us-jails", "deployment-select", 2, 1),
+    shouldSelectOption("dolthub/us-jails", "deployment-select", 2, 2),
     shouldSelectOption("Critical", "impact-select", 3, 1),
     shouldBeVisible("critical-err"),
-    shouldSelectOption("dolthub/us-jails-2", "deployment-select", 2, 0),
+    shouldSelectOption("dolthub/us-jails-3", "deployment-select", 2, 0),
     newExpectationWithClickFlows(
       "should remove inactive deployment",
       `[aria-label="Remove dolthub/us-jails"]`,

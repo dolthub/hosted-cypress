@@ -5,7 +5,7 @@ import { beVisibleAndContain } from "@utils/sharedTests/sharedFunctionsAndVariab
 
 const pageName = "Deployment connectivity page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;
 
 const loggedIn = true;
