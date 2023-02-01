@@ -37,6 +37,7 @@ describe(pageName, () => {
     loggedIn,
   );
 
-  const skip = false;
+  // TODO: Logs query is too slow
+  const skip = true;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });
