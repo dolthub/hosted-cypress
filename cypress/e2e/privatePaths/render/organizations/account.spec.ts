@@ -1,12 +1,12 @@
-import { allDevicesForAppLayout } from "@utils/devices";
-import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
-import { runTestsForDevices } from "@utils/index";
 import {
-  shouldFindAndContain,
-  shouldBeVisible,
   beVisibleAndContain,
+  shouldBeVisible,
   shouldFindAndCloseModal,
+  shouldFindAndContain,
 } from "@sharedTests/sharedFunctionsAndVariables";
+import { allDevicesForAppLayout } from "@utils/devices";
+import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Organization page: Account tab";
 const currentPage = "/organizations/testorg?tab=account";
@@ -44,5 +44,5 @@ describe(pageName, () => {
     loggedIn,
   );
 
-  runTestsForDevices({ currentPage, devices });
+  runTestsForDevices({ currentPage, devices, loggedIn });
 });

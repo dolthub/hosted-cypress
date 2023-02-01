@@ -1,10 +1,10 @@
-import { iPad2ForAppLayout, macbook15ForAppLayout } from "@utils/devices";
-import { newExpectationWithClickFlows, newClickFlow } from "@utils/helpers";
-import { runTestsForDevices } from "@utils/index";
 import {
-  shouldFindAndContain,
   beVisibleAndContain,
+  shouldFindAndContain,
 } from "@sharedTests/sharedFunctionsAndVariables";
+import { iPad2ForAppLayout, macbook15ForAppLayout } from "@utils/devices";
+import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
+import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Organization page: Visit Tabs";
 const currentPage = "/organizations/testorg";
@@ -58,5 +58,5 @@ describe(pageName, () => {
     iPad2ForAppLayout(pageName, tests, false, true, loggedIn),
   ];
 
-  runTestsForDevices({ currentPage, devices });
+  runTestsForDevices({ currentPage, devices, loggedIn });
 });

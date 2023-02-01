@@ -83,15 +83,13 @@ Cypress.Commands.add(
       throw new Error("Username or password env not set");
     }
     cy.session(
-      username,
+      "hostedLogin",
       () => {
         cy.visitAndWait("/signin");
         completeLoginForCypressTesting();
+        ensureSuccessfulLogin(redirectValue);
       },
       {
-        validate() {
-          ensureSuccessfulLogin(redirectValue);
-        },
         cacheAcrossSpecs: true,
       },
     );
@@ -101,13 +99,15 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   "loginAsCypressTestingFromSigninPageWithRedirect",
   (redirectValue: string) => {
-    cy.location("pathname", opts).should("eq", `/signin`);
-    cy.location("search", opts)
-      .should("eq", `?redirect=%2F${redirectValue}`)
-      .then(() => {
-        completeLoginForCypressTesting();
-        ensureSuccessfulLogin(redirectValue);
-      });
+    cy.session("hostedLoginWithRedirect", () => {
+      cy.location("pathname", opts).should("eq", `/signin`);
+      cy.location("search", opts)
+        .should("eq", `?redirect=%2F${redirectValue}`)
+        .then(() => {
+          completeLoginForCypressTesting();
+          ensureSuccessfulLogin(redirectValue);
+        });
+    });
   },
 );
 

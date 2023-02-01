@@ -55,7 +55,6 @@ export type Tests = Expectation[];
 export type Device = {
   device: Cypress.ViewportPreset;
   description: string;
-  loggedIn: boolean;
   tests: Tests;
   isMobile: boolean;
 };

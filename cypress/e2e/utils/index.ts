@@ -48,21 +48,11 @@ export const deviceDimensions: Record<
 // RUN TESTS
 
 type TestsArgs = {
-  loggedIn?: boolean;
-  currentPage: string;
   tests: Tests;
   isMobile: boolean;
 };
 
-export function runTests({
-  isMobile,
-  currentPage,
-  tests,
-  loggedIn = false,
-}: TestsArgs) {
-  // Visit page and log in if needed
-  cy.visitPage(currentPage, loggedIn);
-
+export function runTests({ isMobile, tests }: TestsArgs) {
   tests.forEach(t => {
     cy.log(t.description);
 
@@ -91,31 +81,36 @@ export function runTests({
       cy.signout(isMobile);
     }
   });
-
-  if (loggedIn) cy.signout(isMobile);
 }
 
 type TestsForDevicesArgs = {
   currentPage: string;
   devices: Devices;
+  loggedIn?: boolean;
   skip?: boolean;
 };
 
 export function runTestsForDevices({
   devices,
   currentPage,
+  loggedIn = false,
   skip = false,
 }: TestsForDevicesArgs) {
+  beforeEach(() => {
+    // Visit page and log in if needed
+    cy.visitPage(currentPage, loggedIn);
+  });
+
   devices.forEach(d => {
     // Skip tests that require login if username and password not found
-    const skipForLogin = d.loggedIn && (!username || !password);
+    const skipForLogin = loggedIn && (!username || !password);
     if (skip || skipForLogin) {
       xit(d.description, deviceDimensions[d.device], () => {
-        runTests({ ...d, currentPage });
+        runTests(d);
       });
     } else {
       it(d.description, deviceDimensions[d.device], () => {
-        runTests({ ...d, currentPage });
+        runTests(d);
       });
     }
   });

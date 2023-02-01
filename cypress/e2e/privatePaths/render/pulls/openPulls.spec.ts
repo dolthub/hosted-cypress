@@ -24,6 +24,8 @@ const changeBranchParams = {
   destinationURL: `/${currentPage}?refName=${destinationBranch}`,
 };
 
+const loggedIn = true;
+
 describe(pageName, () => {
   const tests = [
     ...testDBHeaderWithBranch(currentDep, currentOwner, dbName),
@@ -42,7 +44,9 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = [macbook15ForAppLayout(pageName, tests, false, true, true)];
+  const devices = [
+    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
+  ];
   const skip = false;
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

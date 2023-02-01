@@ -138,5 +138,5 @@ describe(pageName, () => {
     ),
   ];
 
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

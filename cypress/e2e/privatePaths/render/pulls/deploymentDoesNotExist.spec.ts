@@ -12,6 +12,8 @@ const doesNotExistDep = "doesnt-exist";
 const dbName = "us_jails";
 const currentPage = `deployments/${currentOwner}/${doesNotExistDep}/database/${dbName}/pulls`;
 
+const loggedIn = true;
+
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("404-page", "Database not found"),
@@ -19,7 +21,9 @@ describe(pageName, () => {
     shouldNotExist("pull-requests-table"),
   ];
 
-  const devices = [macbook15ForAppLayout(pageName, tests, false, true, true)];
+  const devices = [
+    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
+  ];
   const skip = false;
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

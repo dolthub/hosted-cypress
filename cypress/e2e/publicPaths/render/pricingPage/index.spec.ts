@@ -100,7 +100,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
 
   // TODO: Fix tests for other devices
   // const devices = allDevicesForAppLayout(pageName, tests, tests);
-  const devices = [macbook15(pageName, tests, false)];
+  const devices = [macbook15(pageName, tests)];
 
   const skip = false;
   runTestsForDevices({ currentPage, devices, skip });
