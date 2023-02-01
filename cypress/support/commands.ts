@@ -83,10 +83,10 @@ Cypress.Commands.add(
       throw new Error("Username or password env not set");
     }
     cy.session(
-      "hosted-login",
+      username,
       () => {
         cy.visitAndWait("/signin");
-        cy.visitViewport("macbook-15");
+        cy.viewport("macbook-15");
         completeLoginForCypressTesting();
       },
       {
@@ -177,12 +177,6 @@ Cypress.Commands.add("visitPage", (currentPage: string, loggedIn: boolean) => {
 
   // 404 page should be rendered when page not found
   cy.visitAndWait(currentPage);
-});
-
-Cypress.Commands.add("visitViewport", (device: Cypress.ViewportPreset) => {
-  cy.viewport(device);
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500);
 });
 
 Cypress.on(

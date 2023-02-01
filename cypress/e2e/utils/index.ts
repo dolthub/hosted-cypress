@@ -64,7 +64,7 @@ export function runTests({
 }: TestsArgs) {
   // Visit page and log in if needed
   cy.visitPage(currentPage, loggedIn);
-  cy.visitViewport(device);
+  cy.viewport(device);
 
   tests.forEach(t => {
     cy.log(t.description);
