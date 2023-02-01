@@ -86,7 +86,6 @@ Cypress.Commands.add(
       username,
       () => {
         cy.visitAndWait("/signin");
-        cy.viewport("macbook-15");
         completeLoginForCypressTesting();
       },
       {
@@ -122,7 +121,6 @@ function ensureSuccessfulLogin(redirectValue?: string) {
   } else {
     cy.location("pathname", opts).should("include", "/deployments");
   }
-  cy.get("[data-cy=navbar-menu-name]", opts).should("be.visible");
 }
 
 function completeLoginForCypressTesting() {

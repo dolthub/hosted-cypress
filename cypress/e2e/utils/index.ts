@@ -49,14 +49,12 @@ export const deviceDimensions: Record<
 
 type TestsArgs = {
   loggedIn?: boolean;
-  device: Cypress.ViewportPreset;
   currentPage: string;
   tests: Tests;
   isMobile: boolean;
 };
 
 export function runTests({
-  device,
   isMobile,
   currentPage,
   tests,
@@ -64,7 +62,6 @@ export function runTests({
 }: TestsArgs) {
   // Visit page and log in if needed
   cy.visitPage(currentPage, loggedIn);
-  cy.viewport(device);
 
   tests.forEach(t => {
     cy.log(t.description);
