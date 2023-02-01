@@ -82,11 +82,20 @@ Cypress.Commands.add(
     if (!password || !username) {
       throw new Error("Username or password env not set");
     }
-
-    cy.visitAndWait("/signin");
-    cy.visitViewport("macbook-15");
-    completeLoginForCypressTesting();
-    ensureSuccessfulLogin(redirectValue);
+    cy.session(
+      "hosted-login",
+      () => {
+        cy.visitAndWait("/signin");
+        cy.visitViewport("macbook-15");
+        completeLoginForCypressTesting();
+      },
+      {
+        validate() {
+          ensureSuccessfulLogin(redirectValue);
+        },
+        cacheAcrossSpecs: true,
+      },
+    );
   },
 );
 
