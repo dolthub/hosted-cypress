@@ -5,7 +5,7 @@ import { shouldBeVisible } from "@utils/sharedTests/sharedFunctionsAndVariables"
 
 const pageName = "Deployment backups page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=backups`;
 
 const loggedIn = true;
@@ -28,5 +28,6 @@ describe(pageName, () => {
     true,
     loggedIn,
   );
-  runTestsForDevices({ currentPage, devices });
+  const skip = true; // TODO: remove when backups created nightly
+  runTestsForDevices({ currentPage, devices, skip });
 });

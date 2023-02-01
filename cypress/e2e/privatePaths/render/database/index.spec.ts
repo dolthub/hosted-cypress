@@ -25,7 +25,7 @@ import { Tests } from "@utils/types";
 
 const pageName = "Default database page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const dbName = "us_jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}`;
 

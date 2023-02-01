@@ -5,7 +5,7 @@ import { notExist } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment workbench page";
 const ownerName = "dolthub";
-const depName = "us-jails-2";
+const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=workbench`;
 
 const loggedIn = true;
