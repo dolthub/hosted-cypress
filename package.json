@@ -1,6 +1,6 @@
 {
   "name": "hosted-cypress",
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@3.1.1",
   "scripts": {
     "cy-open": "cypress open --config numTestsKeptInMemory=0",
     "cy-run": "cypress run",
