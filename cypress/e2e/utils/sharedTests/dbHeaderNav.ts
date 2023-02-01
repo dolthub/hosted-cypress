@@ -255,12 +255,4 @@ export const testDBHeaderWithBranch = (
   // loggedIn: boolean,
   // hasDocs: boolean,
   isIpad = false,
-): Tests => [
-  ...testDBHeaderForAll(ownerName, depName, dbName, isIpad),
-  // newExpectationWithClickFlows(
-  //   "should open create fork modal on fork button click",
-  //   "[data-cy=db-fork-button]",
-  //   beVisible,
-  //   [forkButtonClickFlow(loggedIn)],
-  // ),
-];
+): Tests => [...testDBHeaderForAll(ownerName, depName, dbName, isIpad)];

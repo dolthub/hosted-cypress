@@ -7,7 +7,7 @@ import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page for non-existent database";
 const currentOwner = "dolthub";
-const currentDep = "us-jails-2";
+const currentDep = "us-jails-3";
 const doesNotExistDB = "doesnotexist";
 const currentPage = `deployments/${currentOwner}/${currentDep}/database/${doesNotExistDB}/pulls`;
 
