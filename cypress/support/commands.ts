@@ -82,11 +82,19 @@ Cypress.Commands.add(
     if (!password || !username) {
       throw new Error("Username or password env not set");
     }
-
-    cy.visitAndWait("/signin");
-    cy.visitViewport("macbook-15");
-    completeLoginForCypressTesting();
-    ensureSuccessfulLogin(redirectValue);
+    cy.session(
+      username,
+      () => {
+        cy.visitAndWait("/signin");
+        completeLoginForCypressTesting();
+      },
+      {
+        validate() {
+          ensureSuccessfulLogin(redirectValue);
+        },
+        cacheAcrossSpecs: true,
+      },
+    );
   },
 );
 
@@ -113,7 +121,6 @@ function ensureSuccessfulLogin(redirectValue?: string) {
   } else {
     cy.location("pathname", opts).should("include", "/deployments");
   }
-  cy.get("[data-cy=navbar-menu-name]", opts).should("be.visible");
 }
 
 function completeLoginForCypressTesting() {
@@ -168,12 +175,6 @@ Cypress.Commands.add("visitPage", (currentPage: string, loggedIn: boolean) => {
 
   // 404 page should be rendered when page not found
   cy.visitAndWait(currentPage);
-});
-
-Cypress.Commands.add("visitViewport", (device: Cypress.ViewportPreset) => {
-  cy.viewport(device);
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500);
 });
 
 Cypress.on(

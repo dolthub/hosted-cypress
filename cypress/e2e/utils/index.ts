@@ -44,67 +44,55 @@ export const deviceDimensions: Record<
   "samsung-note9": { viewportWidth: 414, viewportHeight: 846 },
   "samsung-s10": { viewportWidth: 360, viewportHeight: 760 },
 };
+
 // RUN TESTS
 
 type TestsArgs = {
   loggedIn?: boolean;
-  device: Cypress.ViewportPreset;
   currentPage: string;
   tests: Tests;
   isMobile: boolean;
 };
 
 export function runTests({
-  device,
   isMobile,
   currentPage,
   tests,
   loggedIn = false,
 }: TestsArgs) {
-  before(() => {
-    cy.visitPage(currentPage, loggedIn);
-    cy.visitViewport(device);
-  });
-
-  beforeEach(() => {
-    // Preserve hostedToken cookie through all tests for page
-    Cypress.Cookies.preserveOnce("hostedToken");
-  });
-
-  after(() => {
-    if (loggedIn) cy.signout(isMobile);
-  });
+  // Visit page and log in if needed
+  cy.visitPage(currentPage, loggedIn);
 
   tests.forEach(t => {
-    if (t.skip) {
-      xit(t.description, () => {});
-    } else {
-      it(t.description, () => {
-        if (t.redirect) {
-          // Sign in and continue to redirect value before starting test assertions
-          cy.loginAsCypressTestingFromSigninPageWithRedirect(t.redirect);
-        }
+    cy.log(t.description);
 
-        testAssertion(t);
+    if (t.skip) return;
 
-        if (t.clickFlows) {
-          testClickFlows({
-            clickFlows: t.clickFlows,
-            description: t.description,
-          });
-        }
+    if (t.redirect) {
+      // Sign in and continue to redirect value before starting test assertions
+      cy.loginAsCypressTestingFromSigninPageWithRedirect(t.redirect);
+    }
 
-        if (t.scrollTo) {
-          handleScrollTo(t.scrollTo);
-        }
+    testAssertion(t);
 
-        if (t.redirect) {
-          // Sign out after signing in for redirect and running tests
-          cy.signout(isMobile);
-        }
+    if (t.clickFlows) {
+      testClickFlows({
+        clickFlows: t.clickFlows,
+        description: t.description,
       });
     }
+
+    if (t.scrollTo) {
+      handleScrollTo(t.scrollTo);
+    }
+
+    if (t.redirect) {
+      // Sign out after signing in for redirect and running tests
+      cy.signout(isMobile);
+    }
   });
+
+  if (loggedIn) cy.signout(isMobile);
 }
 
 type TestsForDevicesArgs = {
@@ -122,11 +110,11 @@ export function runTestsForDevices({
     // Skip tests that require login if username and password not found
     const skipForLogin = d.loggedIn && (!username || !password);
     if (skip || skipForLogin) {
-      describe.skip(d.description, deviceDimensions[d.device], () => {
+      xit(d.description, deviceDimensions[d.device], () => {
         runTests({ ...d, currentPage });
       });
     } else {
-      describe(d.description, deviceDimensions[d.device], () => {
+      it(d.description, deviceDimensions[d.device], () => {
         runTests({ ...d, currentPage });
       });
     }
@@ -226,6 +214,7 @@ type ClickFlowsArgs = {
 // the clicking each toClickAfter
 export function testClickFlows({ description, clickFlows }: ClickFlowsArgs) {
   if (!clickFlows) return;
+  cy.log(description);
 
   clickFlows.forEach(({ toClickBefore, expectations, toClickAfter, force }) => {
     if (toClickBefore) runClicks(toClickBefore, force);
