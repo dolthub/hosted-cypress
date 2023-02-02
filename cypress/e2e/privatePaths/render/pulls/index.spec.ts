@@ -21,6 +21,8 @@ const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/
 const currentPage = `${pullsPage}?filter=all`;
 // const destinationBranch = "delete-rows";
 
+const loggedIn = true;
+
 describe(pageName, () => {
   // const changeBranchParams = {
   //   isLeftNavClosed: true,
@@ -73,7 +75,7 @@ describe(pageName, () => {
     desktopAndIpadTests(),
     false,
     true,
-    true,
+    loggedIn,
   );
   /* 
     TODO: mobile pull request page test
@@ -84,5 +86,5 @@ describe(pageName, () => {
     */
   // ];
   const skip = false;
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

@@ -86,5 +86,5 @@ describe(pageName, () => {
   ];
 
   const skip = false;
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

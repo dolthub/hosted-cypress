@@ -9,38 +9,34 @@ import { Device, Tests } from "./types";
 
 // Creates devices
 
-export const macbook15 = (pageName: string, tests: Tests, loggedIn: boolean) =>
+export const macbook15 = (pageName: string, tests: Tests) =>
   newDevice(
     "macbook-15",
     `${pageName} renders expected components on macbook-15`,
-    loggedIn,
     tests,
     false,
   );
 
-export const macbook11 = (pageName: string, tests: Tests, loggedIn: boolean) =>
+export const macbook11 = (pageName: string, tests: Tests) =>
   newDevice(
     "macbook-11",
     `${pageName} renders expected components on macbook-11`,
-    loggedIn,
     tests,
     false,
   );
 
-export const iPad2 = (pageName: string, tests: Tests, loggedIn: boolean) =>
+export const iPad2 = (pageName: string, tests: Tests) =>
   newDevice(
     "ipad-2",
     `${pageName} renders expected components on ipad-2`,
-    loggedIn,
     tests,
     true,
   );
 
-export const iPhoneX = (pageName: string, tests: Tests, loggedIn: boolean) =>
+export const iPhoneX = (pageName: string, tests: Tests) =>
   newDevice(
     "iphone-x",
     `${pageName} renders expected components on iphone-x`,
-    loggedIn,
     tests,
     true,
   );
@@ -54,7 +50,7 @@ export const macbook15ForAppLayout = (
   loggedIn = false,
 ): Device => {
   const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
-  return macbook15(pageName, t, loggedIn);
+  return macbook15(pageName, t);
 };
 
 export const iPad2ForAppLayout = (
@@ -67,7 +63,6 @@ export const iPad2ForAppLayout = (
   iPad2(
     pageName,
     getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
-    loggedIn,
   );
 
 export const iPhoneXForAppLayout = (
@@ -80,7 +75,6 @@ export const iPhoneXForAppLayout = (
   iPhoneX(
     pageName,
     getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
-    loggedIn,
   );
 
 export const mobileDevicesForAppLayout = (
@@ -91,7 +85,7 @@ export const mobileDevicesForAppLayout = (
   loggedIn = false,
 ) => {
   const t = getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn);
-  return [iPad2(pageName, t, loggedIn), iPhoneX(pageName, t, loggedIn)];
+  return [iPad2(pageName, t), iPhoneX(pageName, t)];
 };
 
 export const desktopDevicesForAppLayout = (
@@ -102,7 +96,7 @@ export const desktopDevicesForAppLayout = (
   loggedIn = false,
 ) => {
   const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
-  return [macbook15(pageName, t, loggedIn), macbook11(pageName, t, loggedIn)];
+  return [macbook15(pageName, t), macbook11(pageName, t)];
 };
 
 export const allDevicesForAppLayout = (

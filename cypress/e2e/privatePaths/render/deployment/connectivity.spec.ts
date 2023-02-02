@@ -39,5 +39,5 @@ describe(pageName, () => {
     true,
     loggedIn,
   );
-  runTestsForDevices({ currentPage, devices });
+  runTestsForDevices({ currentPage, devices, loggedIn });
 });

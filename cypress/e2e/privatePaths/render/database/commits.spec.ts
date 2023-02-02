@@ -20,6 +20,7 @@ const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/com
 const loggedIn = true;
 const skipNavbar = false;
 const skipFooter = true;
+const skip = false;
 
 describe(pageName, () => {
   const beVisible = newShouldArgs("be.visible");
@@ -91,6 +92,5 @@ describe(pageName, () => {
     ),
   ];
 
-  const skip = false;
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

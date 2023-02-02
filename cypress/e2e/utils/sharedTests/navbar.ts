@@ -74,7 +74,7 @@ const mobileNavbarClickFlow = (signedIn: boolean) =>
     "[data-cy=mobile-navbar-close-button]",
   );
 
-export const testMobileNavbar = (signedIn = false): Tests => [
+export const testMobileNavbar = (loggedIn = false): Tests => [
   newExpectationWithScrollIntoView(
     "should scroll to and show menu button on mobile",
     "[data-cy=mobile-navbar-menu-button]",
@@ -85,6 +85,6 @@ export const testMobileNavbar = (signedIn = false): Tests => [
     "should show menu button and open nav on mobile",
     "[data-cy=mobile-navbar-menu-button]",
     beVisible,
-    [mobileNavbarClickFlow(signedIn)],
+    [mobileNavbarClickFlow(loggedIn)],
   ),
 ];

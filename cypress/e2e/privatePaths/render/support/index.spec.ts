@@ -19,6 +19,7 @@ import { runTestsForDevices } from "@utils/index";
 
 const pageName = "New support ticket page";
 const currentPage = "/support";
+const loggedIn = true;
 
 describe(pageName, () => {
   const tests = [
@@ -76,7 +77,7 @@ describe(pageName, () => {
     tests,
     false,
     true,
-    true,
+    loggedIn,
   );
-  runTestsForDevices({ currentPage, devices });
+  runTestsForDevices({ currentPage, devices, loggedIn });
 });

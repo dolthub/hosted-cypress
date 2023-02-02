@@ -28,6 +28,7 @@ describe(pageName, () => {
     true,
     loggedIn,
   );
+
   const skip = true; // TODO: remove when backups created nightly
-  runTestsForDevices({ currentPage, devices, skip });
+  runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });
