@@ -1,6 +1,5 @@
 import {
   beVisible,
-  notExist,
   shouldBeVisible,
   shouldFindAndContain,
   shouldNotExist,
@@ -8,9 +7,7 @@ import {
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import {
-  newClickFlow,
   newExpectation,
-  newExpectationWithClickFlows,
   newExpectationWithTypeString,
   newShouldArgs,
   scrollToPosition,
@@ -20,6 +17,10 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "New support ticket page";
 const currentPage = "/support";
 const loggedIn = true;
+
+const isDev =
+  Cypress.env("LOCAL") ||
+  Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
 
 describe(pageName, () => {
   const tests = [
@@ -33,25 +34,37 @@ describe(pageName, () => {
       "[data-cy=submit-button]",
       newShouldArgs("is.disabled"),
     ),
-    shouldSelectOption("dolthub/us-jails", "deployment-select", 2, 2),
-    shouldSelectOption("Critical", "impact-select", 3, 1),
-    shouldBeVisible("critical-err"),
-    shouldSelectOption("dolthub/us-jails-3", "deployment-select", 2, 0),
-    newExpectationWithClickFlows(
-      "should remove inactive deployment",
-      `[aria-label="Remove dolthub/us-jails"]`,
-      beVisible,
-      [
-        newClickFlow(`[aria-label="Remove dolthub/us-jails"]`, [
-          newExpectation(
-            "inactive deployment should be removed",
-            `[aria-label="Remove dolthub/us-jails"]`,
-            notExist,
-          ),
-        ]),
-      ],
+    // TODO: Uncomment when deployment search exists
+    // ...shouldTypeAndSelectOption(
+    //   "dolthub/us-jails",
+    //   "deployment-select",
+    //   2,
+    //   2,
+    //   "us-jails",
+    // ),
+    // shouldSelectOption("Critical", "impact-select", 3, 1),
+    // shouldBeVisible("critical-err"),
+    shouldSelectOption(
+      "dolthub/us-jails-3",
+      "deployment-select",
+      2,
+      isDev ? 5 : 1,
     ),
-    shouldNotExist("critical-err"),
+    // newExpectationWithClickFlows(
+    //   "should remove inactive deployment",
+    //   `[aria-label="Remove dolthub/us-jails"]`,
+    //   beVisible,
+    //   [
+    //     newClickFlow(`[aria-label="Remove dolthub/us-jails"]`, [
+    //       newExpectation(
+    //         "inactive deployment should be removed",
+    //         `[aria-label="Remove dolthub/us-jails"]`,
+    //         notExist,
+    //       ),
+    //     ]),
+    //   ],
+    // ),
+    // shouldNotExist("critical-err"),
     newExpectationWithTypeString(
       "should add title",
       "input[name=title]",

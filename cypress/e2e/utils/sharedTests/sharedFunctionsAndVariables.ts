@@ -2,6 +2,7 @@ import {
   newClickFlow,
   newExpectation,
   newExpectationWithClickFlows,
+  newExpectationWithTypeString,
   newShouldArgs,
 } from "../helpers";
 import { Expectation } from "../types";
@@ -84,6 +85,34 @@ export const shouldNotExist = (dataCy: string): Expectation =>
     `[data-cy=${dataCy}]`,
     notExist,
   );
+
+export function shouldTypeAndSelectOption(
+  optionToSelect: string,
+  selectorDataCy: string,
+  selectorIdx: number,
+  optionIdx: number,
+  typeString: string,
+): Expectation[] {
+  return [
+    newExpectationWithTypeString(
+      `should search and select ${optionToSelect}`,
+      `[data-cy=${selectorDataCy}] input`,
+      beVisible,
+      { value: typeString },
+    ),
+    newExpectationWithClickFlows(
+      `should have ${optionToSelect}`,
+      `[id=react-select-${selectorIdx}-option-${optionIdx}]`,
+      beVisibleAndContain(optionToSelect),
+      [
+        newClickFlow(
+          `[id=react-select-${selectorIdx}-option-${optionIdx}]`,
+          [],
+        ),
+      ],
+    ),
+  ];
+}
 
 export function shouldSelectOption(
   optionToSelect: string,
