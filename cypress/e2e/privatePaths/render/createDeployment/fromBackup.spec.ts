@@ -34,7 +34,7 @@ describe(pageName, () => {
       "m4.large",
     ]),
     shouldFindAndContain("storage-select", ["Storage", "EBS GP3"]),
-    shouldFindAndHaveValue("volume-size-input", isDev ? 100 : 50),
+    shouldFindAndHaveValue("volume-size-input", 100),
     ...shouldFindCheckbox("web-pki-cert-checkbox", false),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
