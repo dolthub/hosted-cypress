@@ -13,7 +13,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Homepage";
 const currentPage = "/";
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const topContainerFindAndContains = [
     { dataCy: "top-container", text: "The easiest way to build with Dolt." },
     { dataCy: "top-database-button", text: "Launch a database" },

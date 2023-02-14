@@ -9,7 +9,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Privacy policy page";
 const currentPage = "/privacy-policy";
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const tests = [
     newExpectation(
       "should render privacy policy page with title",

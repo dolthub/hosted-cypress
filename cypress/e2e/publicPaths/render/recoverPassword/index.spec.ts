@@ -11,7 +11,7 @@ const pageName = "Reset password page";
 const fakeToken = "this-is-a-fake-token";
 const currentPage = `/recover-password?token=${fakeToken}`;
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const tests = [
     shouldFindAndContain(
       "reset-password-page",

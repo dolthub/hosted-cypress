@@ -8,7 +8,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Contact us page";
 const currentPage = "/contact";
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const tests = [
     shouldFindAndContain("contact-us-page", [
       "Contact Us",

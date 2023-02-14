@@ -9,7 +9,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Terms page";
 const currentPage = "/terms";
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const tests = [
     newExpectation(
       "should render terms page with title",
