@@ -76,7 +76,12 @@ describe(pageName, () => {
       true,
     ),
 
-    shouldBeVisible("pricing-dropdowns"),
+    newExpectationWithScrollIntoView(
+      "should find pricing dropdowns",
+      "[data-cy=pricing-dropdowns]",
+      beVisible,
+      true,
+    ),
 
     ...dropdowns.map(d =>
       shouldSelectOption(
