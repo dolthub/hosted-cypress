@@ -10,7 +10,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Signin page";
 const currentPage = "/signin";
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const signUpBeVisibleDataCys = [
     "signin-forms",
     "signin-signin-google",

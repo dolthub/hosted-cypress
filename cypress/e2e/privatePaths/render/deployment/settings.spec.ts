@@ -26,7 +26,7 @@ const settingDataCys = [
 ];
 
 const formClickAndFinds = [
-  { clickCy: "radio-team", findCy: "error-msg" },
+  { clickCy: "radio-team", findCy: "add-team-form" },
   { clickCy: "radio-individual", findCy: "add-individual-form" },
 ];
 

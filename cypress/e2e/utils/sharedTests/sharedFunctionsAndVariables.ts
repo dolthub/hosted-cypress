@@ -2,6 +2,7 @@ import {
   newClickFlow,
   newExpectation,
   newExpectationWithClickFlows,
+  newExpectationWithTypeString,
   newShouldArgs,
 } from "../helpers";
 import { Expectation } from "../types";
@@ -45,12 +46,73 @@ export const shouldFindAndContain = (
     beVisibleAndContain(text),
   );
 
+export const shouldFindAndHaveValue = (
+  dataCy: string,
+  value: string | number | boolean,
+  desc?: string,
+): Expectation =>
+  newExpectation(
+    `should find ${desc ?? getDesc(dataCy)} with value "${value}"`,
+    `[data-cy=${dataCy}]`,
+    newShouldArgs("be.visible.and.have.value", value),
+  );
+
+export const shouldFindCheckbox = (
+  dataCy: string,
+  checked: boolean,
+): Expectation[] => [
+  shouldBeVisible(dataCy),
+  newExpectation(
+    `should find ${checked ? "" : "un"}checked ${getDesc(dataCy)}`,
+    `[data-cy=${dataCy}] input`,
+    newShouldArgs(`${checked ? "" : "not."}be.checked`),
+  ),
+];
+
+export const shouldFindButton = (
+  dataCy: string,
+  disabled = false,
+): Expectation =>
+  newExpectation(
+    `should find${disabled ? "disabled" : ""} ${getDesc(dataCy)}`,
+    `[data-cy=${dataCy}]`,
+    newShouldArgs(disabled ? "be.disabled" : "be.enabled"),
+  );
+
 export const shouldNotExist = (dataCy: string): Expectation =>
   newExpectation(
     `should not find ${getDesc(dataCy)}`,
     `[data-cy=${dataCy}]`,
     notExist,
   );
+
+export function shouldTypeAndSelectOption(
+  optionToSelect: string,
+  selectorDataCy: string,
+  selectorIdx: number,
+  optionIdx: number,
+  typeString: string,
+): Expectation[] {
+  return [
+    newExpectationWithTypeString(
+      `should search and select ${optionToSelect}`,
+      `[data-cy=${selectorDataCy}] input`,
+      beVisible,
+      { value: typeString },
+    ),
+    newExpectationWithClickFlows(
+      `should have ${optionToSelect}`,
+      `[id=react-select-${selectorIdx}-option-${optionIdx}]`,
+      beVisibleAndContain(optionToSelect),
+      [
+        newClickFlow(
+          `[id=react-select-${selectorIdx}-option-${optionIdx}]`,
+          [],
+        ),
+      ],
+    ),
+  ];
+}
 
 export function shouldSelectOption(
   optionToSelect: string,

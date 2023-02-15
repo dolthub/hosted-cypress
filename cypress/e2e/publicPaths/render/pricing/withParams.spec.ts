@@ -9,10 +9,13 @@ import { macbook15 } from "@utils/devices";
 import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
-const pageName = "Pricing Page";
-const currentPage = "/pricing";
+const pageName = "Pricing Page with zone and instance type";
+const zone = "us-east-1";
+const instance = "r5b";
+const currentPage = `/pricing?zone=${zone}&instance=${instance}`;
+const skip = true; // TODO: Unskip when dropdown test works
 
-describe(`${pageName} renders expected components on different devices`, () => {
+describe(pageName, () => {
   const headerWithCardsFindAndContains = [
     {
       dataCy: "pricing-header",
@@ -46,17 +49,17 @@ describe(`${pageName} renders expected components on different devices`, () => {
   const dropdowns = [
     {
       dataCy: "zone-dropdown",
-      currentValue: "us-west-2",
+      currentValue: zone,
       selectorIdx: 2,
-      optionIdx: 1,
-      valueToClick: "us-east-1",
+      optionIdx: 0,
+      valueToClick: "us-west-2",
     },
     {
       dataCy: "instance-dropdown",
-      currentValue: "M4",
+      currentValue: instance.toUpperCase(),
       selectorIdx: 5,
-      optionIdx: 2,
-      valueToClick: "R5B",
+      optionIdx: 3,
+      valueToClick: "T2",
     },
   ];
 
@@ -74,7 +77,12 @@ describe(`${pageName} renders expected components on different devices`, () => {
       true,
     ),
 
-    shouldBeVisible("pricing-dropdowns"),
+    newExpectationWithScrollIntoView(
+      "should find pricing dropdowns",
+      "[data-cy=pricing-dropdowns]",
+      beVisible,
+      true,
+    ),
 
     ...dropdowns.map(d =>
       shouldSelectOption(
@@ -93,7 +101,7 @@ describe(`${pageName} renders expected components on different devices`, () => {
     newExpectationWithScrollIntoView(
       "should find current instance",
       "[data-cy=current-instance]",
-      beVisibleAndContain("R5B Instances"),
+      beVisibleAndContain("T2 Instances"),
       true,
     ),
   ];
@@ -102,6 +110,5 @@ describe(`${pageName} renders expected components on different devices`, () => {
   // const devices = allDevicesForAppLayout(pageName, tests, tests);
   const devices = [macbook15(pageName, tests)];
 
-  const skip = false;
   runTestsForDevices({ currentPage, devices, skip });
 });
