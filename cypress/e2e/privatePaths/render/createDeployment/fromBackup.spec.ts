@@ -28,6 +28,7 @@ describe(pageName, () => {
     shouldBeVisible("backup-banner"),
     shouldFindAndContain("owner-select", ["Owner", ownerName]),
     shouldFindAndHaveValue("deployment-name-input", "us-jails-4"),
+    shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
     shouldFindAndContain("zone-select", ["Zone", "us-west-2"]),
     shouldFindAndContain("instance-type-select-with-details", [
       "Instance Type",

@@ -11,9 +11,10 @@ import { scrollToPosition } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Create deployment page with pricing params";
+const cloud = "aws";
 const zone = "us-east-1";
-const instanceName = "t2.medium";
-const currentPage = `/create-deployment?zone=${zone}&instanceName=${instanceName}`;
+const instanceId = `${cloud}.t2.medium`;
+const currentPage = `/create-deployment?zone=${zone}&instanceId=${instanceId}`;
 const loggedIn = true;
 const isDev =
   Cypress.env("LOCAL") ||
@@ -27,10 +28,14 @@ describe(pageName, () => {
     shouldNotExist("backup-banner"),
     shouldFindAndContain("owner-select", ["Owner", "cypresstesting"]),
     shouldFindAndHaveValue("deployment-name-input", ""),
+    shouldFindAndContain("cloud-select", [
+      "Cloud Provider",
+      cloud.toUpperCase(),
+    ]),
     shouldFindAndContain("zone-select", ["Zone", zone]),
     shouldFindAndContain("instance-type-select-with-details", [
       "Instance Type",
-      instanceName,
+      instanceId,
     ]),
     shouldFindAndContain("storage-select", ["Storage", "Trial 50GB EBS"]),
     shouldFindAndHaveValue("volume-size-input", 50),

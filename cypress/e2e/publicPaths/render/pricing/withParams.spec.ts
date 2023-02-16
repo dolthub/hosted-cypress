@@ -50,14 +50,14 @@ describe(pageName, () => {
     {
       dataCy: "zone-dropdown",
       currentValue: zone,
-      selectorIdx: 2,
+      selectorIdx: 3,
       optionIdx: 0,
       valueToClick: "us-west-2",
     },
     {
       dataCy: "instance-dropdown",
       currentValue: instance.toUpperCase(),
-      selectorIdx: 5,
+      selectorIdx: 7,
       optionIdx: 3,
       valueToClick: "T2",
     },
@@ -83,6 +83,8 @@ describe(pageName, () => {
       beVisible,
       true,
     ),
+
+    shouldFindAndContain("cloud-select", ["Cloud", "AWS"]),
 
     ...dropdowns.map(d =>
       shouldSelectOption(

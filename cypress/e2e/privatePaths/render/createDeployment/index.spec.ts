@@ -25,6 +25,7 @@ describe(pageName, () => {
     shouldNotExist("backup-banner"),
     shouldFindAndContain("owner-select", ["Owner", "cypresstesting"]),
     shouldFindAndHaveValue("deployment-name-input", ""),
+    shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
     shouldFindAndContain("zone-select", ["Zone", "us-west-2"]),
     shouldFindAndContain("instance-type-select-with-details", [
       "Instance Type",
