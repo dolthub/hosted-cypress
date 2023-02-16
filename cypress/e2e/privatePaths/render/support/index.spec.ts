@@ -21,6 +21,7 @@ const loggedIn = true;
 const isDev =
   Cypress.env("LOCAL") ||
   Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
+const skip = !!isDev; // TODO: Unskip on dev when deployment search exists
 
 describe(pageName, () => {
   const tests = [
@@ -92,5 +93,5 @@ describe(pageName, () => {
     true,
     loggedIn,
   );
-  runTestsForDevices({ currentPage, devices, loggedIn });
+  runTestsForDevices({ currentPage, devices, loggedIn, skip });
 });
