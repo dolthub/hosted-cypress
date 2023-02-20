@@ -86,12 +86,6 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = desktopDevicesForAppLayout(
-    pageName,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
+  const devices = desktopDevicesForAppLayout(pageName, tests);
   runTestsForDevices({ currentPage, devices, loggedIn, skip });
 });

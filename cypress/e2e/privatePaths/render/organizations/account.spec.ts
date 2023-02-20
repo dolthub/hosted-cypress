@@ -35,14 +35,7 @@ describe(pageName, () => {
 
     shouldFindAndCloseModal("account-modal-buttons"),
   ];
-  const devices = allDevicesForAppLayout(
-    pageName,
-    tests,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
 
+  const devices = allDevicesForAppLayout(pageName, tests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

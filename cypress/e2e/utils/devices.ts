@@ -41,61 +41,98 @@ export const iPhoneX = (pageName: string, tests: Tests) =>
     true,
   );
 
-// App layout
+// Signed out layout
+
+export const macbook15ForSignedOutLayout = (
+  pageName: string,
+  tests: Tests,
+): Device => {
+  const t = getSignedOutLayoutTests(tests);
+  return macbook15(pageName, t);
+};
+
+export const iPad2ForSignedOutLayout = (
+  pageName: string,
+  tests: Tests,
+): Device => iPad2(pageName, getSignedOutLayoutTestsMobile(tests));
+
+export const iPhoneXForSignedOutLayout = (
+  pageName: string,
+  tests: Tests,
+): Device => iPhoneX(pageName, getSignedOutLayoutTestsMobile(tests));
+
+export const mobileDevicesForSignedOutLayout = (
+  pageName: string,
+  tests: Tests,
+): Device[] => {
+  const t = getSignedOutLayoutTestsMobile(tests);
+  return [iPad2(pageName, t), iPhoneX(pageName, t)];
+};
+
+export const desktopDevicesForSignedOutLayout = (
+  pageName: string,
+  tests: Tests,
+): Device[] => {
+  const t = getSignedOutLayoutTests(tests);
+  return [macbook15(pageName, t), macbook11(pageName, t)];
+};
+
+export const allDevicesForSignedOutLayout = (
+  pageName: string,
+  desktopTests: Tests,
+  mobileTests: Tests,
+): Device[] => [
+  ...desktopDevicesForSignedOutLayout(pageName, desktopTests),
+  ...mobileDevicesForSignedOutLayout(pageName, mobileTests),
+];
+
+function getSignedOutLayoutTests(tests: Tests): Tests {
+  return [...testSignedOutNavbar, ...tests, ...testFooter];
+}
+
+function getSignedOutLayoutTestsMobile(tests: Tests): Tests {
+  return [...testMobileNavbar(false), ...tests, ...testFooter];
+}
+
+// App layout, must be logged in
+// Database page has different navbar and no footer
+
 export const macbook15ForAppLayout = (
   pageName: string,
   tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
+  databasePage = false,
 ): Device => {
-  const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
+  const t = getAppLayoutTests(tests, databasePage);
   return macbook15(pageName, t);
 };
 
 export const iPad2ForAppLayout = (
   pageName: string,
   tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-): Device =>
-  iPad2(
-    pageName,
-    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
-  );
+  databasePage = false,
+): Device => iPad2(pageName, getAppLayoutTestsMobile(tests, databasePage));
 
 export const iPhoneXForAppLayout = (
   pageName: string,
   tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-): Device =>
-  iPhoneX(
-    pageName,
-    getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn),
-  );
+  databasePage = false,
+): Device => iPhoneX(pageName, getAppLayoutTestsMobile(tests, databasePage));
 
 export const mobileDevicesForAppLayout = (
   pageName: string,
   tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-) => {
-  const t = getAppLayoutTestsMobile(tests, skipNavbar, skipFooter, loggedIn);
+  databasePage = false,
+): Device[] => {
+  const t = getAppLayoutTestsMobile(tests, databasePage);
   return [iPad2(pageName, t), iPhoneX(pageName, t)];
 };
 
 export const desktopDevicesForAppLayout = (
   pageName: string,
   tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-) => {
-  const t = getAppLayoutTests(tests, skipNavbar, skipFooter, loggedIn);
+  databasePage = false,
+): Device[] => {
+  const t = getAppLayoutTests(tests, databasePage);
   return [macbook15(pageName, t), macbook11(pageName, t)];
 };
 
@@ -103,47 +140,18 @@ export const allDevicesForAppLayout = (
   pageName: string,
   desktopTests: Tests,
   mobileTests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-) => [
-  ...desktopDevicesForAppLayout(
-    pageName,
-    desktopTests,
-    skipNavbar,
-    skipFooter,
-    loggedIn,
-  ),
-  ...mobileDevicesForAppLayout(
-    pageName,
-    mobileTests,
-    skipNavbar,
-    skipFooter,
-    loggedIn,
-  ),
+  databasePage = false,
+): Device[] => [
+  ...desktopDevicesForAppLayout(pageName, desktopTests, databasePage),
+  ...mobileDevicesForAppLayout(pageName, mobileTests),
 ];
 
-function getAppLayoutTests(
-  tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-) {
-  if (skipNavbar && skipFooter) return tests;
-  if (skipNavbar) return [...tests, ...testFooter];
-  const navbarTests = loggedIn ? testSignedInNavbar : testSignedOutNavbar;
-  if (skipFooter) return [...navbarTests, ...tests];
-  return [...navbarTests, ...tests, ...testFooter];
+function getAppLayoutTests(tests: Tests, databasePage: boolean): Tests {
+  if (databasePage) return [...testSignedInNavbar(true), ...tests];
+  return [...testSignedInNavbar(false), ...tests, ...testFooter];
 }
 
-function getAppLayoutTestsMobile(
-  tests: Tests,
-  skipNavbar = false,
-  skipFooter = false,
-  loggedIn = false,
-) {
-  if (skipNavbar && skipFooter) return tests;
-  if (skipFooter) return [...testMobileNavbar(loggedIn), ...tests];
-  if (skipNavbar) return [...tests, ...testFooter];
-  return [...testMobileNavbar(loggedIn), ...tests, ...testFooter];
+function getAppLayoutTestsMobile(tests: Tests, databasePage: boolean): Tests {
+  if (databasePage) return [...testMobileNavbar(true), ...tests];
+  return [...testMobileNavbar(true), ...tests, ...testFooter];
 }

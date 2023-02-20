@@ -2,7 +2,7 @@ import {
   shouldBeVisible,
   shouldFindAndContain,
 } from "@sharedTests/sharedFunctionsAndVariables";
-import { allDevicesForAppLayout } from "@utils/devices";
+import { allDevicesForSignedOutLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Contact us page";
@@ -20,6 +20,6 @@ describe(pageName, () => {
     shouldBeVisible("support-ticket", "Support Ticket link"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForSignedOutLayout(pageName, tests, tests);
   runTestsForDevices({ currentPage, devices });
 });

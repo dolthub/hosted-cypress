@@ -1,4 +1,4 @@
-import { desktopDevicesForAppLayout } from "@utils/devices";
+import { desktopDevicesForSignedOutLayout } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
@@ -25,6 +25,6 @@ describe(pageName, () => {
       beVisible,
     ),
   ];
-  const devices = desktopDevicesForAppLayout(pageName, tests, false, true);
+  const devices = desktopDevicesForSignedOutLayout(pageName, tests);
   runTestsForDevices({ currentPage, devices });
 });

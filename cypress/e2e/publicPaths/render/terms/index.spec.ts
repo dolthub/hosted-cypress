@@ -2,7 +2,7 @@ import {
   beVisibleAndContain,
   haveLength,
 } from "@sharedTests/sharedFunctionsAndVariables";
-import { allDevicesForAppLayout } from "@utils/devices";
+import { allDevicesForSignedOutLayout } from "@utils/devices";
 import { newExpectation } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
@@ -23,7 +23,7 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForSignedOutLayout(pageName, tests, tests);
 
   runTestsForDevices({ currentPage, devices });
 });

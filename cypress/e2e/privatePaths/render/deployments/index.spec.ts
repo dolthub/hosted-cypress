@@ -45,12 +45,6 @@ describe(pageName, () => {
       newShouldArgs("be.visible.and.have.length.of.at.least", 1),
     ),
   ];
-  const devices = desktopDevicesForAppLayout(
-    pageName,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
+  const devices = desktopDevicesForAppLayout(pageName, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

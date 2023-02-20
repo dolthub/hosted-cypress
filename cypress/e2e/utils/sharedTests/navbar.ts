@@ -17,7 +17,20 @@ const sharedLinks = [
   "[data-cy=navbar-github]",
 ];
 
-const signedInLinks = [...sharedLinks, "[data-cy=navbar-deployments]"];
+const signedInLinks = (databasePage: boolean): string[] => {
+  const links = [...sharedLinks, "[data-cy=navbar-deployments]"];
+  if (databasePage) {
+    return links;
+  }
+  return [
+    ...links,
+    "[data-cy=navbar-settings]",
+    "[data-cy=navbar-support]",
+    "[data-cy=navbar-organizations]",
+    "[data-cy=navbar-blog]",
+    "[data-cy=sign-out-button-desktop]",
+  ];
+};
 
 const signedOutLinks = [...sharedLinks, "[data-cy=navbar-signin]"];
 
@@ -36,10 +49,10 @@ export const testSignedOutNavbar: Tests = [
   ),
 ];
 
-export const testSignedInNavbar: Tests = [
+export const testSignedInNavbar = (databasePage: boolean): Tests => [
   newExpectation(
     "should have signed in navbar and correct links",
-    signedInLinks,
+    signedInLinks(databasePage),
     beVisible,
   ),
   newExpectation(
@@ -49,13 +62,13 @@ export const testSignedInNavbar: Tests = [
   ),
 ];
 
-const mobileNavbarClickFlow = (signedIn: boolean) =>
+const mobileNavbarClickFlow = (loggedIn: boolean) =>
   newClickFlow(
     "[data-cy=mobile-navbar-menu-button]",
     [
       newExpectation(
         "should show links",
-        signedIn ? signedInMobileLinks : signedOutLinks,
+        loggedIn ? signedInMobileLinks : signedOutLinks,
         beVisible,
       ),
     ],

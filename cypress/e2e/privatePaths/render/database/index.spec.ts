@@ -10,9 +10,8 @@ import {
 } from "@sharedTests/dbLeftNav";
 import { testSqlConsole, testSqlConsoleMobile } from "@sharedTests/sqlEditor";
 import {
-  iPad2ForAppLayout,
-  iPhoneXForAppLayout,
   macbook15ForAppLayout,
+  mobileDevicesForAppLayout,
 } from "@utils/devices";
 import {
   newClickFlow,
@@ -30,6 +29,8 @@ const dbName = "us_jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}`;
 
 const loggedIn = true;
+const skip = false;
+const databasePage = true;
 const hasBranch = true;
 const testTable = "incidents";
 
@@ -116,26 +117,9 @@ describe(pageName, () => {
     testSqlConsoleMobile,
   ];
 
-  const skip = false;
-  const skipNavbar = false;
-  const skipFooter = true;
-
   const devices = [
-    macbook15ForAppLayout(
-      pageName,
-      desktopAndIpadTests(),
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
-    iPad2ForAppLayout(pageName, mobileTests, skipNavbar, skipFooter, loggedIn),
-    iPhoneXForAppLayout(
-      pageName,
-      mobileTests,
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
+    macbook15ForAppLayout(pageName, desktopAndIpadTests(), databasePage),
+    ...mobileDevicesForAppLayout(pageName, mobileTests, databasePage),
   ];
 
   runTestsForDevices({ currentPage, devices, skip, loggedIn });

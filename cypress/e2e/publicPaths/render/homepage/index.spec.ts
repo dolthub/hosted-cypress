@@ -2,7 +2,7 @@ import {
   beVisibleAndContain,
   shouldFindAndContain,
 } from "@sharedTests/sharedFunctionsAndVariables";
-import { allDevicesForAppLayout } from "@utils/devices";
+import { allDevicesForSignedOutLayout } from "@utils/devices";
 import {
   newExpectation,
   newExpectationWithScrollIntoView,
@@ -69,7 +69,7 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForSignedOutLayout(pageName, tests, tests);
 
   const skip = false;
   runTestsForDevices({ currentPage, devices, skip });
