@@ -3,9 +3,8 @@ import {
   testMobileDBHeaderNav,
 } from "@sharedTests/dbHeaderNav";
 import {
-  iPad2ForAppLayout,
-  iPhoneXForAppLayout,
   macbook15ForAppLayout,
+  mobileDevicesForAppLayout,
 } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
@@ -18,8 +17,7 @@ const currentBranch = "main";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/commits/${currentBranch}`;
 
 const loggedIn = true;
-const skipNavbar = false;
-const skipFooter = true;
+const databasePage = true;
 const skip = false;
 
 describe(pageName, () => {
@@ -52,11 +50,6 @@ describe(pageName, () => {
       "[data-cy=commit-log-item]:first a",
       newShouldArgs("be.visible.and.have.length", 2),
     ),
-    // newExpectation(
-    //   "should find csv download icon",
-    //   "[data-cy=dump-csv]",
-    //   beVisible,
-    // ),
     newExpectation(
       "should find first commit commit ID",
       "[data-cy=commit-log-id-desktop]:first",
@@ -75,21 +68,8 @@ describe(pageName, () => {
   ];
 
   const devices = [
-    macbook15ForAppLayout(
-      pageName,
-      desktopAndIpadTests(),
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
-    iPad2ForAppLayout(pageName, mobileTests, skipNavbar, skipFooter, loggedIn),
-    iPhoneXForAppLayout(
-      pageName,
-      mobileTests,
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
+    macbook15ForAppLayout(pageName, desktopAndIpadTests(), databasePage),
+    ...mobileDevicesForAppLayout(pageName, mobileTests, databasePage),
   ];
 
   runTestsForDevices({ currentPage, devices, skip, loggedIn });

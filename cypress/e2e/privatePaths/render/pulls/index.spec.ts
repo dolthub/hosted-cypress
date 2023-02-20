@@ -12,6 +12,7 @@ import {
   newExpectationWithScrollIntoView,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { changeBranch } from "@utils/sharedTests/changeBranch";
 
 const pageName = "Pull requests page";
 const currentOwner = "dolthub";
@@ -19,22 +20,23 @@ const currentDep = "us-jails-3";
 const dbName = "us_jails";
 const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 const currentPage = `${pullsPage}?filter=all`;
-// const destinationBranch = "delete-rows";
+const destinationBranch = "delete-rows";
 
 const loggedIn = true;
+const databasePage = true;
+const skip = false;
 
 describe(pageName, () => {
-  // const changeBranchParams = {
-  //   isLeftNavClosed: true,
-  //   currentTabDataCy: "pull-requests-table",
-  //   destinationBranch,
-  //   destinationURL: `/${pullsPage}?refName=${destinationBranch}`,
-  // };
+  const changeBranchParams = {
+    isLeftNavClosed: true,
+    currentTabDataCy: "pull-requests-table",
+    destinationBranch,
+    destinationURL: `/${pullsPage}?refName=${destinationBranch}`,
+  };
 
   const desktopAndIpadTests = (isIpad = false) => [
     ...testDBHeaderWithBranch(currentDep, currentOwner, dbName, isIpad),
-    // TODO: Uncomment when this issue is fixed https://github.com/dolthub/dolthub-issues/issues/343
-    // ...changeBranch(changeBranchParams),
+    ...changeBranch(changeBranchParams),
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),
     newExpectation(
@@ -73,9 +75,7 @@ describe(pageName, () => {
   const devices = desktopDevicesForAppLayout(
     pageName,
     desktopAndIpadTests(),
-    false,
-    true,
-    loggedIn,
+    databasePage,
   );
   /* 
     TODO: mobile pull request page test
@@ -85,6 +85,6 @@ describe(pageName, () => {
     ), 
     */
   // ];
-  const skip = false;
+
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

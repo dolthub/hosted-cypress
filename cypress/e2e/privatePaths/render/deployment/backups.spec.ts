@@ -9,6 +9,7 @@ const depName = "us-jails-3";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=backups`;
 
 const loggedIn = true;
+const skip = false;
 
 describe(pageName, () => {
   const tests = [
@@ -20,15 +21,7 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(
-    pageName,
-    tests,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
+  const devices = allDevicesForAppLayout(pageName, tests, tests);
 
-  const skip = false;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

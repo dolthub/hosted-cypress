@@ -25,6 +25,8 @@ const changeBranchParams = {
 };
 
 const loggedIn = true;
+const skip = false;
+const databasePage = true;
 
 describe(pageName, () => {
   const tests = [
@@ -44,9 +46,7 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = [
-    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
-  ];
-  const skip = false;
+  const devices = [macbook15ForAppLayout(pageName, tests, databasePage)];
+
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

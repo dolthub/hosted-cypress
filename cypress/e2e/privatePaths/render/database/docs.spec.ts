@@ -3,9 +3,8 @@ import {
   testMobileDBHeaderNav,
 } from "@sharedTests/dbHeaderNav";
 import {
-  iPad2ForAppLayout,
-  iPhoneXForAppLayout,
   macbook15ForAppLayout,
+  mobileDevicesForAppLayout,
 } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
@@ -17,9 +16,9 @@ const dbName = "us_jails";
 const currentBranch = "main";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/doc/${currentBranch}`;
 
+const skip = false;
 const loggedIn = true;
-const skipNavbar = false;
-const skipFooter = true;
+const databasePage = true;
 
 describe(pageName, () => {
   const notExist = newShouldArgs("not.exist");
@@ -58,23 +57,9 @@ describe(pageName, () => {
   ];
 
   const devices = [
-    macbook15ForAppLayout(
-      pageName,
-      desktopAndIpadTests(),
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
-    iPad2ForAppLayout(pageName, mobileTests, skipNavbar, skipFooter, loggedIn),
-    iPhoneXForAppLayout(
-      pageName,
-      mobileTests,
-      skipNavbar,
-      skipFooter,
-      loggedIn,
-    ),
+    macbook15ForAppLayout(pageName, desktopAndIpadTests(), databasePage),
+    ...mobileDevicesForAppLayout(pageName, mobileTests, databasePage),
   ];
 
-  const skip = false;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

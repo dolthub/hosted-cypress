@@ -13,6 +13,8 @@ const dbName = "us_jails";
 const currentPage = `deployments/${currentOwner}/${doesNotExistDep}/database/${dbName}/pulls`;
 
 const loggedIn = true;
+const skip = false;
+const databasePage = true;
 
 describe(pageName, () => {
   const tests = [
@@ -21,9 +23,7 @@ describe(pageName, () => {
     shouldNotExist("pull-requests-table"),
   ];
 
-  const devices = [
-    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
-  ];
-  const skip = false;
+  const devices = [macbook15ForAppLayout(pageName, tests, databasePage)];
+
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

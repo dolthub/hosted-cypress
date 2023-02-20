@@ -12,6 +12,8 @@ const doesNotExistDB = "doesnotexist";
 const currentPage = `deployments/${currentOwner}/${currentDep}/database/${doesNotExistDB}/pulls`;
 
 const loggedIn = true;
+const databasePage = true;
+const skip = false;
 
 describe(pageName, () => {
   const tests = [
@@ -19,9 +21,7 @@ describe(pageName, () => {
     shouldNotExist("pull-requests-table"),
   ];
 
-  const devices = [
-    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
-  ];
-  const skip = false;
+  const devices = [macbook15ForAppLayout(pageName, tests, databasePage)];
+
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

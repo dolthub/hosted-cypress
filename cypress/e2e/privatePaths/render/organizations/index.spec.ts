@@ -54,8 +54,8 @@ describe(pageName, () => {
 
   // TODO: add mobile tests
   const devices = [
-    macbook15ForAppLayout(pageName, tests, false, true, loggedIn),
-    iPad2ForAppLayout(pageName, tests, false, true, loggedIn),
+    macbook15ForAppLayout(pageName, tests),
+    iPad2ForAppLayout(pageName, tests),
   ];
 
   runTestsForDevices({ currentPage, devices, loggedIn });

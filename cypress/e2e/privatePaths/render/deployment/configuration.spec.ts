@@ -37,13 +37,6 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(
-    pageName,
-    tests,
-    tests,
-    false,
-    true,
-    loggedIn,
-  );
+  const devices = allDevicesForAppLayout(pageName, tests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
