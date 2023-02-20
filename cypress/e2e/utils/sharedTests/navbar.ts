@@ -17,25 +17,13 @@ const sharedLinks = [
   "[data-cy=navbar-github]",
 ];
 
-const signedInLinks = [
-  ...sharedLinks,
-  "[data-cy=navbar-deployments]",
-  "[data-cy=navbar-organizations]",
-];
+const signedInLinks = [...sharedLinks, "[data-cy=navbar-deployments]"];
 
 const signedOutLinks = [...sharedLinks, "[data-cy=navbar-signin]"];
 
-const signedOutMobileLinks = [
-  "[data-cy=navbar-documentation]",
-  "[data-cy=navbar-pricing]",
-  "[data-cy=navbar-signin]",
-];
-
 const signedInMobileLinks = [
-  "[data-cy=navbar-documentation]",
-  "[data-cy=navbar-pricing]",
+  ...sharedLinks,
   "[data-cy=navbar-deployments]",
-  "[data-cy=navbar-organizations]",
   "[data-cy=navbar-settings]",
   "[data-cy=sign-out-button-mobile]",
 ];
@@ -67,7 +55,7 @@ const mobileNavbarClickFlow = (signedIn: boolean) =>
     [
       newExpectation(
         "should show links",
-        signedIn ? signedInMobileLinks : signedOutMobileLinks,
+        signedIn ? signedInMobileLinks : signedOutLinks,
         beVisible,
       ),
     ],
