@@ -15,7 +15,7 @@ const connectivityFindAndContains = [
   { dataCy: "connectivity-field-port", text: "Port" },
   { dataCy: "connectivity-field-username", text: "Username" },
   { dataCy: "connectivity-field-password", text: "Password" },
-  { dataCy: "instructions-header", text: "Connect to Server" },
+  { dataCy: "instructions-header", text: "Connect to server" },
   { dataCy: "docs-link", text: "Read the docs" },
 ];
 

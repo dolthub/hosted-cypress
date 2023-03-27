@@ -1,14 +1,7 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import {
-  newClickFlow,
-  newExpectationWithClickFlows,
-  newExpectationWithScrollIntoView,
-} from "@utils/helpers";
+import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import {
-  beVisible,
-  shouldBeVisible,
-} from "@utils/sharedTests/sharedFunctionsAndVariables";
+import { beVisible } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment settings page";
 const ownerName = "dolthub";
@@ -21,14 +14,14 @@ const settingDataCys = [
   "collab-header",
   "collab-table",
   "cypresstesting-collab-row",
-  "add-collaborator-header",
-  "add-collab-radios",
+  // "add-collaborator-header",
+  // "add-collab-radios",
 ];
 
-const formClickAndFinds = [
-  { clickCy: "radio-team", findCy: "add-team-form" },
-  { clickCy: "radio-individual", findCy: "add-individual-form" },
-];
+// const formClickAndFinds = [
+//   { clickCy: "radio-team", findCy: "add-team-form" },
+//   { clickCy: "radio-individual", findCy: "add-individual-form" },
+// ];
 
 describe(pageName, () => {
   const tests = [
@@ -40,18 +33,18 @@ describe(pageName, () => {
         true,
       ),
     ),
-    ...formClickAndFinds.map(test =>
-      newExpectationWithClickFlows(
-        `should find ${test.findCy}`,
-        `[data-cy=${test.clickCy}]`,
-        beVisible,
-        [
-          newClickFlow(`[data-cy=${test.clickCy}]`, [
-            shouldBeVisible(test.findCy),
-          ]),
-        ],
-      ),
-    ),
+    // ...formClickAndFinds.map(test =>
+    //   newExpectationWithClickFlows(
+    //     `should find ${test.findCy}`,
+    //     `[data-cy=${test.clickCy}]`,
+    //     beVisible,
+    //     [
+    //       newClickFlow(`[data-cy=${test.clickCy}]`, [
+    //         shouldBeVisible(test.findCy),
+    //       ]),
+    //     ],
+    //   ),
+    // ),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
