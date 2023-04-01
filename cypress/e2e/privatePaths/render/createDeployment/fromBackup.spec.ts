@@ -25,7 +25,7 @@ describe(pageName, () => {
     shouldFindAndContain("page-title", "Create Deployment"),
     shouldNotExist("no-subscription-banner"),
     shouldBeVisible("no-perm-banner"),
-    shouldBeVisible("backup-banner"),
+    shouldBeVisible("backups-banner"),
     shouldFindAndContain("owner-select", ["Owner", ownerName]),
     shouldFindAndHaveValue("deployment-name-input", "us-jails-4"),
     shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
