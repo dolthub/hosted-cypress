@@ -1,7 +1,10 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import { beVisibleAndContain } from "@utils/sharedTests/sharedFunctionsAndVariables";
+import {
+  beVisibleAndContain,
+  shouldBeVisible,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment connectivity page";
 const ownerName = "dolthub";
@@ -17,6 +20,11 @@ const connectivityFindAndContains = [
   { dataCy: "connectivity-field-password", text: "Password" },
   { dataCy: "instructions-header", text: "Connect to server" },
   { dataCy: "docs-link", text: "Read the docs" },
+  { dataCy: "clone-header", text: "Clone database" },
+  {
+    dataCy: "create-from-backup-button",
+    text: "Create new deployment with Web PKI from latest backup",
+  },
 ];
 
 describe(pageName, () => {
@@ -29,6 +37,7 @@ describe(pageName, () => {
         true,
       ),
     ),
+    shouldBeVisible("disabled-clone-instructions"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
