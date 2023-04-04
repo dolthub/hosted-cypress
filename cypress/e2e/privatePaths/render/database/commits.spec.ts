@@ -8,6 +8,10 @@ import {
 } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import {
+  beVisible,
+  notExist,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Commit log page";
 const ownerName = "dolthub";
@@ -21,9 +25,6 @@ const databasePage = true;
 const skip = false;
 
 describe(pageName, () => {
-  const beVisible = newShouldArgs("be.visible");
-  const notExist = newShouldArgs("not.exist");
-
   const commonTests = [
     newExpectation(
       "should not find empty commits message",

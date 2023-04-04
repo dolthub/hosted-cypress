@@ -64,16 +64,18 @@ export const iPhoneXForSignedOutLayout = (
 export const mobileDevicesForSignedOutLayout = (
   pageName: string,
   tests: Tests,
+  loggedIn = false,
 ): Device[] => {
-  const t = getSignedOutLayoutTestsMobile(tests);
+  const t = getSignedOutLayoutTestsMobile(tests, loggedIn);
   return [iPad2(pageName, t), iPhoneX(pageName, t)];
 };
 
 export const desktopDevicesForSignedOutLayout = (
   pageName: string,
   tests: Tests,
+  loggedIn = false,
 ): Device[] => {
-  const t = getSignedOutLayoutTests(tests);
+  const t = getSignedOutLayoutTests(tests, loggedIn);
   return [macbook15(pageName, t), macbook11(pageName, t)];
 };
 
@@ -81,17 +83,18 @@ export const allDevicesForSignedOutLayout = (
   pageName: string,
   desktopTests: Tests,
   mobileTests: Tests,
+  loggedIn = false,
 ): Device[] => [
-  ...desktopDevicesForSignedOutLayout(pageName, desktopTests),
-  ...mobileDevicesForSignedOutLayout(pageName, mobileTests),
+  ...desktopDevicesForSignedOutLayout(pageName, desktopTests, loggedIn),
+  ...mobileDevicesForSignedOutLayout(pageName, mobileTests, loggedIn),
 ];
 
-function getSignedOutLayoutTests(tests: Tests): Tests {
-  return [...testSignedOutNavbar, ...tests, ...testFooter];
+function getSignedOutLayoutTests(tests: Tests, loggedIn = false): Tests {
+  return [...testSignedOutNavbar(loggedIn), ...tests, ...testFooter];
 }
 
-function getSignedOutLayoutTestsMobile(tests: Tests): Tests {
-  return [...testMobileNavbar(false), ...tests, ...testFooter];
+function getSignedOutLayoutTestsMobile(tests: Tests, loggedIn = false): Tests {
+  return [...testMobileNavbar(loggedIn), ...tests, ...testFooter];
 }
 
 // App layout, must be logged in

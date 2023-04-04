@@ -2,6 +2,7 @@ import {
   beVisible,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindButton,
   shouldNotExist,
   shouldSelectOption,
 } from "@sharedTests/sharedFunctionsAndVariables";
@@ -30,11 +31,7 @@ describe(pageName, () => {
     shouldBeVisible("view-tickets-tab"),
     shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
-    newExpectation(
-      "should have disabled submit button",
-      "[data-cy=submit-button]",
-      newShouldArgs("is.disabled"),
-    ),
+    shouldFindButton("submit-button", true),
     // TODO: Uncomment when deployment search exists
     // ...shouldTypeAndSelectOption(
     //   "dolthub/us-jails",

@@ -22,7 +22,8 @@ describe(pageName, () => {
     shouldFindAndContain("page-title", "Create Deployment"),
     shouldBeVisible("no-subscription-banner"),
     shouldNotExist("no-perm-banner"),
-    shouldNotExist("backup-banner"),
+    shouldNotExist("backups-banner"),
+    shouldNotExist("existing-deployment"),
     shouldFindAndContain("owner-select", ["Owner", "cypresstesting"]),
     shouldFindAndHaveValue("deployment-name-input", ""),
     shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
@@ -34,6 +35,7 @@ describe(pageName, () => {
     shouldFindAndContain("storage-select", ["Storage", "EBS GP3"]),
     shouldFindAndHaveValue("volume-size-input", 100),
     ...shouldFindCheckbox("web-pki-cert-checkbox", false),
+    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
       ? shouldFindCheckbox("deployment-flag-checkbox", true)
