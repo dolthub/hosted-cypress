@@ -60,12 +60,18 @@ export const shouldFindAndHaveValue = (
 export const shouldFindCheckbox = (
   dataCy: string,
   checked: boolean,
+  disabled = false,
 ): Expectation[] => [
   shouldBeVisible(dataCy),
   newExpectation(
     `should find ${checked ? "" : "un"}checked ${getDesc(dataCy)}`,
     `[data-cy=${dataCy}] input`,
     newShouldArgs(`${checked ? "" : "not."}be.checked`),
+  ),
+  newExpectation(
+    `should find ${disabled ? "disabled" : "enabled"} ${getDesc(dataCy)}`,
+    `[data-cy=${dataCy}] input`,
+    newShouldArgs(disabled ? "be.disabled" : "be.enabled"),
   ),
 ];
 

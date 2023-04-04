@@ -14,7 +14,7 @@ const pageName = "Create deployment page with existing deployment params";
 const ownerName = "dolthub";
 const depName = "us-jails-3";
 const backupName = "20230213T000525.292";
-const currentPage = `/create-deployment?ownerName=${ownerName}&deploymentName=${depName}&backupName=${backupName}`;
+const currentPage = `/create-deployment?ownerName=${ownerName}&deploymentName=${depName}&backupName=${backupName}&webPKI=true`;
 const loggedIn = true;
 const isDev =
   Cypress.env("LOCAL") ||
@@ -38,8 +38,8 @@ describe(pageName, () => {
     ]),
     shouldFindAndContain("storage-select", ["Storage", "EBS GP3"]),
     shouldFindAndHaveValue("volume-size-input", 100),
-    ...shouldFindCheckbox("web-pki-cert-checkbox", false),
-    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
+    ...shouldFindCheckbox("web-pki-cert-checkbox", true),
+    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
       ? shouldFindCheckbox("deployment-flag-checkbox", true)
