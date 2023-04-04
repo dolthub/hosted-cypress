@@ -41,10 +41,10 @@ const signedInMobileLinks = [
   "[data-cy=sign-out-button-mobile]",
 ];
 
-export const testSignedOutNavbar: Tests = [
+export const testSignedOutNavbar = (loggedIn = false): Tests => [
   newExpectation(
     "should have signed out navbar and correct links",
-    signedOutLinks,
+    loggedIn ? signedInLinks(true) : signedOutLinks,
     beVisible,
   ),
 ];
