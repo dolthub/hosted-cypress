@@ -1,10 +1,12 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisible,
   beVisibleAndContain,
   shouldBeVisible,
+  shouldFindAndContain,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment backups page";
@@ -17,6 +19,8 @@ const skip = false;
 
 describe(pageName, () => {
   const tests = [
+    ...deploymentHeaderTests(ownerName, depName),
+    shouldFindAndContain("active-tab-backups", "Backups"),
     shouldBeVisible("backup-table"),
     newExpectation(
       "should have at least 10 backups",

@@ -1,6 +1,7 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisibleAndContain,
   shouldBeVisible,
@@ -22,6 +23,8 @@ const formFindAndContains = [
 
 describe(pageName, () => {
   const tests = [
+    ...deploymentHeaderTests(ownerName, depName),
+    shouldFindAndContain("active-tab-support", "Support"),
     shouldBeVisible("create-support-ticket"),
     shouldFindAndContain(
       "create-support-ticket-header",

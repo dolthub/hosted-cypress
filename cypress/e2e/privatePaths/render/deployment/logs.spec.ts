@@ -1,7 +1,11 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import { beVisible } from "@utils/sharedTests/sharedFunctionsAndVariables";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
+import {
+  beVisible,
+  shouldFindAndContain,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment logs page";
 const ownerName = "dolthub";
@@ -18,6 +22,8 @@ const logDataCys = [
 
 describe(pageName, () => {
   const tests = [
+    ...deploymentHeaderTests(ownerName, depName),
+    shouldFindAndContain("active-tab-logs", "Logs"),
     ...logDataCys.map(dataCy =>
       newExpectationWithScrollIntoView(
         `should scroll to ${dataCy}`,

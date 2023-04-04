@@ -7,6 +7,7 @@ import {
   newShouldArgs,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisible,
   notExist,
@@ -74,6 +75,8 @@ const collabFormClickFlow = newClickFlow(
 
 describe(pageName, () => {
   const tests = [
+    ...deploymentHeaderTests(ownerName, depName),
+    shouldFindAndContain("active-tab-settings", "Settings"),
     ...settingDataCys.map(dc =>
       newExpectationWithScrollIntoView(
         `should scroll to ${dc}`,

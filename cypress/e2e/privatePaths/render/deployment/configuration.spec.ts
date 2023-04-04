@@ -1,10 +1,16 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import { newExpectationWithScrollIntoView } from "@utils/helpers";
+import {
+  newExpectation,
+  newExpectationWithScrollIntoView,
+  newShouldArgs,
+} from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisible,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldNotExist,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment configuration page";
@@ -29,7 +35,11 @@ const supportedOverrides = [
 
 describe(pageName, () => {
   const tests = [
+    ...deploymentHeaderTests(ownerName, depName),
+    shouldFindAndContain("active-tab-configuration", "Configuration"),
     shouldFindAndContain("configuration-header", "Configuration"),
+    shouldNotExist("must-admin-msg"),
+    shouldNotExist("must-started-msg"),
     ...supportedOverrides.map(supportedOverride =>
       newExpectationWithScrollIntoView(
         `should scroll to ${supportedOverride}`,
@@ -37,6 +47,11 @@ describe(pageName, () => {
         beVisible,
         true,
       ),
+    ),
+    newExpectation(
+      "should find multiple inputs in config table",
+      "[data-cy=config-table] input",
+      newShouldArgs("be.visible.and.have.length", supportedOverrides.length),
     ),
     shouldBeVisible("save-changes-button"),
   ];
