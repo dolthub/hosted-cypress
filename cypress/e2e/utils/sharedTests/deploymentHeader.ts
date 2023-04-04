@@ -1,13 +1,9 @@
-import {
-  newClickFlow,
-  newExpectation,
-  newExpectationWithClickFlows,
-  newShouldArgs,
-} from "@utils/helpers";
+import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
 import {
   beVisible,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindButton,
   shouldNotExist,
 } from "./sharedFunctionsAndVariables";
 
@@ -15,19 +11,9 @@ const actionsClickFlow = (isStopped = false) =>
   newClickFlow(
     "[data-cy=actions-button]",
     [
-      newExpectation(
-        "should have update dolt button",
-        "[data-cy=update-dolt-button]",
-        isStopped ? newShouldArgs("is.disabled") : beVisible,
-      ),
+      shouldFindButton("update-dolt-button", isStopped),
       shouldBeVisible("create-new-dep-button"),
-      newExpectation(
-        `should have ${
-          isStopped ? "disabled" : "enabled"
-        } destroy deployment button`,
-        "[data-cy=destroy-button]",
-        newShouldArgs(isStopped ? "be.disabled" : "be.enabled"),
-      ),
+      shouldFindButton("destroy-button", isStopped),
     ],
     `[data-cy=deployment-state-${isStopped ? "stopped" : "started"}]`,
   );

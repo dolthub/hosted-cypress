@@ -13,6 +13,7 @@ import {
   notExist,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindButton,
   shouldFindCheckbox,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
@@ -103,11 +104,7 @@ describe(pageName, () => {
       [collabFormClickFlow],
     ),
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
-    newExpectation(
-      "should have disabled update advanced settings button",
-      "[data-cy=update-advanced-settings-button]",
-      newShouldArgs("be.disabled"),
-    ),
+    shouldFindButton("update-advanced-settings-button", true),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

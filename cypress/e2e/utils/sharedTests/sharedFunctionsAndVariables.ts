@@ -80,7 +80,7 @@ export const shouldFindButton = (
   disabled = false,
 ): Expectation =>
   newExpectation(
-    `should find${disabled ? "disabled" : ""} ${getDesc(dataCy)}`,
+    `should find${disabled ? "disabled" : "enabled"} ${getDesc(dataCy)}`,
     `[data-cy=${dataCy}]`,
     newShouldArgs(disabled ? "be.disabled" : "be.enabled"),
   );
