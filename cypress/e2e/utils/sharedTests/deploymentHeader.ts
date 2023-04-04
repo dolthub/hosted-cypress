@@ -1,4 +1,9 @@
-import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
+import {
+  newClickFlow,
+  newExpectation,
+  newExpectationWithClickFlows,
+  newShouldArgs,
+} from "@utils/helpers";
 import {
   beVisible,
   shouldBeVisible,
@@ -11,7 +16,11 @@ const actionsClickFlow = (isStopped = false) =>
   newClickFlow(
     "[data-cy=actions-button]",
     [
-      shouldFindButton("update-dolt-button", isStopped),
+      newExpectation(
+        "should have update dolt button",
+        "[data-cy=update-dolt-button]",
+        isStopped ? newShouldArgs("is.disabled") : beVisible,
+      ),
       shouldBeVisible("create-new-dep-button"),
       shouldFindButton("destroy-button", isStopped),
     ],
