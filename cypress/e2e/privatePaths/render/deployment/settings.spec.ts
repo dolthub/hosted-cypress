@@ -24,15 +24,11 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=settings`;
 
 const loggedIn = true;
 
-const settingDataCys = [
+const swDataCys = [
   "service-window-settings",
   "service-window-day-of-week",
   "service-window-start-time",
   "service-window-end-time",
-  "collab-header",
-  "collab-table",
-  "cypresstesting-collab-row",
-  "advanced-settings",
 ];
 
 const formClickAndFinds = [
@@ -78,14 +74,13 @@ describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
     shouldFindAndContain("active-tab-settings", "Settings"),
-    ...settingDataCys.map(dc =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${dc}`,
-        `[data-cy=${dc}]`,
-        beVisible,
-        true,
-      ),
+    newExpectationWithScrollIntoView(
+      `should scroll to service window`,
+      `[data-cy=service-window-settings]`,
+      beVisible,
+      true,
     ),
+    ...swDataCys.map(dc => shouldBeVisible(dc)),
     newExpectation(
       "should have no service window inputs",
       "[data-cy=service-window-settings] input",
@@ -97,11 +92,25 @@ describe(pageName, () => {
       beVisible,
       [editServiceWindowClickFlow],
     ),
+    newExpectationWithScrollIntoView(
+      `should scroll to collab header`,
+      `[data-cy=collab-header]`,
+      beVisible,
+      true,
+    ),
+    shouldBeVisible("collab-table"),
+    shouldBeVisible("cypresstesting-collab-row"),
     newExpectationWithClickFlows(
       "should open new collaborator modal",
       "[data-cy=add-collab-button]",
       beVisible,
       [collabFormClickFlow],
+    ),
+    newExpectationWithScrollIntoView(
+      `should scroll to advanced settings`,
+      `[data-cy=advanced-settings]`,
+      beVisible,
+      true,
     ),
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
     shouldFindButton("update-advanced-settings-button", true),
