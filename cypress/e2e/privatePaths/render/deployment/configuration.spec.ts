@@ -38,7 +38,7 @@ describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
     shouldFindAndContain("active-tab-configuration", "Configuration"),
-    shouldFindAndContain("configuration-header", "Configuration"),
+    shouldBeVisible("configuration-header"),
     shouldNotExist("must-admin-msg"),
     shouldNotExist("must-started-msg"),
     ...supportedOverrides.map(supportedOverride =>
