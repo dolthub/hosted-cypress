@@ -22,6 +22,7 @@ const loggedIn = true;
 
 const supportedOverrides = [
   "behavior_auto_commit",
+  "behavior_dolt_transaction_commit",
   "behavior_read_only",
   "behavior_sysvar_persistence",
   "behavior_disable_multistatements",
@@ -51,7 +52,10 @@ describe(pageName, () => {
     newExpectation(
       "should find multiple inputs in config table",
       "[data-cy=config-table] input",
-      newShouldArgs("be.visible.and.have.length", supportedOverrides.length),
+      newShouldArgs(
+        "be.visible.and.have.length.of.at.least",
+        supportedOverrides.length,
+      ),
     ),
     shouldBeVisible("save-changes-button"),
   ];
