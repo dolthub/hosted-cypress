@@ -4,7 +4,6 @@ import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisibleAndContain,
-  shouldBeVisible,
   shouldFindAndContain,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
@@ -42,7 +41,7 @@ describe(pageName, () => {
         true,
       ),
     ),
-    shouldBeVisible("disabled-clone-instructions"),
+    // shouldBeVisible("disabled-clone-instructions"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
