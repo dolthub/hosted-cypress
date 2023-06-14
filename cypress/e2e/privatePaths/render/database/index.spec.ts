@@ -60,7 +60,7 @@ describe(pageName, () => {
     ),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
     // TODO: Once writes are allowed, make loggedIn = true
-    ...tableExpectations(true, true, 3, testTable),
+    ...tableExpectations(true, true, 4, testTable),
     // ...testClickDeleteRow(
     //   "error-modal",
     //   newShouldArgs("be.visible.and.contain", ["No authentication", "sign in"]),
@@ -96,7 +96,7 @@ describe(pageName, () => {
       beVisible,
     ),
     ...testMobileDBHeaderNav(ownerName, depName, dbName),
-    ...tableExpectations(true, false, 3, testTable, true),
+    ...tableExpectations(true, false, 4, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
     testQueryCatalogSection(hasBranch, 0, undefined, true),
     testSchemaSection(hasBranch, 3, testTable, true),
