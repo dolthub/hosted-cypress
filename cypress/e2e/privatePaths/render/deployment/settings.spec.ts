@@ -18,8 +18,8 @@ import {
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment settings page";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=settings`;
 
 const loggedIn = true;
@@ -112,7 +112,7 @@ describe(pageName, () => {
       beVisible,
       true,
     ),
-    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
+    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
     shouldFindButton("update-advanced-settings-button", true),
   ];
 

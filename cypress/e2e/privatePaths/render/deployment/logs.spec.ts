@@ -8,8 +8,8 @@ import {
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment logs page";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 
 const loggedIn = true;
@@ -37,6 +37,6 @@ describe(pageName, () => {
   const devices = allDevicesForAppLayout(pageName, tests, tests);
 
   // TODO: Logs query is too slow
-  const skip = true;
+  const skip = false;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

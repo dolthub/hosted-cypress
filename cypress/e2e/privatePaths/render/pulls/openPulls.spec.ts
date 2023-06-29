@@ -11,8 +11,8 @@ import { newExpectation } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page with open pulls";
-const currentOwner = "dolthub";
-const currentDep = "us-jails-3";
+const currentOwner = "automated_testing";
+const currentDep = "us-jails";
 const dbName = "us_jails";
 const currentPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 

@@ -15,8 +15,8 @@ import { runTestsForDevices } from "@utils/index";
 import { changeBranch } from "@utils/sharedTests/changeBranch";
 
 const pageName = "Pull requests page";
-const currentOwner = "dolthub";
-const currentDep = "us-jails-3";
+const currentOwner = "automated_testing";
+const currentDep = "us-jails";
 const dbName = "us_jails";
 const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 const currentPage = `${pullsPage}?filter=all`;

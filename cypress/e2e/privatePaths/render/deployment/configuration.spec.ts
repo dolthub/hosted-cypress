@@ -14,8 +14,8 @@ import {
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment configuration page";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
 
 const loggedIn = true;

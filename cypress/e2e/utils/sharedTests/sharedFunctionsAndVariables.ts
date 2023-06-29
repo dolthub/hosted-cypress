@@ -150,3 +150,11 @@ export function shouldSelectOption(
 function getDesc(dataCy: string): string {
   return dataCy.replace(/-/g, " ");
 }
+
+export const typingExpectation = (value: string, selectorStr: string) =>
+  newExpectationWithTypeString(
+    `should write description in textbox`,
+    selectorStr,
+    beVisible,
+    { value },
+  );
