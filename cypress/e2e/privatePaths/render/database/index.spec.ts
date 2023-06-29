@@ -20,11 +20,12 @@ import {
   newShouldArgs,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { typingExpectation } from "@utils/sharedTests/sharedFunctionsAndVariables";
 import { Tests } from "@utils/types";
 
 const pageName = "Default database page";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const dbName = "us_jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}`;
 
@@ -59,25 +60,20 @@ describe(pageName, () => {
       beVisible,
     ),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
-    // TODO: Once writes are allowed, make loggedIn = true
     ...tableExpectations(true, true, 3, testTable),
-    // ...testClickDeleteRow(
-    //   "error-modal",
-    //   newShouldArgs("be.visible.and.contain", ["No authentication", "sign in"]),
-    // ),
     testViewsSection(hasBranch, 0),
-    // newExpectationWithClickFlows(
-    //   "should show create view button",
-    //   "[data-cy=create-view-button]",
-    //   beVisible,
-    //   [
-    //     newClickFlow(
-    //       "[data-cy=create-view-button]",
-    //       [typingExpectation("testQueryName", "[data-cy=query-name]")],
-    //       "[data-cy=close-modal]",
-    //     ),
-    //   ],
-    // ),
+    newExpectationWithClickFlows(
+      "should show create view button",
+      "[data-cy=create-view-button]",
+      beVisible,
+      [
+        newClickFlow(
+          "[data-cy=create-view-button]",
+          [typingExpectation("testQueryName", "[data-cy=query-name]")],
+          "[data-cy=close-modal]",
+        ),
+      ],
+    ),
     testQueryCatalogSection(hasBranch, 0),
     testSchemaSection(hasBranch, 3, testTable),
     testSqlConsole,

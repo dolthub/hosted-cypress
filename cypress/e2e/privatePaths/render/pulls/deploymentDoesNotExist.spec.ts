@@ -7,7 +7,7 @@ import { macbook15ForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Pull requests page for non-existent deployment";
-const currentOwner = "dolthub";
+const currentOwner = "automated_testing";
 const doesNotExistDep = "doesnt-exist";
 const dbName = "us_jails";
 const currentPage = `deployments/${currentOwner}/${doesNotExistDep}/database/${dbName}/pulls`;

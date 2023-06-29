@@ -5,6 +5,7 @@ import {
   shouldFindButton,
   shouldNotExist,
   shouldSelectOption,
+  shouldTypeAndSelectOption,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import {
@@ -22,7 +23,7 @@ const loggedIn = true;
 const isDev =
   Cypress.env("LOCAL") ||
   Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
-const skip = true; // TODO: Unskip when deployment search exists
+const skip = false; // TODO: Unskip when deployment search exists
 
 describe(pageName, () => {
   const tests = [
@@ -33,30 +34,30 @@ describe(pageName, () => {
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),
     // TODO: Uncomment when deployment search exists
-    // ...shouldTypeAndSelectOption(
-    //   "dolthub/us-jails",
-    //   "deployment-select",
-    //   2,
-    //   2,
-    //   "us-jails",
-    // ),
-    // shouldSelectOption("Critical", "impact-select", 3, 1),
-    // shouldBeVisible("critical-err"),
-    shouldSelectOption(
-      "dolthub/us-jails-3",
+    ...shouldTypeAndSelectOption(
+      "automated_testing/us-jails",
       "deployment-select",
       2,
-      isDev ? 5 : 1,
+      0,
+      "us-jails",
     ),
+    shouldSelectOption("Critical", "impact-select", 3, 1),
+    // shouldBeVisible("critical-err"),
+    // shouldSelectOption(
+    //   "automated_testing/us-jails",
+    //   "deployment-select",
+    //   2,
+    //   isDev ? 5 : 1,
+    // ),
     // newExpectationWithClickFlows(
     //   "should remove inactive deployment",
-    //   `[aria-label="Remove dolthub/us-jails"]`,
+    //   `[aria-label="Remove automated_testing/us-jails"]`,
     //   beVisible,
     //   [
-    //     newClickFlow(`[aria-label="Remove dolthub/us-jails"]`, [
+    //     newClickFlow(`[aria-label="Remove automated_testing/us-jails"]`, [
     //       newExpectation(
     //         "inactive deployment should be removed",
-    //         `[aria-label="Remove dolthub/us-jails"]`,
+    //         `[aria-label="Remove automated_testing/us-jails"]`,
     //         notExist,
     //       ),
     //     ]),

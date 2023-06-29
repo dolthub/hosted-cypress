@@ -11,8 +11,8 @@ import { scrollToPosition } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 
 const pageName = "Create deployment page with existing deployment params";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const currentPage = `/create-deployment?ownerName=${ownerName}&deploymentName=${depName}`;
 const loggedIn = true;
 const isDev =
@@ -28,7 +28,7 @@ describe(pageName, () => {
     shouldBeVisible("existing-deployment-checkboxes"),
     shouldNotExist("backups-banner"),
     shouldFindAndContain("owner-select", ["Owner", ownerName]),
-    shouldFindAndHaveValue("deployment-name-input", "us-jails-4"),
+    shouldFindAndHaveValue("deployment-name-input", "us-jails-1"),
     shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
     shouldFindAndContain("zone-select", ["Zone", "us-west-2"]),
     shouldFindAndContain("instance-type-select-with-details", [
@@ -37,11 +37,11 @@ describe(pageName, () => {
     ]),
     shouldFindAndContain("storage-select", ["Storage", "EBS GP3"]),
     shouldFindAndHaveValue("volume-size-input", 100),
-    ...shouldFindCheckbox("web-pki-cert-checkbox", false),
-    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
+    ...shouldFindCheckbox("web-pki-cert-checkbox", true),
+    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
-      ? shouldFindCheckbox("deployment-flag-checkbox", true)
+      ? shouldFindCheckbox("deployment-flag-checkbox", false)
       : [shouldNotExist("deployment-flag-checkbox")]),
     scrollToPosition("#main-content", "bottom"),
     shouldFindAndContain("hourly-cost", [

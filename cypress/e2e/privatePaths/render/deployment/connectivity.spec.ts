@@ -8,8 +8,8 @@ import {
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment connectivity page";
-const ownerName = "dolthub";
-const depName = "us-jails-3";
+const ownerName = "automated_testing";
+const depName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;
 
 const loggedIn = true;
@@ -24,8 +24,8 @@ const connectivityFindAndContains = [
   { dataCy: "docs-link", text: "Read the docs" },
   { dataCy: "clone-header", text: "Clone database" },
   {
-    dataCy: "create-from-backup-button",
-    text: "Create new deployment with Web PKI from latest backup",
+    dataCy: "clone-instructions",
+    text: `You can clone "us_jails" using the Dolt CLI* by executing these commands:`,
   },
 ];
 
@@ -41,7 +41,6 @@ describe(pageName, () => {
         true,
       ),
     ),
-    // shouldBeVisible("disabled-clone-instructions"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
