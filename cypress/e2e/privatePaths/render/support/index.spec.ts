@@ -20,9 +20,6 @@ const pageName = "New support ticket page";
 const currentPage = "/support";
 const loggedIn = true;
 
-const isDev =
-  Cypress.env("LOCAL") ||
-  Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
 const skip = false; // TODO: Unskip when deployment search exists
 
 describe(pageName, () => {
