@@ -14,6 +14,11 @@ export const defaultTimeout = 5000;
 export const opts: Partial<Cypress.Timeoutable> = {
   timeout: defaultTimeout,
 };
+export const getOpts = (
+  timeout = defaultTimeout,
+): Partial<Cypress.Timeoutable> => ({
+  timeout,
+});
 export const clickOpts: Partial<Cypress.ClickOptions> = {
   scrollBehavior: false,
 };
@@ -69,6 +74,7 @@ export function runTests({ isMobile, tests }: TestsArgs) {
       testClickFlows({
         clickFlows: t.clickFlows,
         description: t.description,
+        timeout: t.timeout,
       });
     }
 
@@ -130,6 +136,7 @@ function testAssertion(t: Expectation) {
         t.targetPage,
         t.url,
         t.scrollIntoView,
+        t.timeout,
       ),
     );
   }
@@ -142,6 +149,7 @@ function testAssertion(t: Expectation) {
     t.targetPage,
     t.url,
     t.scrollIntoView,
+    t.timeout,
   );
 }
 
@@ -154,24 +162,26 @@ function getAssertionTest(
   targetPage?: string,
   url?: string,
   scrollIntoView?: boolean,
+  timeout?: number,
 ) {
   const message = `
   Test assertion failed... 
   related test: ${description},
   related selector: ${selectorStr},
 `;
+  const o = getOpts(timeout);
   if (typeString) {
     if (typeString.eq) {
       return cy
-        .get(selectorStr, opts)
+        .get(selectorStr, o)
         .eq(typeString.eq)
         .type(typeString.value, clickOpts);
     }
     if (!typeString.skipClear) {
-      cy.get(selectorStr, opts).clear(clickOpts);
-      return cy.get(selectorStr, opts).type(typeString.value, clickOpts);
+      cy.get(selectorStr, o).clear(clickOpts);
+      return cy.get(selectorStr, o).type(typeString.value, clickOpts);
     }
-    return cy.get(selectorStr, opts).type(typeString.value, clickOpts);
+    return cy.get(selectorStr, o).type(typeString.value, clickOpts);
   }
 
   if (selectOption !== undefined) {
@@ -182,68 +192,83 @@ function getAssertionTest(
   }
   if (url) {
     const base = Cypress.config().baseUrl;
-    cy.location("href", opts).should("eq", `${base}${url}`);
+    cy.location("href", o).should("eq", `${base}${url}`);
   }
   if (scrollIntoView) {
-    scrollSelectorIntoView(selectorStr);
+    scrollSelectorIntoView(selectorStr, timeout);
   }
   if (Array.isArray(shouldArgs.value)) {
     return cy
-      .get(selectorStr, opts)
+      .get(selectorStr, o)
       .should(shouldArgs.chainer, ...shouldArgs.value, { message });
   }
   return cy
-    .get(selectorStr, opts)
+    .get(selectorStr, o)
     .should(shouldArgs.chainer, shouldArgs.value, { message });
 }
 
 type ClickFlowsArgs = {
   description: string;
   clickFlows?: ClickFlow[];
+  timeout?: number;
 };
 
 // testClickFlows recursively runs clickFlow tests
 // clicking each toClickBefore first, then making assertions
 // the clicking each toClickAfter
-export function testClickFlows({ description, clickFlows }: ClickFlowsArgs) {
+export function testClickFlows({
+  description,
+  clickFlows,
+  timeout,
+}: ClickFlowsArgs) {
   if (!clickFlows) return;
   cy.log(description);
 
   clickFlows.forEach(({ toClickBefore, expectations, toClickAfter, force }) => {
-    if (toClickBefore) runClicks(toClickBefore, force);
+    if (toClickBefore) runClicks(toClickBefore, force, timeout);
 
     expectations.forEach(t => {
       testAssertion(t);
       testClickFlows({
         description,
         clickFlows: t.clickFlows,
+        timeout: t.timeout,
       });
     });
 
-    if (toClickAfter) runClicks(toClickAfter);
+    if (toClickAfter) runClicks(toClickAfter, false, timeout);
   });
 }
 
 // runClicks clicks on each selectorStr
-function runClicks(clickStrOrArr: string | string[], force?: boolean) {
+function runClicks(
+  clickStrOrArr: string | string[],
+  force?: boolean,
+  timeout?: number,
+) {
   const cOpts = { ...clickOpts, force };
+  const o = getOpts(timeout);
   if (Array.isArray(clickStrOrArr)) {
     clickStrOrArr.forEach(clickStr => {
-      cy.get(clickStr, opts).click(cOpts);
+      cy.get(clickStr, o).click(cOpts);
     });
   } else {
-    cy.get(clickStrOrArr, opts).click(cOpts);
+    cy.get(clickStrOrArr, o).click(cOpts);
   }
 }
 
 // scrollSelectorIntoView scrolls the selector into view
-function scrollSelectorIntoView(clickStrOrArr: string | string[]) {
+function scrollSelectorIntoView(
+  clickStrOrArr: string | string[],
+  timeout?: number,
+) {
+  const o = getOpts(timeout);
   if (Array.isArray(clickStrOrArr)) {
     clickStrOrArr.forEach(clickStr => {
-      cy.get(clickStr, opts).scrollIntoView();
+      cy.get(clickStr, o).scrollIntoView();
     });
   } else {
-    cy.get(clickStrOrArr, opts).scrollIntoView();
+    cy.get(clickStrOrArr, o).scrollIntoView();
   }
 }
 

@@ -48,6 +48,7 @@ export type Expectation = {
   targetPage?: string;
   redirect?: string;
   url?: string;
+  timeout?: number;
 };
 
 export type Tests = Expectation[];

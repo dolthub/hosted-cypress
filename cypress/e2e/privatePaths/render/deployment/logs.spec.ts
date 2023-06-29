@@ -14,6 +14,9 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 
 const loggedIn = true;
 
+// TODO: Logs query is too slow
+const skip = false;
+
 const logDataCys = [
   "newer-pagination-button",
   "logs",
@@ -30,13 +33,12 @@ describe(pageName, () => {
         `[data-cy=${dataCy}]`,
         beVisible,
         true,
+        false,
+        10000,
       ),
     ),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
-
-  // TODO: Logs query is too slow
-  const skip = false;
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });
