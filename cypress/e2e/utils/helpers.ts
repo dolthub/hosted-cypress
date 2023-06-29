@@ -58,8 +58,9 @@ export function newExpectationWithScrollIntoView(
   shouldArgs: ShouldArgs,
   scrollIntoView: boolean,
   skip = false,
+  timeout?: number,
 ): Expectation {
-  return { description, selector, scrollIntoView, shouldArgs, skip };
+  return { description, selector, scrollIntoView, shouldArgs, skip, timeout };
 }
 
 export function newExpectationWithScrollTo(
