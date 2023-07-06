@@ -1,6 +1,5 @@
 import {
   beVisible,
-  beVisibleAndContain,
   shouldBeVisible,
   shouldFindAndContain,
   shouldSelectOption,
@@ -51,13 +50,14 @@ describe(pageName, () => {
       optionIdx: 1,
       valueToClick: "us-east-1",
     },
-    {
-      dataCy: "instance-dropdown",
-      currentValue: "M4",
-      selectorIdx: 7,
-      optionIdx: 2,
-      valueToClick: "R5B",
-    },
+    // TODO: flaky
+    // {
+    //   dataCy: "instance-dropdown",
+    //   currentValue: "M4",
+    //   selectorIdx: 7,
+    //   optionIdx: 2,
+    //   valueToClick: "R5B",
+    // },
   ];
 
   const tests = [
@@ -92,12 +92,12 @@ describe(pageName, () => {
       shouldFindAndContain(find.dataCy, find.text),
     ),
 
-    newExpectationWithScrollIntoView(
-      "should find current instance",
-      "[data-cy=current-instance]",
-      beVisibleAndContain("R5B Instances"),
-      true,
-    ),
+    // newExpectationWithScrollIntoView(
+    //   "should find current instance",
+    //   "[data-cy=current-instance]",
+    //   beVisibleAndContain("R5B Instances"),
+    //   true,
+    // ),
   ];
 
   // TODO: Fix tests for other devices

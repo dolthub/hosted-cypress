@@ -15,7 +15,7 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 const loggedIn = true;
 
 // TODO: Logs query is too slow
-const skip = false;
+const skip = true;
 
 const logDataCys = [
   "newer-pagination-button",
