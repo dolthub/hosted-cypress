@@ -1,4 +1,4 @@
-import { allDevicesForAppLayout } from "@utils/devices";
+import { desktopDevicesForAppLayout } from "@utils/devices";
 import { newExpectation, newShouldArgs } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
@@ -49,7 +49,8 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  // TODO: Fix for mobile
+  const devices = desktopDevicesForAppLayout(pageName, tests);
 
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

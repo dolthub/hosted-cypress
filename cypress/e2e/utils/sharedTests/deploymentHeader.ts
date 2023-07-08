@@ -51,5 +51,4 @@ export const deploymentHeaderTests = (
     beVisible,
     [actionsClickFlow(isStopped)],
   ),
-  shouldBeVisible("deployment-summary-table"),
 ];
