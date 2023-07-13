@@ -35,7 +35,7 @@ describe(pageName, () => {
       "automated_testing/us-jails",
       "deployment-select",
       2,
-      0,
+      2,
       "us-jails",
     ),
     shouldSelectOption("Critical", "impact-select", 3, 1),
