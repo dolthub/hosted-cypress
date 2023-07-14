@@ -20,7 +20,11 @@ import {
   newShouldArgs,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import { typingExpectation } from "@utils/sharedTests/sharedFunctionsAndVariables";
+import {
+  shouldBeVisible,
+  shouldNotExist,
+  typingExpectation,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
 import { Tests } from "@utils/types";
 
 const pageName = "Default database page";
@@ -49,18 +53,10 @@ describe(pageName, () => {
 
   const desktopAndIpadTests = (isIpad = false): Tests => [
     ...commonTests,
-    newExpectation(
-      "should not find database table data",
-      "[data-cy=db-data-table]",
-      notExist,
-    ),
-    newExpectation(
-      "should find doc markdown",
-      "[data-cy=db-doc-markdown]",
-      beVisible,
-    ),
+    shouldBeVisible("desktop-db-data-table"),
+    shouldNotExist("db-doc-markdown"),
     ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
-    ...tableExpectations(true, true, 3, testTable),
+    ...tableExpectations(false, true, 3, testTable),
     testViewsSection(hasBranch, 0),
     newExpectationWithClickFlows(
       "should show create view button",
@@ -81,16 +77,8 @@ describe(pageName, () => {
 
   const mobileTests = [
     ...commonTests,
-    newExpectation(
-      "should not find mobile database table data",
-      "[data-cy=mobile-db-data-table]",
-      notExist,
-    ),
-    newExpectation(
-      "should find doc markdown",
-      "[data-cy=db-doc-markdown]",
-      beVisible,
-    ),
+    shouldBeVisible("mobile-db-data-table"),
+    shouldNotExist("db-doc-markdown"),
     ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...tableExpectations(true, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
