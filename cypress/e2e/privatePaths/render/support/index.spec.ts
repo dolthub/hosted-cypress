@@ -5,7 +5,6 @@ import {
   shouldFindButton,
   shouldNotExist,
   shouldSelectOption,
-  shouldTypeAndSelectOption,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import {
@@ -31,13 +30,13 @@ describe(pageName, () => {
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),
     // TODO: Uncomment when deployment search exists
-    ...shouldTypeAndSelectOption(
-      "automated_testing/us-jails",
-      "deployment-select",
-      2,
-      2,
-      "us-jails",
-    ),
+    // ...shouldTypeAndSelectOption(
+    //   "automated_testing/us-jails",
+    //   "deployment-select",
+    //   2,
+    //   5,
+    //   "us-jails",
+    // ),
     shouldSelectOption("Critical", "impact-select", 3, 1),
     // shouldBeVisible("critical-err"),
     // shouldSelectOption(
