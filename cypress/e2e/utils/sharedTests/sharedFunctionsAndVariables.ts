@@ -98,13 +98,14 @@ export function shouldTypeAndSelectOption(
   selectorIdx: number,
   optionIdx: number,
   typeString: string,
+  skipClear = false,
 ): Expectation[] {
   return [
     newExpectationWithTypeString(
       `should search and select ${optionToSelect}`,
       `[data-cy=${selectorDataCy}] input`,
       beVisible,
-      { value: typeString },
+      { value: typeString, skipClear },
     ),
     newExpectationWithClickFlows(
       `should have ${optionToSelect}`,

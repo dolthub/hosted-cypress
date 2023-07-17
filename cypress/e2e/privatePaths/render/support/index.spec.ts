@@ -1,14 +1,18 @@
 import {
   beVisible,
+  notExist,
   shouldBeVisible,
   shouldFindAndContain,
   shouldFindButton,
   shouldNotExist,
   shouldSelectOption,
+  shouldTypeAndSelectOption,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import {
+  newClickFlow,
   newExpectation,
+  newExpectationWithClickFlows,
   newExpectationWithTypeString,
   newShouldArgs,
   scrollToPosition,
@@ -19,7 +23,7 @@ const pageName = "New support ticket page";
 const currentPage = "/support";
 const loggedIn = true;
 
-const skip = false; // TODO: Unskip when deployment search exists
+const skip = false;
 
 describe(pageName, () => {
   const tests = [
@@ -29,37 +33,38 @@ describe(pageName, () => {
     shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),
-    // TODO: Uncomment when deployment search exists
-    // ...shouldTypeAndSelectOption(
-    //   "automated_testing/us-jails",
-    //   "deployment-select",
-    //   2,
-    //   5,
-    //   "us-jails",
-    // ),
-    shouldSelectOption("Critical", "impact-select", 3, 1),
-    // shouldBeVisible("critical-err"),
-    // shouldSelectOption(
-    //   "automated_testing/us-jails",
-    //   "deployment-select",
-    //   2,
-    //   isDev ? 5 : 1,
-    // ),
-    // newExpectationWithClickFlows(
-    //   "should remove inactive deployment",
-    //   `[aria-label="Remove automated_testing/us-jails"]`,
-    //   beVisible,
-    //   [
-    //     newClickFlow(`[aria-label="Remove automated_testing/us-jails"]`, [
-    //       newExpectation(
-    //         "inactive deployment should be removed",
-    //         `[aria-label="Remove automated_testing/us-jails"]`,
-    //         notExist,
-    //       ),
-    //     ]),
-    //   ],
-    // ),
-    // shouldNotExist("critical-err"),
+    ...shouldTypeAndSelectOption(
+      "dolthub/us-jails-1",
+      "deployment-select",
+      3,
+      0,
+      "us-jails-1",
+    ),
+    shouldSelectOption("Critical", "impact-select", 2, 1),
+    shouldBeVisible("critical-err"),
+    ...shouldTypeAndSelectOption(
+      "automated_testing/us-jails",
+      "deployment-select",
+      3,
+      0,
+      "us-jails",
+      true,
+    ),
+    newExpectationWithClickFlows(
+      "should remove inactive deployment",
+      `[aria-label="Remove dolthub/us-jails-1"]`,
+      beVisible,
+      [
+        newClickFlow(`[aria-label="Remove dolthub/us-jails-1"]`, [
+          newExpectation(
+            "inactive deployment should be removed",
+            `[aria-label="Remove dolthub/us-jails-1"]`,
+            notExist,
+          ),
+        ]),
+      ],
+    ),
+    shouldNotExist("critical-err"),
     newExpectationWithTypeString(
       "should add title",
       "input[name=title]",
