@@ -27,10 +27,11 @@ const changeBranchParams = {
 const loggedIn = true;
 const skip = false;
 const databasePage = true;
+const hasDocs = true;
 
 describe(pageName, () => {
   const tests = [
-    ...testDBHeaderWithBranch(currentDep, currentOwner, dbName),
+    ...testDBHeaderWithBranch(currentDep, currentOwner, dbName, hasDocs),
     ...changeBranch(changeBranchParams),
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),

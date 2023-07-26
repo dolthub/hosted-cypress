@@ -1,4 +1,9 @@
-import { newExpectation, newShouldArgs } from "../helpers";
+import {
+  newClickFlow,
+  newExpectation,
+  newExpectationWithClickFlows,
+  newShouldArgs,
+} from "../helpers";
 import { Expectation, ShouldArgs, Tests } from "../types";
 
 const beVisible = newShouldArgs("be.visible");
@@ -6,66 +11,50 @@ const notBeVisible = newShouldArgs("not.be.visible");
 
 // DATABASE DROPDOWN CLICK FLOW
 
-// export const conditionalReadMeTest = (hasDocs: boolean) => {
-//   const docsExpectation: Expectation = hasDocs
-//     ? newExpectation(
-//         "should not have README link",
-//         "[data-cy=dropdown-new-docs-link]",
-//         newShouldArgs("not.exist"),
-//       )
-//     : newExpectation(
-//         "should have a create new readme link",
-//         "[data-cy=dropdown-new-docs-link]",
-//         beVisible,
-//       );
+export const conditionalReadMeTest = (hasDocs: boolean) => {
+  const docsExpectation: Expectation = hasDocs
+    ? newExpectation(
+        "should not have README link",
+        "[data-cy=dropdown-new-docs-link]",
+        newShouldArgs("not.exist"),
+      )
+    : newExpectation(
+        "should have a create new readme link",
+        "[data-cy=dropdown-new-docs-link]",
+        beVisible,
+      );
 
-//   return docsExpectation;
-// };
+  return docsExpectation;
+};
 
-// export const databaseDropdownClickFlow = (
-//   loggedIn: boolean,
-//   hasDocs: boolean,
-// ) =>
-//   newClickFlow(
-//     "[data-cy=db-dropdown-button]",
-//     loggedIn
-//       ? [
-//           newExpectation(
-//             "should have a create new table link",
-//             "[data-cy=dropdown-create-new-table-link]",
-//             beVisible,
-//           ),
-//           newExpectation(
-//             "should have a upload a file link",
-//             "[data-cy=dropdown-upload-a-file-link]",
-//             beVisible,
-//           ),
-//           newExpectation(
-//             "should have a create new issue link",
-//             "[data-cy=dropdown-new-issue-link]",
-//             beVisible,
-//           ),
-//           newExpectation(
-//             "should have a create new pull request link",
-//             "[data-cy=dropdown-new-pull-request-link]",
-//             beVisible,
-//           ),
-//           conditionalReadMeTest(hasDocs),
-//         ]
-//       : [
-//           newExpectation(
-//             "should have a create new issue link",
-//             "[data-cy=dropdown-new-issue-link]",
-//             beVisible,
-//           ),
-//           newExpectation(
-//             "should have a create new pull request link",
-//             "[data-cy=dropdown-new-pull-request-link]",
-//             beVisible,
-//           ),
-//         ],
-//     "[data-cy=db-dropdown-button]",
-//   );
+export const databaseDropdownClickFlow = (hasDocs: boolean) =>
+  newClickFlow(
+    "[data-cy=add-dropdown-button]",
+    [
+      // newExpectation(
+      //   "should have a create new table link",
+      //   "[data-cy=dropdown-create-new-table-link]",
+      //   beVisible,
+      // ),
+      newExpectation(
+        "should have a upload a file link",
+        "[data-cy=add-dropdown-upload-a-file-link]",
+        beVisible,
+      ),
+      // newExpectation(
+      //   "should have a create new issue link",
+      //   "[data-cy=dropdown-new-issue-link]",
+      //   beVisible,
+      // ),
+      newExpectation(
+        "should have a create new pull request link",
+        "[data-cy=add-dropdown-new-pull-request-link]",
+        beVisible,
+      ),
+      conditionalReadMeTest(hasDocs),
+    ],
+    "[data-cy=add-dropdown-button]",
+  );
 
 export const testTabs = (visibility: ShouldArgs): Expectation[] => {
   const tabsVisibility = visibility.chainer === "be.visible" ? "" : "not ";
@@ -102,21 +91,13 @@ export const testTabs = (visibility: ShouldArgs): Expectation[] => {
 
     // PULL REQUESTS TAB
 
-    // newExpectation(
-    //   `should ${tabsVisibility}have Pull Requests tab`,
-    //   "[data-cy=db-pull-requests-tab]",
-    //   visibility,
-    // ),
+    newExpectation(
+      `should ${tabsVisibility}have Pull Requests tab`,
+      "[data-cy=db-pull-requests-tab]",
+      visibility,
+    ),
   ];
 };
-
-// SETTINGS TAB
-
-// export const testDBSettingsTab = newExpectation(
-//   "should have DB Settings section for user with write perms",
-//   "[data-cy=db-settings-tab]",
-//   beVisible,
-// );
 
 export const testCommonHeader = (
   ownerName: string,
@@ -143,36 +124,16 @@ export const testCommonHeader = (
     "[data-cy=dep-db-breadcrumb-link]",
     newShouldArgs("be.visible.and.contain", dbName),
   ),
-  // newExpectation(
-  //   "should have db last updated",
-  //   "[data-cy=updated-at]",
-  //   newShouldArgs("be.visible"),
-  // ),
-  // newExpectation(
-  //   "should have db's size",
-  //   "[data-cy=db-size]",
-  //   newShouldArgs("be.visible"),
-  // ),
-  // newExpectation(
-  //   "should have db star button",
-  //   "[data-cy=db-star]",
-  //   beVisible,
-  // ),
-  // newExpectation(
-  //   "should have db fork button",
-  //   "[data-cy=db-fork-button]",
-  //   beVisible,
-  // ),
 ];
 
 export const testDBHeaderForAll = (
   ownerName: string,
   depName: string,
   dbName: string,
-  // hasDocs: boolean,
+  hasDocs: boolean,
   isIpad = false,
 ): Tests => {
-  const loggedOutDBHeaderTests = isIpad
+  const tests = isIpad
     ? [
         ...testCommonHeader(depName, ownerName, dbName),
         newExpectation(
@@ -194,11 +155,11 @@ export const testDBHeaderForAll = (
       ]
     : [
         ...testCommonHeader(depName, ownerName, dbName),
-        newExpectation(
-          "should have exit button",
-          "[data-cy=database-exit-button]",
-          beVisible,
-        ),
+        // newExpectation(
+        //   "should have exit button",
+        //   "[data-cy=database-exit-button]",
+        //   beVisible,
+        // ),
         // newExpectationWithClickFlows(
         //   "should have db clone button",
         //   "[data-cy=db-clone-button]",
@@ -206,17 +167,15 @@ export const testDBHeaderForAll = (
         //   [cloneClickFlow],
         // ),
         ...testTabs(beVisible),
-        // newExpectationWithClickFlows(
-        //   "should have functioning nav dropdown",
-        //   "[data-cy=db-dropdown-button]",
-        //   beVisible,
-        //   [databaseDropdownClickFlow(loggedIn, hasDocs)],
-        // ),
+        newExpectationWithClickFlows(
+          "should have functioning nav dropdown",
+          "[data-cy=add-dropdown-button]",
+          beVisible,
+          [databaseDropdownClickFlow(hasDocs)],
+        ),
       ];
 
-  // const loggedInDBHeaderTests = [testDBSettingsTab];
-
-  return loggedOutDBHeaderTests;
+  return tests;
 };
 
 export const testMobileDBHeaderNav = (
@@ -226,33 +185,19 @@ export const testMobileDBHeaderNav = (
 ): Expectation[] => [
   ...testCommonHeader(ownerName, depName, dbName),
   newExpectation(
-    "should have exit button",
-    "[data-cy=mobile-database-exit-icon]",
-    beVisible,
+    "should not have nav dropdown",
+    "[data-cy=add-dropdown-button]",
+    notBeVisible,
   ),
-  // newExpectation(
-  //   "should not have clone button",
-  //   "[data-cy=db-clone-button]",
-  //   notBeVisible,
-  // ),
-  // newExpectation(
-  //   "should not have nav dropdown",
-  //   "[data-cy=db-dropdown-button]",
-  //   notBeVisible,
-  // ),
   ...testTabs(notBeVisible),
-  // newExpectation(
-  //   "should not have DB Settings section",
-  //   "[data-cy=db-settings-tab]",
-  //   notExist,
-  // ),
 ];
 
 export const testDBHeaderWithBranch = (
   ownerName: string,
   depName: string,
   dbName: string,
-  // loggedIn: boolean,
-  // hasDocs: boolean,
+  hasDocs: boolean,
   isIpad = false,
-): Tests => [...testDBHeaderForAll(ownerName, depName, dbName, isIpad)];
+): Tests => [
+  ...testDBHeaderForAll(ownerName, depName, dbName, hasDocs, isIpad),
+];

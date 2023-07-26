@@ -38,6 +38,7 @@ const skip = false;
 const databasePage = true;
 const hasBranch = true;
 const testTable = "incidents";
+const hasDocs = true;
 
 describe(pageName, () => {
   const beVisible = newShouldArgs("be.visible");
@@ -55,7 +56,7 @@ describe(pageName, () => {
     ...commonTests,
     shouldBeVisible("desktop-db-data-table"),
     shouldNotExist("db-doc-markdown"),
-    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, hasDocs, isIpad),
     ...tableExpectations(false, true, 3, testTable),
     testViewsSection(hasBranch, 0),
     newExpectationWithClickFlows(
