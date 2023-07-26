@@ -25,6 +25,7 @@ const destinationBranch = "delete-rows";
 const loggedIn = true;
 const databasePage = true;
 const skip = false;
+const hasDocs = true;
 
 describe(pageName, () => {
   const changeBranchParams = {
@@ -35,7 +36,13 @@ describe(pageName, () => {
   };
 
   const desktopAndIpadTests = (isIpad = false) => [
-    ...testDBHeaderWithBranch(currentDep, currentOwner, dbName, isIpad),
+    ...testDBHeaderWithBranch(
+      currentDep,
+      currentOwner,
+      dbName,
+      hasDocs,
+      isIpad,
+    ),
     ...changeBranch(changeBranchParams),
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),

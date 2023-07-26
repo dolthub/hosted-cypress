@@ -19,6 +19,7 @@ const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/doc
 const skip = false;
 const loggedIn = true;
 const databasePage = true;
+const hasDocs = true;
 
 describe(pageName, () => {
   const notExist = newShouldArgs("not.exist");
@@ -47,7 +48,7 @@ describe(pageName, () => {
   ];
 
   const desktopAndIpadTests = (isIpad = false) => [
-    ...testDBHeaderWithBranch(ownerName, depName, dbName, isIpad),
+    ...testDBHeaderWithBranch(ownerName, depName, dbName, hasDocs, isIpad),
     ...commonTests,
   ];
 

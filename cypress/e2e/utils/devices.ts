@@ -155,6 +155,6 @@ function getAppLayoutTests(tests: Tests, databasePage: boolean): Tests {
 }
 
 function getAppLayoutTestsMobile(tests: Tests, databasePage: boolean): Tests {
-  if (databasePage) return [...testMobileNavbar(true), ...tests];
+  if (databasePage) return [...testMobileNavbar(true, databasePage), ...tests];
   return [...testMobileNavbar(true), ...tests, ...testFooter];
 }
