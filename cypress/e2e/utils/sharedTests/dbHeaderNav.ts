@@ -5,7 +5,6 @@ import {
   newShouldArgs,
 } from "../helpers";
 import { Expectation, ShouldArgs, Tests } from "../types";
-import { notExist } from "./sharedFunctionsAndVariables";
 
 const beVisible = newShouldArgs("be.visible");
 const notBeVisible = newShouldArgs("not.be.visible");
@@ -188,7 +187,7 @@ export const testMobileDBHeaderNav = (
   newExpectation(
     "should not have nav dropdown",
     "[data-cy=add-dropdown-button]",
-    notExist,
+    notBeVisible,
   ),
   ...testTabs(notBeVisible),
 ];

@@ -16,7 +16,10 @@ const sharedLinks = [
   "[data-cy=navbar-github]",
 ];
 
-const signedInLinks = (databasePage: boolean): string[] => {
+const signedInLinks = (
+  databasePage: boolean,
+  signedOutLayout = false,
+): string[] => {
   if (databasePage) {
     return [
       "[data-cy=navbar-deployments]",
@@ -25,10 +28,17 @@ const signedInLinks = (databasePage: boolean): string[] => {
       "[data-cy=database-exit-button]",
     ];
   }
-  return [
+  const common = [
     ...sharedLinks,
     "[data-cy=navbar-logo]",
     "[data-cy=navbar-deployments]",
+    "[data-cy=navbar-menu-name]",
+  ];
+  if (signedOutLayout) {
+    return common;
+  }
+  return [
+    ...common,
     "[data-cy=navbar-settings]",
     "[data-cy=navbar-support]",
     "[data-cy=navbar-organizations]",
@@ -54,7 +64,7 @@ const signedInMobileLinks = (databasePage: boolean) => [
 export const testSignedOutNavbar = (loggedIn = false): Tests => [
   newExpectation(
     "should have signed out navbar and correct links",
-    loggedIn ? signedInLinks(true) : signedOutLinks,
+    loggedIn ? signedInLinks(false, true) : signedOutLinks,
     beVisible,
   ),
 ];
