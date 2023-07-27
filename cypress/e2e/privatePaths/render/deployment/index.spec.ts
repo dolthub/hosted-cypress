@@ -10,7 +10,7 @@ import {
 const pageName = "Deployment page";
 const ownerName = "automated_testing";
 const depName = "us-jails";
-const currentPage = `/deployments/${ownerName}/${depName}?tab=connectivity`;
+const currentPage = `/deployments/${ownerName}/${depName}`;
 
 const loggedIn = true;
 
@@ -43,6 +43,6 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

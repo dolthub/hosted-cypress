@@ -134,8 +134,9 @@ export const desktopDevicesForAppLayout = (
   pageName: string,
   tests: Tests,
   databasePage = false,
+  navClosed = false,
 ): Device[] => {
-  const t = getAppLayoutTests(tests, databasePage);
+  const t = getAppLayoutTests(tests, databasePage, navClosed);
   return [macbook15(pageName, t), macbook11(pageName, t)];
 };
 
@@ -144,14 +145,24 @@ export const allDevicesForAppLayout = (
   desktopTests: Tests,
   mobileTests: Tests,
   databasePage = false,
+  navClosed = false,
 ): Device[] => [
-  ...desktopDevicesForAppLayout(pageName, desktopTests, databasePage),
+  ...desktopDevicesForAppLayout(
+    pageName,
+    desktopTests,
+    databasePage,
+    navClosed,
+  ),
   ...mobileDevicesForAppLayout(pageName, mobileTests),
 ];
 
-function getAppLayoutTests(tests: Tests, databasePage: boolean): Tests {
-  if (databasePage) return [...testSignedInNavbar(true), ...tests];
-  return [...testSignedInNavbar(false), ...tests, ...testFooter];
+function getAppLayoutTests(
+  tests: Tests,
+  databasePage: boolean,
+  navClosed: boolean,
+): Tests {
+  if (databasePage) return [...testSignedInNavbar(true, false), ...tests];
+  return [...testSignedInNavbar(false, navClosed), ...tests, ...testFooter];
 }
 
 function getAppLayoutTestsMobile(tests: Tests, databasePage: boolean): Tests {

@@ -108,16 +108,6 @@ const tabs: Tab[] = [
     ],
   },
   {
-    tab: "Support",
-    hasDataCy: [
-      "create-support-ticket",
-      "support-form",
-      "deployment-select",
-      "impact-select",
-      "submit-button",
-    ],
-  },
-  {
     tab: "Workbench",
     notStartedMsg: true,
     hasDataCy: ["deployment-workbench"],
@@ -183,6 +173,6 @@ describe(pageName, () => {
     ...deploymentHeaderTests(ownerName, depName, true),
     ...tabs.map(testTab).flat(),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
