@@ -4,7 +4,9 @@ import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisibleAndContain,
+  shouldBeVisible,
   shouldFindAndContain,
+  shouldNotExist,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment connectivity page";
@@ -32,8 +34,10 @@ const connectivityFindAndContains = [
 describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
-    // shouldBeVisible("deployment-summary-table"),
+    shouldBeVisible("deployment-summary"),
     shouldFindAndContain("active-tab-connectivity", "Connectivity"),
+    shouldNotExist("deployment-destroyed-at"),
+    shouldBeVisible("deployment-created-at"),
     ...connectivityFindAndContains.map(test =>
       newExpectationWithScrollIntoView(
         `should scroll to ${test.dataCy}`,
