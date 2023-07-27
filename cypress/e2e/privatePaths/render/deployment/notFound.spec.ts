@@ -21,6 +21,6 @@ describe(pageName, () => {
     shouldNotExist("deployment-breadcrumbs"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });

@@ -69,7 +69,20 @@ export const testSignedOutNavbar = (loggedIn = false): Tests => [
   ),
 ];
 
-export const testSignedInNavbar = (databasePage: boolean): Tests => [
+export const testSignedInNavbar = (
+  databasePage: boolean,
+  navClosed: boolean,
+): Tests => [
+  ...(navClosed
+    ? [
+        newExpectationWithClickFlows(
+          "should open left nav menu",
+          "[data-cy=left-navbar-open-button]",
+          beVisible,
+          [newClickFlow("[data-cy=left-navbar-open-button]", [])],
+        ),
+      ]
+    : []),
   newExpectation(
     "should have signed in navbar and correct links",
     signedInLinks(databasePage),

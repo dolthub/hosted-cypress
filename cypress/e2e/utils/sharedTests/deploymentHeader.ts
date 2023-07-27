@@ -22,6 +22,9 @@ const actionsClickFlow = (isStopped = false) =>
         isStopped ? newShouldArgs("is.disabled") : beVisible,
       ),
       shouldBeVisible("create-new-dep-button"),
+      shouldBeVisible("reboot-instance-button"),
+      shouldBeVisible("restart-dolt-button"),
+      shouldBeVisible("create-support-ticket"),
       shouldFindButton("destroy-button", isStopped),
     ],
     `[data-cy=deployment-state-${isStopped ? "stopped" : "started"}]`,
@@ -32,15 +35,10 @@ export const deploymentHeaderTests = (
   depName: string,
   isStopped = false,
 ) => [
-  shouldBeVisible("back-to-deps-link"),
   shouldBeVisible("utc-time"),
   shouldFindAndContain("deployment-breadcrumbs", [ownerName, depName]),
   shouldBeVisible(`deployment-state-${isStopped ? "stopped" : "started"}`),
   shouldNotExist("deployment-starting-msg"),
-  shouldBeVisible("deployment-created-at"),
-  isStopped
-    ? shouldBeVisible("deployment-destroyed-at")
-    : shouldNotExist("deployment-destroyed-at"),
   shouldBeVisible("dolt-version"),
   isStopped
     ? shouldNotExist("launch-workbench-button")
