@@ -104,8 +104,9 @@ export const macbook15ForAppLayout = (
   pageName: string,
   tests: Tests,
   databasePage = false,
+  navClosed = false,
 ): Device => {
-  const t = getAppLayoutTests(tests, databasePage);
+  const t = getAppLayoutTests(tests, databasePage, navClosed);
   return macbook15(pageName, t);
 };
 
