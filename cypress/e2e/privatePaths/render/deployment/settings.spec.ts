@@ -13,8 +13,6 @@ import {
   notExist,
   shouldBeVisible,
   shouldFindAndContain,
-  shouldFindButton,
-  shouldFindCheckbox,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment settings page";
@@ -112,8 +110,6 @@ describe(pageName, () => {
       beVisible,
       true,
     ),
-    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
-    shouldFindButton("update-advanced-settings-button", true),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

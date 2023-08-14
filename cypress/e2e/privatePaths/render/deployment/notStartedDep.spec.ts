@@ -33,7 +33,7 @@ type Tab = {
 
 const tabs: Tab[] = [
   {
-    tab: "Connectivity",
+    tab: "Database",
     notStartedMsg: true,
     hasDataCy: [
       "connectivity-field-host",
@@ -41,6 +41,9 @@ const tabs: Tab[] = [
       "connectivity-field-username",
       "connectivity-field-password",
       "connectivity-field-certificate",
+      "must-started-msg",
+      "config-table",
+      "configuration-header",
     ],
     notExistDataCy: [
       "instructions-header",
@@ -48,6 +51,20 @@ const tabs: Tab[] = [
       "create-from-backup-button",
       "clone-instructions",
       "disabled-clone-instructions",
+      "save-changes-button",
+    ],
+    exp: [
+      newExpectationWithScrollIntoView(
+        `should scroll to config table`,
+        `[data-cy=config-table]`,
+        beVisible,
+        true,
+      ),
+      newExpectation(
+        "should find no inputs in config table",
+        "[data-cy=config-table] input",
+        newShouldArgs("be.visible.and.have.length", 0),
+      ),
     ],
   },
   {
@@ -74,24 +91,6 @@ const tabs: Tab[] = [
     ],
   },
   { tab: "Backups", hasDataCy: ["backup-table", "backup-options-popup"] },
-  {
-    tab: "Configuration",
-    hasDataCy: ["must-started-msg", "config-table", "configuration-header"],
-    notExistDataCy: ["save-changes-button", "must-admin-msg"],
-    exp: [
-      newExpectationWithScrollIntoView(
-        `should scroll to config table`,
-        `[data-cy=config-table]`,
-        beVisible,
-        true,
-      ),
-      newExpectation(
-        "should find no inputs in config table",
-        "[data-cy=config-table] input",
-        newShouldArgs("be.visible.and.have.length", 0),
-      ),
-    ],
-  },
   {
     tab: "Settings",
     hasDataCy: [
