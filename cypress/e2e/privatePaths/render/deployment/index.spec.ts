@@ -3,8 +3,13 @@ import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
+  beVisible,
   beVisibleAndContain,
+  shouldBeVisible,
   shouldFindAndContain,
+  shouldFindButton,
+  shouldFindCheckbox,
+  shouldNotExist,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment page";
@@ -14,15 +19,32 @@ const currentPage = `/deployments/${ownerName}/${depName}`;
 
 const loggedIn = true;
 
-const connectivityFindAndContains = [
+const connectivityTests = [
   { dataCy: "connectivity-field-host", text: "Host" },
   { dataCy: "connectivity-field-port", text: "Port" },
   { dataCy: "connectivity-field-username", text: "Username" },
   { dataCy: "connectivity-field-password", text: "Password" },
   { dataCy: "connectivity-field-certificate", text: "Certificate" },
-  { dataCy: "instructions-header", text: "Connect to server" },
+  { dataCy: "connect-instructions", text: "MySQL Client" },
   { dataCy: "docs-link", text: "Read the docs" },
-  { dataCy: "clone-header", text: "Clone database" },
+];
+
+const supportedOverrides = [
+  "behavior_auto_commit",
+  "behavior_dolt_transaction_commit",
+  "behavior_read_only",
+  "behavior_sysvar_persistence",
+  "behavior_disable_multistatements",
+  "listener_max_connections",
+  "listener_read_timeout_millis",
+  "listener_write_timeout_millis",
+  "perf_query_parallelism",
+  "max_logged_query_len",
+  "log_level",
+];
+
+const cloneTests = [
+  { dataCy: "clone-header", text: "Clone" },
   {
     dataCy: "clone-instructions",
     text: `You can clone "us_jails" using the Dolt CLI* by executing these commands:`,
@@ -32,8 +54,13 @@ const connectivityFindAndContains = [
 describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
-    shouldFindAndContain("active-tab-connectivity", "Connectivity"),
-    ...connectivityFindAndContains.map(test =>
+    shouldNotExist("must-admin-msg"),
+    shouldNotExist("must-started-msg"),
+    shouldFindAndContain("active-tab-database", "Database"),
+    shouldBeVisible("deployment-summary"),
+    shouldNotExist("deployment-destroyed-at"),
+    shouldBeVisible("deployment-created-at"),
+    ...connectivityTests.map(test =>
       newExpectationWithScrollIntoView(
         `should scroll to ${test.dataCy}`,
         `[data-cy=${test.dataCy}]`,
@@ -41,6 +68,24 @@ describe(pageName, () => {
         true,
       ),
     ),
+    ...supportedOverrides.map(supportedOverride =>
+      newExpectationWithScrollIntoView(
+        `should scroll to ${supportedOverride}`,
+        `[data-cy=${supportedOverride}]`,
+        beVisible,
+        true,
+      ),
+    ),
+    ...cloneTests.map(test =>
+      newExpectationWithScrollIntoView(
+        `should scroll to ${test.dataCy}`,
+        `[data-cy=${test.dataCy}]`,
+        beVisibleAndContain(test.text),
+        true,
+      ),
+    ),
+    ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
+    shouldFindButton("update-advanced-settings-button", true),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);

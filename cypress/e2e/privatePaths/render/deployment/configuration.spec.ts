@@ -1,19 +1,20 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import {
+  newClickFlow,
   newExpectation,
-  newExpectationWithScrollIntoView,
+  newExpectationWithClickFlows,
   newShouldArgs,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisible,
+  notExist,
   shouldBeVisible,
   shouldFindAndContain,
   shouldNotExist,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
-const pageName = "Deployment configuration page";
+const pageName = "Deployment database page, configuration section";
 const ownerName = "automated_testing";
 const depName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
@@ -36,28 +37,44 @@ const supportedOverrides = [
 
 describe(pageName, () => {
   const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
-    shouldFindAndContain("active-tab-configuration", "Configuration"),
+    shouldFindAndContain("active-tab-database", "Database"),
     shouldBeVisible("configuration-header"),
     shouldNotExist("must-admin-msg"),
     shouldNotExist("must-started-msg"),
     ...supportedOverrides.map(supportedOverride =>
-      newExpectationWithScrollIntoView(
+      newExpectation(
         `should scroll to ${supportedOverride}`,
         `[data-cy=${supportedOverride}]`,
         beVisible,
-        true,
       ),
+    ),
+    newExpectationWithClickFlows(
+      "should click edit config",
+      "[data-cy=edit-config-button]",
+      beVisible,
+      [
+        newClickFlow(
+          "[data-cy=edit-config-button]",
+          [
+            newExpectation(
+              "should find multiple inputs in config table",
+              "[data-cy=config-table] input",
+              newShouldArgs(
+                "be.visible.and.have.length.of.at.least",
+                supportedOverrides.length,
+              ),
+            ),
+            shouldBeVisible("save-changes-button"),
+          ],
+          "[data-cy=cancel-button]",
+        ),
+      ],
     ),
     newExpectation(
-      "should find multiple inputs in config table",
+      "should no multiple inputs after cancel",
       "[data-cy=config-table] input",
-      newShouldArgs(
-        "be.visible.and.have.length.of.at.least",
-        supportedOverrides.length,
-      ),
+      notExist,
     ),
-    shouldBeVisible("save-changes-button"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
