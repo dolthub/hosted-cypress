@@ -10,7 +10,7 @@ import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
   beVisible,
-  notExist,
+  notBeVisible,
   shouldBeVisible,
   shouldFindAndContain,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
@@ -40,7 +40,7 @@ const editServiceWindowClickFlow = newClickFlow(
     newExpectation(
       "should have service window inputs",
       "[data-cy=service-window-settings] input",
-      newShouldArgs("be.visible.and.have.length", 4),
+      newShouldArgs("be.visible.and.have.length", 5),
     ),
     shouldBeVisible("save-service-window-button"),
   ],
@@ -82,7 +82,7 @@ describe(pageName, () => {
     newExpectation(
       "should have no service window inputs",
       "[data-cy=service-window-settings] input",
-      notExist,
+      notBeVisible,
     ),
     newExpectationWithClickFlows(
       "should show edit service window inputs on edit",
