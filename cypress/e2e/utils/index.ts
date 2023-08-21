@@ -203,12 +203,14 @@ function getAssertionTest(
         "Value array can only be used with be.visible.and.contain",
       );
     }
-    return cy.get(selectorStr, o).should($el => {
-      expect($el).to.be.visible;
-      shouldArgs.value.forEach((v: any) => {
-        expect($el).to.contain(v, message);
+    return cy
+      .get(selectorStr, o)
+      .should("be.visible")
+      .should($el => {
+        shouldArgs.value.forEach((v: string) => {
+          expect($el).to.contain(v, message);
+        });
       });
-    });
   }
   return cy
     .get(selectorStr, o)
