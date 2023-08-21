@@ -13,7 +13,8 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Create deployment page with pricing params";
 const cloud = "aws";
 const zone = "us-east-1";
-const instanceId = `${cloud}.t2.medium`;
+const instanceType = "t2.medium";
+const instanceId = `${cloud}.${instanceType}`;
 const currentPage = `/create-deployment?zone=${zone}&instanceId=${instanceId}`;
 const loggedIn = true;
 const isDev =
@@ -36,7 +37,7 @@ describe(pageName, () => {
     shouldFindAndContain("zone-select", ["Zone", zone]),
     shouldFindAndContain("instance-type-select-with-details", [
       "Instance Type",
-      instanceId,
+      instanceType,
     ]),
     shouldFindAndContain("storage-select", ["Storage", "Trial 50GB EBS"]),
     shouldFindAndHaveValue("volume-size-input", 50),

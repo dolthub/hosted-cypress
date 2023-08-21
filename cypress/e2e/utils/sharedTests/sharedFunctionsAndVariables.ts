@@ -2,6 +2,7 @@ import {
   newClickFlow,
   newExpectation,
   newExpectationWithClickFlows,
+  newExpectationWithScrollIntoView,
   newExpectationWithTypeString,
   newShouldArgs,
 } from "../helpers";
@@ -26,6 +27,14 @@ export const shouldFindAndCloseModal = (dataCy: string): Expectation =>
     `[data-cy=${dataCy}] button:last-of-type`,
     beVisibleAndContain("cancel"),
     [newClickFlow(`[data-cy=${dataCy}] button:last-of-type`, [])],
+  );
+
+export const shouldFindAndScrollTo = (dataCy: string): Expectation =>
+  newExpectationWithScrollIntoView(
+    `should scroll to ${dataCy}`,
+    `[data-cy=${dataCy}]`,
+    beVisible,
+    true,
   );
 
 export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
