@@ -198,9 +198,17 @@ function getAssertionTest(
     scrollSelectorIntoView(selectorStr, timeout);
   }
   if (Array.isArray(shouldArgs.value)) {
-    return cy
-      .get(selectorStr, o)
-      .should(shouldArgs.chainer, ...shouldArgs.value, { message });
+    if (shouldArgs.chainer !== "be.visible.and.contain") {
+      throw new Error(
+        "Value array can only be used with be.visible.and.contain",
+      );
+    }
+    return cy.get(selectorStr, o).should($el => {
+      expect($el).to.be.visible;
+      shouldArgs.value.forEach((v: any) => {
+        expect($el).to.contain(v, message);
+      });
+    });
   }
   return cy
     .get(selectorStr, o)
