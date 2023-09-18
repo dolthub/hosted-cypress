@@ -29,7 +29,7 @@ export const conditionalReadMeTest = (hasDocs: boolean) => {
 
 export const databaseDropdownClickFlow = (hasDocs: boolean) =>
   newClickFlow(
-    "[data-cy=add-dropdown-button]",
+    "[data-cy=db-page-header] [data-cy=add-dropdown-button]",
     [
       // newExpectation(
       //   "should have a create new table link",
@@ -53,7 +53,7 @@ export const databaseDropdownClickFlow = (hasDocs: boolean) =>
       ),
       conditionalReadMeTest(hasDocs),
     ],
-    "[data-cy=add-dropdown-button]",
+    "[data-cy=db-page-header] [data-cy=add-dropdown-button]",
   );
 
 export const testTabs = (visibility: ShouldArgs): Expectation[] => {
@@ -169,7 +169,7 @@ export const testDBHeaderForAll = (
         ...testTabs(beVisible),
         newExpectationWithClickFlows(
           "should have functioning nav dropdown",
-          "[data-cy=add-dropdown-button]",
+          "[data-cy=db-page-header] [data-cy=add-dropdown-button]",
           beVisible,
           [databaseDropdownClickFlow(hasDocs)],
         ),
