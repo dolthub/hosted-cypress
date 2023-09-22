@@ -130,9 +130,8 @@ export function newDevice(
   device: Cypress.ViewportPreset,
   description: string,
   tests: Tests,
-  isMobile: boolean,
 ): Device {
-  return { device, description, tests, isMobile };
+  return { device, description, tests };
 }
 
 // Should args

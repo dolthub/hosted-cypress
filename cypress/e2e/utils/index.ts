@@ -54,10 +54,9 @@ export const deviceDimensions: Record<
 
 type TestsArgs = {
   tests: Tests;
-  isMobile: boolean;
 };
 
-export function runTests({ isMobile, tests }: TestsArgs) {
+export function runTests({ tests }: TestsArgs) {
   tests.forEach(t => {
     cy.log(t.description);
 

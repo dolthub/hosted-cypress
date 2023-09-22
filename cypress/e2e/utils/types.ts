@@ -56,7 +56,6 @@ export type Device = {
   device: Cypress.ViewportPreset;
   description: string;
   tests: Tests;
-  isMobile: boolean;
 };
 
 export type Devices = Device[];

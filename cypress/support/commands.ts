@@ -125,17 +125,6 @@ function completeLoginForCypressTesting() {
   cy.get("input[name=password]", opts).type("{enter}", clickOpts);
 }
 
-Cypress.Commands.add("signout", isMobile => {
-  if (!isMobile) {
-    cy.get("[data-cy=navbar-menu-name]", opts).click(clickOpts);
-    cy.get("[data-cy=sign-out-button-desktop]", opts).click(clickOpts);
-  } else {
-    cy.get("[data-cy=mobile-navbar-menu-button]", opts).click(clickOpts);
-    cy.get("[data-cy=sign-out-button-mobile]", opts).click(clickOpts);
-  }
-  cy.clearCookie("hostedToken");
-});
-
 Cypress.Commands.add("handleGoogle", () => {
   // create the stub here
   const ga = cy.stub().as("ga");
