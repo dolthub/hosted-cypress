@@ -46,7 +46,6 @@ export type Expectation = {
   typeString?: TypeStringType;
   selectOption?: number;
   targetPage?: string;
-  redirect?: string;
   url?: string;
   timeout?: number;
 };
@@ -57,7 +56,6 @@ export type Device = {
   device: Cypress.ViewportPreset;
   description: string;
   tests: Tests;
-  isMobile: boolean;
 };
 
 export type Devices = Device[];

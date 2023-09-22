@@ -54,19 +54,13 @@ export const deviceDimensions: Record<
 
 type TestsArgs = {
   tests: Tests;
-  isMobile: boolean;
 };
 
-export function runTests({ isMobile, tests }: TestsArgs) {
+export function runTests({ tests }: TestsArgs) {
   tests.forEach(t => {
     cy.log(t.description);
 
     if (t.skip) return;
-
-    if (t.redirect) {
-      // Sign in and continue to redirect value before starting test assertions
-      cy.loginAsCypressTestingFromSigninPageWithRedirect(t.redirect);
-    }
 
     testAssertion(t);
 
@@ -80,11 +74,6 @@ export function runTests({ isMobile, tests }: TestsArgs) {
 
     if (t.scrollTo) {
       handleScrollTo(t.scrollTo);
-    }
-
-    if (t.redirect) {
-      // Sign out after signing in for redirect and running tests
-      cy.signout(isMobile);
     }
   });
 }

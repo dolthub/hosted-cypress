@@ -36,69 +36,62 @@ const checkCurrentBranch = (testParams: TestParams): Tests =>
       ]
     : [
         newExpectationWithURL(
-          "should have page load in ",
+          "should find destination page url",
           `[data-cy=${testParams.currentTabDataCy}]`,
           beVisible,
           testParams.destinationURL,
         ),
       ];
 
-export const changeBranch = (testParams: TestParams): Tests => [
-  newExpectation(
-    `should check current branch ${testParams.currentTabDataCy}`,
-    `[data-cy=${testParams.currentTabDataCy}]`,
-    testParams.optionalText
-      ? beVisibleAndContain(testParams.optionalText)
-      : beVisible,
-  ),
-  testParams.isLeftNavClosed
-    ? newExpectationWithClickFlows(
-        "should open menu",
-        `[data-cy=left-nav-toggle-icon]`,
-        beVisible,
-        [
-          newClickFlow(`[data-cy=left-nav-toggle-icon]`, [
-            newExpectationWithClickFlows(
-              "should open branch selector",
-              `[data-cy=branch-selector]`,
-              beVisible,
-              [
-                newClickFlow(`[data-cy=branch-selector]`, [
-                  newExpectationWithClickFlows(
-                    "should click on other branch",
-                    `[data-cy=${testParams.destinationBranch}]`,
-                    beVisible,
-                    [
-                      newClickFlow(
-                        `[data-cy=${testParams.destinationBranch}]`,
-                        checkCurrentBranch(testParams),
-                      ),
-                    ],
-                  ),
-                ]),
-              ],
-            ),
-          ]),
-        ],
-      )
-    : newExpectationWithClickFlows(
-        "should open branch selector",
-        `[data-cy=branch-selector]`,
-        beVisible,
-        [
-          newClickFlow(`[data-cy=branch-selector]`, [
-            newExpectationWithClickFlows(
-              "should click on other branch",
-              `[data-cy=${testParams.destinationBranch}]`,
-              beVisible,
-              [
-                newClickFlow(
-                  `[data-cy=${testParams.destinationBranch}]`,
-                  checkCurrentBranch(testParams),
-                ),
-              ],
-            ),
-          ]),
-        ],
-      ),
-];
+const branchSelectorClickFlow = (testParams: TestParams) =>
+  newClickFlow(`[data-cy=branch-selector]`, [
+    newExpectationWithClickFlows(
+      "should click on destination branch",
+      `[data-cy=${testParams.destinationBranch}]`,
+      beVisible,
+      [
+        newClickFlow(
+          `[data-cy=${testParams.destinationBranch}]`,
+          checkCurrentBranch(testParams),
+        ),
+      ],
+    ),
+  ]);
+
+export const changeBranch = (testParams: TestParams): Tests => {
+  const maybeOpenLeftNav = testParams.isLeftNavClosed
+    ? [
+        newExpectationWithClickFlows(
+          "should open menu",
+          `[data-cy=left-nav-toggle-icon]`,
+          beVisible,
+          [
+            newClickFlow(`[data-cy=left-nav-toggle-icon]`, [
+              newExpectation(
+                "should have branch selector",
+                `[data-cy=branch-selector]`,
+                beVisible,
+              ),
+            ]),
+          ],
+        ),
+      ]
+    : [];
+
+  return [
+    newExpectation(
+      `should check current branch ${testParams.currentTabDataCy}`,
+      `[data-cy=${testParams.currentTabDataCy}]`,
+      testParams.optionalText
+        ? beVisibleAndContain(testParams.optionalText)
+        : beVisible,
+    ),
+    ...maybeOpenLeftNav,
+    newExpectationWithClickFlows(
+      "should open branch selector",
+      `[data-cy=branch-selector]`,
+      beVisible,
+      [branchSelectorClickFlow(testParams)],
+    ),
+  ];
+};

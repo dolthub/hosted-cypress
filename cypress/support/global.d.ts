@@ -12,12 +12,6 @@ declare namespace Cypress {
 
     loginAsCypressTestingAfterNavigateToSignin(redirectValue?: string): void;
 
-    signout(isMobile: boolean): void;
-
-    loginAsCypressTestingFromSigninPageWithRedirect(
-      redirectValue: string,
-    ): void;
-
     visitPage(currentPage: string, loggedIn: boolean): void;
 
     visitAndWait(path: string): void;

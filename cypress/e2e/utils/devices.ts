@@ -14,7 +14,6 @@ export const macbook15 = (pageName: string, tests: Tests) =>
     "macbook-15",
     `${pageName} renders expected components on macbook-15`,
     tests,
-    false,
   );
 
 export const macbook11 = (pageName: string, tests: Tests) =>
@@ -22,7 +21,6 @@ export const macbook11 = (pageName: string, tests: Tests) =>
     "macbook-11",
     `${pageName} renders expected components on macbook-11`,
     tests,
-    false,
   );
 
 export const iPad2 = (pageName: string, tests: Tests) =>
@@ -30,7 +28,6 @@ export const iPad2 = (pageName: string, tests: Tests) =>
     "ipad-2",
     `${pageName} renders expected components on ipad-2`,
     tests,
-    true,
   );
 
 export const iPhoneX = (pageName: string, tests: Tests) =>
@@ -38,7 +35,6 @@ export const iPhoneX = (pageName: string, tests: Tests) =>
     "iphone-x",
     `${pageName} renders expected components on iphone-x`,
     tests,
-    true,
   );
 
 // Signed out layout

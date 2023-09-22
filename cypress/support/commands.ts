@@ -97,21 +97,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add(
-  "loginAsCypressTestingFromSigninPageWithRedirect",
-  (redirectValue: string) => {
-    cy.session("hostedLoginWithRedirect", () => {
-      cy.location("pathname", opts).should("eq", `/signin`);
-      cy.location("search", opts)
-        .should("eq", `?redirect=%2F${redirectValue}`)
-        .then(() => {
-          completeLoginForCypressTesting();
-          ensureSuccessfulLogin(redirectValue);
-        });
-    });
-  },
-);
-
 function ensureSuccessfulLogin(redirectValue?: string) {
   // Must set cookie for localhost so navbar renders correctly
   if (Cypress.env("LOCAL")) {
@@ -139,17 +124,6 @@ function completeLoginForCypressTesting() {
   });
   cy.get("input[name=password]", opts).type("{enter}", clickOpts);
 }
-
-Cypress.Commands.add("signout", isMobile => {
-  if (!isMobile) {
-    cy.get("[data-cy=navbar-menu-name]", opts).click(clickOpts);
-    cy.get("[data-cy=sign-out-button-desktop]", opts).click(clickOpts);
-  } else {
-    cy.get("[data-cy=mobile-navbar-menu-button]", opts).click(clickOpts);
-    cy.get("[data-cy=sign-out-button-mobile]", opts).click(clickOpts);
-  }
-  cy.clearCookie("hostedToken");
-});
 
 Cypress.Commands.add("handleGoogle", () => {
   // create the stub here
