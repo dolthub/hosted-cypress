@@ -46,7 +46,6 @@ export type Expectation = {
   typeString?: TypeStringType;
   selectOption?: number;
   targetPage?: string;
-  redirect?: string;
   url?: string;
   timeout?: number;
 };

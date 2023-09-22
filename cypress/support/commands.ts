@@ -97,21 +97,6 @@ Cypress.Commands.add(
   },
 );
 
-Cypress.Commands.add(
-  "loginAsCypressTestingFromSigninPageWithRedirect",
-  (redirectValue: string) => {
-    cy.session("hostedLoginWithRedirect", () => {
-      cy.location("pathname", opts).should("eq", `/signin`);
-      cy.location("search", opts)
-        .should("eq", `?redirect=%2F${redirectValue}`)
-        .then(() => {
-          completeLoginForCypressTesting();
-          ensureSuccessfulLogin(redirectValue);
-        });
-    });
-  },
-);
-
 function ensureSuccessfulLogin(redirectValue?: string) {
   // Must set cookie for localhost so navbar renders correctly
   if (Cypress.env("LOCAL")) {
