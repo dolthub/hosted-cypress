@@ -45,7 +45,7 @@ describe(pageName, () => {
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
-      ? shouldFindCheckbox("deployment-flag-checkbox", true)
+      ? shouldFindCheckbox("deployment-flag-checkbox", false)
       : [shouldNotExist("deployment-flag-checkbox")]),
     scrollToPosition("#main-content", "bottom"),
     shouldFindAndContain("hourly-cost", [

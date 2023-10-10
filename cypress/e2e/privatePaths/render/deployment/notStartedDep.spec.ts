@@ -94,22 +94,13 @@ const tabs: Tab[] = [
   {
     tab: "Settings",
     hasDataCy: [
-      "service-window-settings",
+      "deployment-workbench",
       "collab-header",
       "collab-table",
       "cypresstesting-collab-row",
       "add-collab-button",
+      "service-window-settings",
     ],
-    notExistDataCy: [
-      "edit-service-window-button",
-      "advanced-settings",
-      "update-advanced-settings-button",
-    ],
-  },
-  {
-    tab: "Workbench",
-    notStartedMsg: true,
-    hasDataCy: ["deployment-workbench"],
     notExistDataCy: [
       "workbench-database-list",
       "database-writes-enabled",
@@ -117,6 +108,9 @@ const tabs: Tab[] = [
       "enable-writes-form",
       "workbench-auth-directions",
       "workbench-no-databases",
+      "edit-service-window-button",
+      "advanced-settings",
+      "update-advanced-settings-button",
     ],
   },
 ];

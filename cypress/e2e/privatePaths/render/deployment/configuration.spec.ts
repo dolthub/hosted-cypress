@@ -11,6 +11,7 @@ import {
   notExist,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindAndScrollTo,
   shouldNotExist,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
@@ -42,12 +43,9 @@ describe(pageName, () => {
     shouldNotExist("must-admin-msg"),
     shouldNotExist("must-started-msg"),
     ...supportedOverrides.map(supportedOverride =>
-      newExpectation(
-        `should scroll to ${supportedOverride}`,
-        `[data-cy=${supportedOverride}]`,
-        beVisible,
-      ),
+      shouldFindAndScrollTo(supportedOverride),
     ),
+    shouldFindAndScrollTo("edit-config-button"),
     newExpectationWithClickFlows(
       "should click edit config",
       "[data-cy=edit-config-button]",

@@ -37,6 +37,17 @@ export const shouldFindAndScrollTo = (dataCy: string): Expectation =>
     true,
   );
 
+export const shouldFindAndScrollToWithText = (
+  dataCy: string,
+  text: string,
+): Expectation =>
+  newExpectationWithScrollIntoView(
+    `should scroll to ${dataCy}`,
+    `[data-cy=${dataCy}]`,
+    beVisibleAndContain(text),
+    true,
+  );
+
 export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
   newExpectation(
     `should find ${desc ?? getDesc(dataCy)}`,

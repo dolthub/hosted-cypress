@@ -19,8 +19,8 @@ const loggedIn = true;
 describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
-    shouldFindAndContain("active-tab-workbench", "Workbench"),
-    shouldFindAndContain("deployment-workbench", "Connect to Web Workbench"),
+    shouldFindAndContain("active-tab-settings", "Settings"),
+    shouldFindAndContain("deployment-workbench", "Workbench"),
     newExpectation(
       "should have list of databases",
       "[data-cy=workbench-database-list] > li",
