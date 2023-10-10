@@ -1,10 +1,9 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
-  beVisible,
   shouldFindAndContain,
+  shouldFindAndScrollTo,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment monitoring page";
@@ -29,14 +28,7 @@ describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
     shouldFindAndContain("active-tab-monitoring", "Monitoring"),
-    ...graphTitles.map(graphTitle =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${graphTitle}`,
-        `[data-cy=${graphTitle}]`,
-        beVisible,
-        true,
-      ),
-    ),
+    ...graphTitles.map(graphTitle => shouldFindAndScrollTo(graphTitle)),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

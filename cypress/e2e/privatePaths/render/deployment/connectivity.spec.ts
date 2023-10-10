@@ -1,9 +1,8 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import {
-  beVisibleAndContain,
   shouldFindAndContain,
+  shouldFindAndScrollToWithText,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment database page, connectivity section";
@@ -27,12 +26,7 @@ describe(pageName, () => {
   const tests = [
     shouldFindAndContain("active-tab-database", "Database"),
     ...connectivityTests.map(test =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${test.dataCy}`,
-        `[data-cy=${test.dataCy}]`,
-        beVisibleAndContain(test.text),
-        true,
-      ),
+      shouldFindAndScrollToWithText(test.dataCy, test.text),
     ),
   ];
 

@@ -1,12 +1,11 @@
 import { allDevicesForAppLayout } from "@utils/devices";
-import { newExpectationWithScrollIntoView } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
 import {
-  beVisible,
-  beVisibleAndContain,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindAndScrollTo,
+  shouldFindAndScrollToWithText,
   shouldFindButton,
   shouldFindCheckbox,
   shouldNotExist,
@@ -59,31 +58,17 @@ describe(pageName, () => {
     shouldFindAndContain("active-tab-database", "Database"),
     shouldBeVisible("deployment-summary"),
     shouldNotExist("deployment-destroyed-at"),
-    shouldBeVisible("deployment-created-at"),
+    shouldFindAndScrollTo("deployment-created-at"),
     ...connectivityTests.map(test =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${test.dataCy}`,
-        `[data-cy=${test.dataCy}]`,
-        beVisibleAndContain(test.text),
-        true,
-      ),
+      shouldFindAndScrollToWithText(test.dataCy, test.text),
     ),
     ...supportedOverrides.map(supportedOverride =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${supportedOverride}`,
-        `[data-cy=${supportedOverride}]`,
-        beVisible,
-        true,
-      ),
+      shouldFindAndScrollTo(supportedOverride),
     ),
     ...cloneTests.map(test =>
-      newExpectationWithScrollIntoView(
-        `should scroll to ${test.dataCy}`,
-        `[data-cy=${test.dataCy}]`,
-        beVisibleAndContain(test.text),
-        true,
-      ),
+      shouldFindAndScrollToWithText(test.dataCy, test.text),
     ),
+    shouldFindAndScrollTo("expose-remotesapi-endpoint-checkbox"),
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
     shouldFindButton("update-advanced-settings-button", true),
   ];

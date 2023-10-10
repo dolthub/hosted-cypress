@@ -3,7 +3,6 @@ import {
   newClickFlow,
   newExpectation,
   newExpectationWithClickFlows,
-  newExpectationWithScrollIntoView,
   newShouldArgs,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
@@ -13,6 +12,7 @@ import {
   notBeVisible,
   shouldBeVisible,
   shouldFindAndContain,
+  shouldFindAndScrollTo,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 
 const pageName = "Deployment settings page";
@@ -72,12 +72,7 @@ describe(pageName, () => {
   const tests = [
     ...deploymentHeaderTests(ownerName, depName),
     shouldFindAndContain("active-tab-settings", "Settings"),
-    newExpectationWithScrollIntoView(
-      `should scroll to service window`,
-      `[data-cy=service-window-settings]`,
-      beVisible,
-      true,
-    ),
+    shouldFindAndScrollTo("service-window-settings"),
     ...swDataCys.map(dc => shouldBeVisible(dc)),
     newExpectation(
       "should have no service window inputs",
@@ -90,12 +85,7 @@ describe(pageName, () => {
       beVisible,
       [editServiceWindowClickFlow],
     ),
-    newExpectationWithScrollIntoView(
-      `should scroll to collab header`,
-      `[data-cy=collab-header]`,
-      beVisible,
-      true,
-    ),
+    shouldFindAndScrollTo("collab-header"),
     shouldBeVisible("collab-table"),
     shouldBeVisible("cypresstesting-collab-row"),
     newExpectationWithClickFlows(
@@ -104,12 +94,7 @@ describe(pageName, () => {
       beVisible,
       [collabFormClickFlow],
     ),
-    newExpectationWithScrollIntoView(
-      `should scroll to advanced settings`,
-      `[data-cy=advanced-settings]`,
-      beVisible,
-      true,
-    ),
+    shouldFindAndScrollTo("advanced-settings"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
