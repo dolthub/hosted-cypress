@@ -17,8 +17,8 @@ const currentPage = `/deployments/${ownerName}/${depName}?tab=workbench`;
 const loggedIn = true;
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile),
     shouldFindAndContain("active-tab-settings", "Settings"),
     shouldFindAndContain("deployment-workbench", "Workbench"),
     newExpectation(
@@ -34,6 +34,6 @@ describe(pageName, () => {
     shouldNotExist("workbench-no-databases"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

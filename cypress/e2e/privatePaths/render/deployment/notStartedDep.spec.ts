@@ -162,10 +162,16 @@ const testTab = (t: Tab, i: number): Expectation[] => {
 };
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName, true),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, true, isMobile),
     ...tabs.map(testTab).flat(),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);
+  const devices = allDevicesForAppLayout(
+    pageName,
+    tests(),
+    tests(true),
+    false,
+    true,
+  );
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

@@ -25,12 +25,12 @@ const graphTitles = [
 ];
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile),
     shouldFindAndContain("active-tab-monitoring", "Monitoring"),
     ...graphTitles.map(graphTitle => shouldFindAndScrollTo(graphTitle)),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

@@ -55,6 +55,16 @@ export const shouldBeVisible = (dataCy: string, desc?: string): Expectation =>
     beVisible,
   );
 
+export const shouldNotBeVisible = (
+  dataCy: string,
+  desc?: string,
+): Expectation =>
+  newExpectation(
+    `should not find ${desc ?? getDesc(dataCy)}`,
+    `[data-cy=${dataCy}]`,
+    notBeVisible,
+  );
+
 export const shouldFindAndContain = (
   dataCy: string,
   text: string | string[],

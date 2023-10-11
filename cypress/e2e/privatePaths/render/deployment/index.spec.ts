@@ -51,8 +51,8 @@ const cloneTests = [
 ];
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile),
     shouldNotExist("must-admin-msg"),
     shouldNotExist("must-started-msg"),
     shouldFindAndContain("active-tab-database", "Database"),
@@ -73,6 +73,12 @@ describe(pageName, () => {
     shouldFindButton("update-advanced-settings-button", true),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests, false, true);
+  const devices = allDevicesForAppLayout(
+    pageName,
+    tests(),
+    tests(true),
+    false,
+    true,
+  );
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
