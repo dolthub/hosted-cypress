@@ -69,8 +69,8 @@ const collabFormClickFlow = newClickFlow(
 );
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile),
     shouldFindAndContain("active-tab-settings", "Settings"),
     shouldFindAndScrollTo("service-window-settings"),
     ...swDataCys.map(dc => shouldBeVisible(dc)),
@@ -97,6 +97,6 @@ describe(pageName, () => {
     shouldFindAndScrollTo("advanced-settings"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

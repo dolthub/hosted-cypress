@@ -9,6 +9,7 @@ import {
   shouldBeVisible,
   shouldFindAndContain,
   shouldFindButton,
+  shouldNotBeVisible,
   shouldNotExist,
 } from "./sharedFunctionsAndVariables";
 
@@ -34,8 +35,9 @@ export const deploymentHeaderTests = (
   ownerName: string,
   depName: string,
   isStopped = false,
+  isMobile = false,
 ) => [
-  shouldBeVisible("utc-time"),
+  isMobile ? shouldNotBeVisible("utc-time") : shouldBeVisible("utc-time"),
   shouldFindAndContain("deployment-breadcrumbs", [ownerName, depName]),
   shouldBeVisible(`deployment-state-${isStopped ? "stopped" : "started"}`),
   shouldNotExist("deployment-starting-msg"),

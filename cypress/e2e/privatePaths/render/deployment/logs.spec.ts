@@ -24,8 +24,8 @@ const logDataCys = [
 ];
 
 describe(pageName, () => {
-  const tests = [
-    ...deploymentHeaderTests(ownerName, depName),
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile),
     shouldFindAndContain("active-tab-logs", "Logs"),
     ...logDataCys.map(dataCy =>
       newExpectationWithScrollIntoView(
@@ -39,6 +39,6 @@ describe(pageName, () => {
     ),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });
