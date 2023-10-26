@@ -6,7 +6,7 @@ import {
   newExpectationWithTypeString,
   newShouldArgs,
 } from "../helpers";
-import { Expectation } from "../types";
+import { Expectation, Tests } from "../types";
 
 export const beVisible = newShouldArgs("be.visible");
 export const notBeVisible = newShouldArgs("not.be.visible");
@@ -190,8 +190,8 @@ export const typingExpectation = (value: string, selectorStr: string) =>
     { value },
   );
 
-export function checkValueInGridTests(grids: string[][]) {
-  const tests: Expectation[] = [];
+export function checkValueInGridTests(grids: string[][]): Tests {
+  const tests: Tests = [];
   grids.forEach((row: string[], rowidx: number) => {
     row.forEach((val: string, colidx: number) => {
       tests.push(
@@ -207,8 +207,11 @@ export function checkValueInGridTests(grids: string[][]) {
 }
 
 // type function for spreadsheet input
-export function getTypeInGridTests(grids: string[][], skipClear = false) {
-  const tests: Expectation[] = [];
+export function getTypeInGridTests(
+  grids: string[][],
+  skipClear = false,
+): Tests {
+  const tests: Tests = [];
   grids.forEach((row: string[], rowidx: number) => {
     row.forEach((val: string, colidx: number) => {
       tests.push(
