@@ -37,28 +37,12 @@ export const checkViewsClickflow: ClickFlow = newClickFlow(
   ],
 );
 
-export const checkQueriesClickflow: ClickFlow = newClickFlow(
-  `[data-cy=tab-queries]`,
-  [
-    newExpectation(
-      "the Views tab should be inactive",
-      `[data-cy=tab-views]`,
-      beVisible,
-    ),
-    newExpectation(
-      "the Queries tab should be active",
-      `[data-cy=active-tab-queries]`,
-      beVisible,
-    ),
-  ],
-);
-
 export const checkSchemaClickflow: ClickFlow = newClickFlow(
   `[data-cy=tab-schemas]`,
   [
     newExpectation(
-      "the Queries tab should be inactive",
-      `[data-cy=tab-queries]`,
+      "the Views tab should be inactive",
+      `[data-cy=tab-views]`,
       beVisible,
     ),
     newExpectation(
@@ -297,12 +281,7 @@ export const testTablesSection = (
       "should open left database navigation",
       "[data-cy=left-nav-toggle-icon]",
       beVisible,
-      [
-        clickToOpenNavClickFlow,
-        checkViewsClickflow,
-        checkQueriesClickflow,
-        checkSchemaClickflow,
-      ],
+      [clickToOpenNavClickFlow, checkViewsClickflow, checkSchemaClickflow],
     ),
     ...tableExpectations(hasDocs, loggedIn, tableLen, testTable),
   ];
@@ -455,127 +434,6 @@ export const testViewsSection = (
     "[data-cy=tab-views]",
     beVisible,
     [viewsClickFlow(hasBranch, viewsLen, testView, isMobile)],
-  );
-};
-
-// QUERY CATALOG
-
-const testQueryClickFlow = (testQuery: string): ClickFlow =>
-  newClickFlow(`[data-cy=db-query-button-${testQuery}]`, [
-    newExpectation(
-      "",
-      `[data-cy=db-query-viewing-${testQuery}]`,
-      newShouldArgs("be.visible.and.contain", "Viewing"),
-    ),
-    newExpectation(
-      "",
-      "[data-cy=sql-editor-collapsed]",
-      newShouldArgs("be.visible.and.contain", `select * from ${testQuery}`),
-    ),
-  ]);
-
-const testQueryMobile = (testQuery: string): Expectation[] => [
-  newExpectationWithClickFlows(
-    "should successfully execute a query",
-    `[data-cy=db-query-list-query-${testQuery}]`,
-    beVisible,
-    [
-      newClickFlow(
-        `[data-cy=db-query-button-${testQuery}]`,
-        [
-          newExpectation(
-            "",
-            "[data-cy=mobile-sql-editor-button]",
-            newShouldArgs(
-              "be.visible.and.contain",
-              `select * from ${testQuery}`,
-            ),
-          ),
-        ],
-        "[data-cy=show-table-nav-button]",
-      ),
-    ],
-  ),
-  newExpectation(
-    "",
-    `[data-cy=db-query-viewing-${testQuery}]`,
-    newShouldArgs("be.visible.and.contain", "Viewing"),
-  ),
-];
-
-export const emptyQueriesExpectation = (hasBranch: boolean): Expectation =>
-  hasBranch
-    ? newExpectation("", "[data-cy=db-no-queries]", beVisible)
-    : newExpectation("", "[data-cy=db-queries-empty]", beVisible);
-
-const notEmptyQueriesExpectations = (
-  queryLen: number,
-  testQuery: string,
-  isMobile = false,
-): Tests =>
-  isMobile
-    ? [
-        newExpectationWithScrollIntoView(
-          "should render link to see more queries",
-          "[data-cy=db-query-see-all]",
-          beVisible,
-          true,
-        ),
-        newExpectation(
-          "",
-          "[data-cy=db-query-list] > li",
-          newShouldArgs("be.visible.and.have.length", queryLen),
-        ),
-        ...testQueryMobile(testQuery),
-      ]
-    : [
-        newExpectationWithScrollIntoView(
-          "should render link to see more queries",
-          "[data-cy=db-query-see-all]",
-          beVisible,
-          true,
-        ),
-        newExpectation(
-          "",
-          "[data-cy=db-query-list] > li",
-          newShouldArgs("be.visible.and.have.length", queryLen),
-        ),
-        newExpectationWithClickFlows(
-          "should successfully execute a query",
-          `[data-cy=db-query-list-query-${testQuery}]`,
-          beVisible,
-          [testQueryClickFlow(testQuery)],
-        ),
-      ];
-
-const queryCatalogClickFlow = (
-  hasBranch: boolean,
-  queryLen: number,
-  testQuery?: string,
-  isMobile = false,
-): ClickFlow => {
-  const expectations =
-    queryLen === 0 || !testQuery
-      ? [emptyQueriesExpectation(hasBranch)]
-      : notEmptyQueriesExpectations(queryLen, testQuery, isMobile);
-
-  return newClickFlow("[data-cy=tab-queries]", expectations);
-};
-
-export const testQueryCatalogSection = (
-  hasBranch: boolean,
-  queryLen: number,
-  testQuery?: string,
-  isMobile = false,
-): Expectation => {
-  if (queryLen > 0 && !testQuery) {
-    throw new Error("Cannot have queryLen > 0 and no testQuery");
-  }
-  return newExpectationWithClickFlows(
-    "should have db Query Catalog section",
-    "[data-cy=tab-queries]",
-    beVisible,
-    [queryCatalogClickFlow(hasBranch, queryLen, testQuery, isMobile)],
   );
 };
 
