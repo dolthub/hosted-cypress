@@ -4,7 +4,6 @@ import {
 } from "@sharedTests/dbHeaderNav";
 import {
   tableExpectations,
-  testQueryCatalogSection,
   testSchemaSection,
   testViewsSection,
 } from "@sharedTests/dbLeftNav";
@@ -71,7 +70,6 @@ describe(pageName, () => {
         ),
       ],
     ),
-    testQueryCatalogSection(hasBranch, 0),
     testSchemaSection(hasBranch, 3, testTable),
     testSqlConsole,
   ];
@@ -83,7 +81,6 @@ describe(pageName, () => {
     ...testMobileDBHeaderNav(ownerName, depName, dbName),
     ...tableExpectations(true, false, 3, testTable, true),
     testViewsSection(hasBranch, 0, undefined, true),
-    testQueryCatalogSection(hasBranch, 0, undefined, true),
     testSchemaSection(hasBranch, 3, testTable, true),
     newExpectationWithClickFlows(
       "should click button to close db nav",
