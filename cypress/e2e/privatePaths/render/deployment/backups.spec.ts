@@ -28,9 +28,9 @@ describe(pageName, () => {
       newShouldArgs("be.visible.and.have.length.of.at.least", 10),
     ),
     newExpectation(
-      "should have us_jails database in each row",
+      "should have us-jails database in each row",
       "[data-cy=backup-table] > tbody > tr > td:nth-child(2)",
-      beVisibleAndContain("us_jails"),
+      beVisibleAndContain("us-jails"),
     ),
     newExpectation(
       "should have size in each row",

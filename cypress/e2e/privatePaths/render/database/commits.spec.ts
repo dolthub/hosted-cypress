@@ -16,7 +16,7 @@ import {
 const pageName = "Commit log page";
 const ownerName = "automated_testing";
 const depName = "us-jails";
-const dbName = "us_jails";
+const dbName = "us-jails";
 const currentBranch = "main";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}/commits/${currentBranch}`;
 
