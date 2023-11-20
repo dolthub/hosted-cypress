@@ -9,7 +9,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Pull requests page for non-existent deployment";
 const currentOwner = "automated_testing";
 const doesNotExistDep = "doesnt-exist";
-const dbName = "us_jails";
+const dbName = "us-jails";
 const currentPage = `deployments/${currentOwner}/${doesNotExistDep}/database/${dbName}/pulls`;
 
 const loggedIn = true;

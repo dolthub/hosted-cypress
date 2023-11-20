@@ -13,7 +13,7 @@ import { runTestsForDevices } from "@utils/index";
 const pageName = "Pull requests page with open pulls";
 const currentOwner = "automated_testing";
 const currentDep = "us-jails";
-const dbName = "us_jails";
+const dbName = "us-jails";
 const currentPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 
 const destinationBranch = "delete-rows";

@@ -46,7 +46,7 @@ const cloneTests = [
   { dataCy: "clone-header", text: "Clone" },
   {
     dataCy: "clone-instructions",
-    text: `You can clone "us_jails" using the Dolt CLI* by executing these commands:`,
+    text: `You can clone "us-jails" using the Dolt CLI* by executing these commands:`,
   },
 ];
 

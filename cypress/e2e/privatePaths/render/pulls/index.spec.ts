@@ -17,7 +17,7 @@ import { changeBranch } from "@utils/sharedTests/changeBranch";
 const pageName = "Pull requests page";
 const currentOwner = "automated_testing";
 const currentDep = "us-jails";
-const dbName = "us_jails";
+const dbName = "us-jails";
 const pullsPage = `deployments/${currentOwner}/${currentDep}/database/${dbName}/pulls`;
 const currentPage = `${pullsPage}?filter=all`;
 const destinationBranch = "delete-rows";

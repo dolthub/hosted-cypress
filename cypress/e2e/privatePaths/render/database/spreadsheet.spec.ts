@@ -13,7 +13,7 @@ import {
 const pageName = "Edit table with spreadsheet editor";
 const ownerName = "automated_testing";
 const depName = "us-jails";
-const dbName = "us_jails";
+const dbName = "us-jails";
 const currentPage = `/deployments/${ownerName}/${depName}/database/${dbName}`;
 
 const tableToEdit = "incidents";
