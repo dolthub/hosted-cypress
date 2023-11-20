@@ -4,7 +4,7 @@ updates:
   directory: "/"
   schedule:
     interval: monthly
-    time: "06:30"
+    time: "08:30"
     timezone: America/Los_Angeles
   open-pull-requests-limit: 10
   reviewers:
