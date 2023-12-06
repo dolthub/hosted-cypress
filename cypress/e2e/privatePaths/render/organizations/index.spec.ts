@@ -48,7 +48,7 @@ describe(pageName, () => {
 
     shouldFindAndContain(
       "billing-new-subscriber-section",
-      "Sign up for a subscription to create deployments.",
+      "Sign up for a subscription to create deployments",
     ),
   ];
 
