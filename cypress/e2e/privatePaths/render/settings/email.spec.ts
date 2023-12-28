@@ -15,7 +15,6 @@ const loggedIn = true;
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("page-title", "Settings"),
-    shouldFindAndContain("active-tab", "Email"),
     shouldBeVisible("emails-table"),
     newExpectation(
       `should find emails table row`,
@@ -40,6 +39,10 @@ describe(pageName, () => {
     shouldBeVisible("email-input"),
     shouldBeVisible("add-email-settings-button"),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const deskTests = [
+    shouldFindAndContain("subnav-link-active", "Email"),
+    ...tests,
+  ];
+  const devices = allDevicesForAppLayout(pageName, deskTests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

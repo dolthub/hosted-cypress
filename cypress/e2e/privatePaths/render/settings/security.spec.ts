@@ -12,13 +12,16 @@ const loggedIn = true;
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("page-title", "Settings"),
-    shouldFindAndContain("active-tab", "Security"),
-    shouldFindAndContain("change-password-header", "Change password"),
+    shouldFindAndContain("change-password-header", "Security"),
     shouldBeVisible("old-password-input"),
     shouldBeVisible("new-password-input"),
     shouldBeVisible("confirm-password-input"),
     shouldBeVisible("update-password-button"),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const deskTests = [
+    shouldFindAndContain("subnav-link-active", "Security"),
+    ...tests,
+  ];
+  const devices = allDevicesForAppLayout(pageName, deskTests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

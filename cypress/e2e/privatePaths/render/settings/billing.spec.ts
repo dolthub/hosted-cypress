@@ -21,11 +21,14 @@ describe(pageName, () => {
   ];
   const tests = [
     shouldFindAndContain("page-title", "Settings"),
-    shouldFindAndContain("active-tab", "Billing"),
     shouldBeVisible("billing-new-subscriber-section"),
     ...inputs.map(i => shouldBeVisible(`${i}-input`)),
     shouldBeVisible("billing-submit-button"),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const deskTests = [
+    shouldFindAndContain("subnav-link-active", "Billing"),
+    ...tests,
+  ];
+  const devices = allDevicesForAppLayout(pageName, deskTests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
