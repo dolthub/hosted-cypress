@@ -12,13 +12,16 @@ const loggedIn = true;
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("page-title", "Settings"),
-    shouldFindAndContain("active-tab", "Account"),
     shouldBeVisible("account-info-form"),
     shouldFindAndContain("account-username", ["Username", "cypresstesting"]),
     shouldBeVisible("account-display-name"),
     shouldBeVisible("account-company-name"),
     shouldBeVisible("update-account-button"),
   ];
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const deskTests = [
+    shouldFindAndContain("subnav-link-active", "Account"),
+    ...tests,
+  ];
+  const devices = allDevicesForAppLayout(pageName, deskTests, tests);
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
