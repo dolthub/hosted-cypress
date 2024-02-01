@@ -16,7 +16,7 @@
     "prettier:fix": "prettier --write 'cypress/**/*.{ts,js}'"
   },
   "dependencies": {
-    "cypress": "^13.6.2",
+    "cypress": "^13.6.4",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
