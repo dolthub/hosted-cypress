@@ -48,10 +48,7 @@ describe(pageName, () => {
       ? shouldFindCheckbox("deployment-flag-checkbox", false)
       : [shouldNotExist("deployment-flag-checkbox")]),
     scrollToPosition("#main-content", "bottom"),
-    shouldFindAndContain("hourly-cost", [
-      "Hourly cost:",
-      "$0.07 + egress costs",
-    ]),
+    shouldFindAndContain("hourly-cost", ["Hourly cost:", "$0.07 + egress"]),
     shouldFindButton("create-deployment-button", true),
   ];
 
