@@ -1,8 +1,7 @@
 import { changeBranch } from "@sharedTests/changeBranch";
 import { testDBHeaderWithBranch } from "@sharedTests/dbHeaderNav";
 import {
-  beVisibleAndContain,
-  haveLength,
+  beVisible,
   shouldBeVisible,
   shouldNotExist,
 } from "@sharedTests/sharedFunctionsAndVariables";
@@ -36,14 +35,9 @@ describe(pageName, () => {
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),
     newExpectation(
-      "should find pull requests table with header",
-      "[data-cy=pull-requests-table] > thead > tr > th",
-      haveLength(5),
-    ),
-    newExpectation(
-      "should find first pull with pull state label",
-      "[data-cy=pull-requests-table] > tbody > tr:first [data-cy=pull-state-label]",
-      beVisibleAndContain("Open"),
+      "should find pull with ID 1 with pull state icon",
+      "[data-cy=pull-requests-row-1] [data-cy=pull-state-icon]",
+      beVisible,
     ),
   ];
 
