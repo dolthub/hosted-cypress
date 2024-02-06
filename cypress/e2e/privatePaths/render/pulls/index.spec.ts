@@ -1,16 +1,12 @@
 import { testDBHeaderWithBranch } from "@sharedTests/dbHeaderNav";
 import {
   beVisible,
-  haveLength,
   haveLengthAtLeast,
   shouldBeVisible,
   shouldNotExist,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
-import {
-  newExpectation,
-  newExpectationWithScrollIntoView,
-} from "@utils/helpers";
+import { newExpectation } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
 import { changeBranch } from "@utils/sharedTests/changeBranch";
 
@@ -47,34 +43,38 @@ describe(pageName, () => {
     shouldNotExist("pull-requests-no-pulls"),
     shouldBeVisible("pull-search-input"),
     newExpectation(
-      "should find pull requests table with header",
-      "[data-cy=pull-requests-table] > thead > tr > th",
-      haveLength(5),
-    ),
-    newExpectation(
       "should find at least 1 pull",
-      "[data-cy=pull-requests-table] > tbody > tr",
+      "[data-cy=pull-requests-table] > li",
       haveLengthAtLeast(1),
     ),
-    newExpectationWithScrollIntoView(
-      `should scroll to pull-requests-row-1`,
-      "[data-cy=pull-requests-row-1]",
+    newExpectation(
+      "should find pull with ID 1 with pull state icon",
+      "[data-cy=pull-requests-row-1] [data-cy=pull-state-icon]",
       beVisible,
-      true,
     ),
     newExpectation(
-      "should find pull with ID 1 with 5 columns",
-      "[data-cy=pull-requests-row-1] > td",
-      haveLength(5),
+      "should find pull with ID 1 with pull title",
+      "[data-cy=pull-requests-row-1] [data-cy=pull-title]",
+      beVisible,
     ),
     newExpectation(
-      "should find pull with ID 1 with one link",
-      "[data-cy=pull-requests-row-1] > td a",
-      haveLength(1),
+      "should find pull with ID 1 with pull id",
+      "[data-cy=pull-requests-row-1] [data-cy=pull-id]",
+      beVisible,
     ),
     newExpectation(
-      "should find pull with ID 1 with pull state label",
-      "[data-cy=pull-requests-row-1] [data-cy=pull-state-label]",
+      "should find pull with ID 1 with pull creator",
+      "[data-cy=pull-requests-row-1] [data-cy=pull-creator]",
+      beVisible,
+    ),
+    newExpectation(
+      "should find pull with ID 1 with created time",
+      "[data-cy=pull-requests-row-1] [data-cy=created-time]",
+      beVisible,
+    ),
+    newExpectation(
+      "should find pull with ID 1 with comment count",
+      "[data-cy=pull-requests-row-1] [data-cy=comment-count]",
       beVisible,
     ),
   ];
