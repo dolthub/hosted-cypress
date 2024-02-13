@@ -28,18 +28,23 @@ describe(pageName, () => {
       newShouldArgs("be.visible.and.have.length.of.at.least", 10),
     ),
     newExpectation(
-      "should have us-jails database in each row",
+      "should have server in each row",
       "[data-cy=backup-table] > tbody > tr > td:nth-child(2)",
+      beVisibleAndContain("0"),
+    ),
+    newExpectation(
+      "should have us-jails database in each row",
+      "[data-cy=backup-table] > tbody > tr > td:nth-child(3)",
       beVisibleAndContain("us-jails"),
     ),
     newExpectation(
       "should have size in each row",
-      "[data-cy=backup-table] > tbody > tr > td:nth-child(3)",
+      "[data-cy=backup-table] > tbody > tr > td:nth-child(4)",
       beVisibleAndContain("MB"),
     ),
     newExpectation(
       "should have created at in each row",
-      "[data-cy=backup-table] > tbody > tr > td:nth-child(4)",
+      "[data-cy=backup-table] > tbody > tr > td:nth-child(5)",
       beVisibleAndContain("ago"),
     ),
     newExpectation(
