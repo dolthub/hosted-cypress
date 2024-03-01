@@ -30,8 +30,8 @@ const swDataCys = [
 ];
 
 const formClickAndFinds = [
-  { clickCy: "radio-team", findCy: "add-team-form" },
-  { clickCy: "radio-individual", findCy: "add-individual-form" },
+  { clickCy: "team-radio", findCy: "add-team-form" },
+  { clickCy: "individual-radio", findCy: "add-individual-form" },
 ];
 
 const editServiceWindowClickFlow = newClickFlow(
