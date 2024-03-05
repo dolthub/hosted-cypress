@@ -24,7 +24,7 @@ describe(pageName, () => {
 
     shouldFindAndContain("modal-title", "Create team"),
 
-    shouldFindAndCloseModal("create-team-modal-buttons"),
+    shouldFindAndCloseModal,
 
     shouldFindAndContain("testTeam-link", "testTeam"),
   ];

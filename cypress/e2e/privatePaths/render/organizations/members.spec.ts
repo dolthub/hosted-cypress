@@ -35,9 +35,9 @@ describe(pageName, () => {
       beVisibleAndContain("Add member"),
       [newClickFlow(`[data-cy=add-member-button]`, [])],
     ),
-    shouldFindAndContain("modal-title", "Add member to testorg"),
+    shouldFindAndContain("modal-title", "Add organization member"),
 
-    shouldFindAndCloseModal("add-member-modal-buttons"),
+    shouldFindAndCloseModal,
 
     newExpectationWithClickFlows(
       `should find Edit`,

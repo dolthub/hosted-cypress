@@ -31,9 +31,9 @@ describe(pageName, () => {
       [newClickFlow(`[data-cy=delete-organization-button]`, [])],
     ),
 
-    shouldFindAndContain("modal-title", "Delete testorg?"),
+    shouldFindAndContain("modal-title", "Delete organization"),
 
-    shouldFindAndCloseModal("account-modal-buttons"),
+    shouldFindAndCloseModal,
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

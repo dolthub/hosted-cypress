@@ -11,6 +11,7 @@ import {
   beVisible,
   notBeVisible,
   shouldBeVisible,
+  shouldFindAndCloseModal,
   shouldFindAndContain,
   shouldFindAndScrollTo,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
@@ -47,26 +48,22 @@ const editServiceWindowClickFlow = newClickFlow(
   "[data-cy=cancel-button]",
 );
 
-const collabFormClickFlow = newClickFlow(
-  "[data-cy=add-collab-button]",
-  [
-    shouldFindAndContain("add-collaborator-header", "Add a collaborator"),
-    shouldBeVisible("add-collab-radios"),
-    ...formClickAndFinds.map(test =>
-      newExpectationWithClickFlows(
-        `should find ${test.findCy}`,
-        `[data-cy=${test.clickCy}]`,
-        beVisible,
-        [
-          newClickFlow(`[data-cy=${test.clickCy}]`, [
-            shouldBeVisible(test.findCy),
-          ]),
-        ],
-      ),
+const collabFormClickFlow = newClickFlow("[data-cy=add-collab-button]", [
+  shouldFindAndContain("modal-title", "Add collaborator"),
+  shouldBeVisible("add-collab-radios"),
+  ...formClickAndFinds.map(test =>
+    newExpectationWithClickFlows(
+      `should find ${test.findCy}`,
+      `[data-cy=${test.clickCy}]`,
+      beVisible,
+      [
+        newClickFlow(`[data-cy=${test.clickCy}]`, [
+          shouldBeVisible(test.findCy),
+        ]),
+      ],
     ),
-  ],
-  "[data-cy=cancel-button]",
-);
+  ),
+]);
 
 describe(pageName, () => {
   const tests = (isMobile = false) => [
@@ -94,6 +91,7 @@ describe(pageName, () => {
       beVisible,
       [collabFormClickFlow],
     ),
+    shouldFindAndCloseModal,
     shouldFindAndScrollTo("advanced-settings"),
   ];
 

@@ -35,15 +35,15 @@ describe(pageName, () => {
     ),
 
     newExpectationWithClickFlows(
-      `should find Add Member`,
+      `should find Add member`,
       `[data-cy=profile-add-member-button]`,
-      beVisibleAndContain("Add Member"),
+      beVisibleAndContain("Add member"),
       [newClickFlow(`[data-cy=profile-add-member-button]`, [])],
     ),
 
-    shouldFindAndContain("modal-title", "Add Team Member"),
+    shouldFindAndContain("modal-title", "Add team member"),
 
-    shouldFindAndCloseModal("add-team-member-modal-buttons"),
+    shouldFindAndCloseModal,
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);
