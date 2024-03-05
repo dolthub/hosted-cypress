@@ -1,4 +1,5 @@
 import {
+  beVisible,
   beVisibleAndContain,
   shouldBeVisible,
   shouldFindAndContain,
@@ -50,10 +51,10 @@ describe(pageName, () => {
           ),
           newExpectationWithClickFlows(
             "should close recover modal",
-            "[data-cy=recover-cancel]",
-            beVisibleAndContain("cancel"),
+            "[data-cy=close-modal]",
+            beVisible,
             [
-              newClickFlow("[data-cy=recover-cancel]", [
+              newClickFlow("[data-cy=close-modal]", [
                 shouldFindAndContain(
                   "signin-forgot-password",
                   "Forgot username or password?",
