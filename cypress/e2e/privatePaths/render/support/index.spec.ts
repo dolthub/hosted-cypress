@@ -52,13 +52,13 @@ describe(pageName, () => {
     ),
     newExpectationWithClickFlows(
       "should remove inactive deployment",
-      `[aria-label="Remove dolthub/us-jails-1"]`,
+      `[aria-label="remove dolthub/us-jails-1"]`,
       beVisible,
       [
-        newClickFlow(`[aria-label="Remove dolthub/us-jails-1"]`, [
+        newClickFlow(`[aria-label="remove dolthub/us-jails-1"]`, [
           newExpectation(
             "inactive deployment should be removed",
-            `[aria-label="Remove dolthub/us-jails-1"]`,
+            `[aria-label="remove dolthub/us-jails-1"]`,
             notExist,
           ),
         ]),

@@ -44,14 +44,14 @@ const checkCurrentBranch = (testParams: TestParams): Tests =>
       ];
 
 const branchSelectorClickFlow = (testParams: TestParams) =>
-  newClickFlow(`[data-cy=branch-selector]`, [
+  newClickFlow(`[data-cy=branch-and-tag-selector]`, [
     newExpectationWithClickFlows(
       "should click on destination branch",
-      `[data-cy=${testParams.destinationBranch}]`,
+      `[data-cy=select-option-${testParams.destinationBranch}]`,
       beVisible,
       [
         newClickFlow(
-          `[data-cy=${testParams.destinationBranch}]`,
+          `[data-cy=select-option-${testParams.destinationBranch}]`,
           checkCurrentBranch(testParams),
         ),
       ],
@@ -69,7 +69,7 @@ export const changeBranch = (testParams: TestParams): Tests => {
             newClickFlow(`[data-cy=left-nav-toggle-icon]`, [
               newExpectation(
                 "should have branch selector",
-                `[data-cy=branch-selector]`,
+                `[data-cy=branch-and-tag-selector]`,
                 beVisible,
               ),
             ]),
@@ -89,7 +89,7 @@ export const changeBranch = (testParams: TestParams): Tests => {
     ...maybeOpenLeftNav,
     newExpectationWithClickFlows(
       "should open branch selector",
-      `[data-cy=branch-selector]`,
+      `[data-cy=branch-and-tag-selector]`,
       beVisible,
       [branchSelectorClickFlow(testParams)],
     ),
