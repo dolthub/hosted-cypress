@@ -252,7 +252,7 @@ export const tableExpectations = (
         ),
         newExpectation(
           "should have branch selector",
-          "[data-cy=branch-selector]",
+          "[data-cy=branch-and-tag-selector]",
           beVisible,
         ),
         ...expectations,
@@ -260,7 +260,7 @@ export const tableExpectations = (
     : [
         newExpectation(
           "should have branch selector",
-          "[data-cy=branch-selector]",
+          "[data-cy=branch-and-tag-selector]",
           beVisible,
         ),
         ...expectations,
