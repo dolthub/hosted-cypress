@@ -8,8 +8,8 @@ const loggedIn = true;
 
 describe(pageName, () => {
   const tests = [
-    shouldBeVisible("new-ticket-tab"),
-    shouldBeVisible("active-view-tickets-tab"),
+    shouldBeVisible("tab-new-ticket"),
+    shouldBeVisible("active-tab-view-tickets"),
     shouldBeVisible("no-incidents"),
     shouldBeVisible("reload-button"),
   ];
