@@ -28,8 +28,8 @@ const skip = false;
 describe(pageName, () => {
   const tests = [
     shouldFindAndContain("create-support-ticket", "Create a support ticket"),
-    shouldBeVisible("active-new-ticket-tab"),
-    shouldBeVisible("view-tickets-tab"),
+    shouldBeVisible("active-tab-new-ticket"),
+    shouldBeVisible("tab-view-tickets"),
     shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),

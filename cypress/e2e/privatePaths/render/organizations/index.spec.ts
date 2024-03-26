@@ -42,7 +42,7 @@ describe(pageName, () => {
         `should find ${test.text}`,
         `[data-cy=${test.datacy}]`,
         beVisibleAndContain(test.text),
-        [newClickFlow(`[data-cy=${test.tabDataCy}]`, [])],
+        [newClickFlow(`[data-cy=tab-${test.tabDataCy}]`, [])],
       ),
     ),
 
