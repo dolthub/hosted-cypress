@@ -54,7 +54,10 @@ const signedOutLinks = [
 ];
 
 const signedInMobileLinks = (databasePage: boolean) => [
-  ...sharedLinks,
+  "[data-cy=navbar-documentation]",
+  ...(databasePage ? [] : ["[data-cy=navbar-pricing]"]),
+  "[data-cy=navbar-discord]",
+  "[data-cy=navbar-github]",
   databasePage ? "[data-cy=navbar-workbench-logo]" : "[data-cy=navbar-logo]",
   "[data-cy=navbar-deployments]",
   "[data-cy=navbar-settings]",
