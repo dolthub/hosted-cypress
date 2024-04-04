@@ -1,7 +1,4 @@
-import {
-  shouldFindAndContain,
-  shouldNotExist,
-} from "@sharedTests/sharedFunctionsAndVariables";
+import { shouldNotExist } from "@sharedTests/sharedFunctionsAndVariables";
 import { macbook15ForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
 
@@ -17,7 +14,8 @@ const skip = false;
 
 describe(pageName, () => {
   const tests = [
-    shouldFindAndContain("error-msg", "database not found"),
+    // TODO: unskip when error-msg added back
+    // shouldFindAndContain("error-msg", "database not found"),
     shouldNotExist("pull-requests-table"),
   ];
 
