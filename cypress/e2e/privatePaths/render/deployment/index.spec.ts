@@ -19,11 +19,11 @@ const currentPage = `/deployments/${ownerName}/${depName}`;
 const loggedIn = true;
 
 const connectivityTests = [
-  { dataCy: "connectivity-field-host", text: "Host" },
-  { dataCy: "connectivity-field-port", text: "Port" },
-  { dataCy: "connectivity-field-username", text: "Username" },
-  { dataCy: "connectivity-field-password", text: "Password" },
-  { dataCy: "connectivity-field-certificate", text: "Certificate" },
+  { dataCy: "copyable-field-host", text: "Host" },
+  { dataCy: "copyable-field-port", text: "Port" },
+  { dataCy: "copyable-field-username", text: "Username" },
+  { dataCy: "copyable-field-password", text: "Password" },
+  { dataCy: "copyable-field-certificate", text: "Certificate" },
   { dataCy: "connect-instructions", text: "MySQL Client" },
   { dataCy: "docs-link", text: "Read the docs" },
 ];
