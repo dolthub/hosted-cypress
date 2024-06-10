@@ -1,10 +1,12 @@
 import {
   shouldBeVisible,
+  shouldClickAndFind,
   shouldFindAndContain,
   shouldFindAndHaveValue,
   shouldFindButton,
   shouldFindCheckbox,
   shouldNotExist,
+  shouldTypeString,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { allDevicesForAppLayout } from "@utils/devices";
 import { scrollToPosition } from "@utils/helpers";
@@ -28,8 +30,18 @@ describe(pageName, () => {
     shouldNotExist("no-perm-banner"),
     shouldNotExist("existing-deployment"),
     shouldNotExist("backups-banner"),
+
+    // About
+    shouldFindAndContain("active-tab", "About"),
     shouldFindAndContain("owner-select", ["Owner", "cypresstesting"]),
     shouldFindAndHaveValue("deployment-name-input", ""),
+    shouldFindButton("next-about", true),
+    shouldTypeString("deployment-name-input", "test-dep"),
+    shouldFindButton("next-about", false),
+    shouldClickAndFind("next-about", "cloud-select"),
+
+    // Instance
+    shouldFindAndContain("active-tab", "Instance"),
     shouldFindAndContain("cloud-select", [
       "Cloud Provider",
       cloud.toUpperCase(),
@@ -41,15 +53,25 @@ describe(pageName, () => {
     ]),
     shouldFindAndContain("storage-select", ["Storage", "Trial 50GB EBS"]),
     shouldFindAndHaveValue("volume-size-input", 50),
+    scrollToPosition("#main-content", "bottom"),
+    shouldClickAndFind("next-instance", "web-pki-cert-checkbox"),
+
+    // Advanced
+    shouldFindAndContain("active-tab", "Advanced"),
     ...shouldFindCheckbox("web-pki-cert-checkbox", false),
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
       ? shouldFindCheckbox("deployment-flag-checkbox", false)
       : [shouldNotExist("deployment-flag-checkbox")]),
+    shouldClickAndFind("next-advanced", "create-deployment-button"),
+
+    // Confirm
+    shouldFindAndContain("active-tab", "Confirm"),
+    shouldNotExist("error-msg"),
     scrollToPosition("#main-content", "bottom"),
     shouldFindAndContain("hourly-cost", ["Hourly cost:", "$0.07 + egress"]),
-    shouldFindButton("create-deployment-button", true),
+    shouldFindButton("create-deployment-button"),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

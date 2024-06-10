@@ -1,7 +1,9 @@
 import {
   shouldBeVisible,
+  shouldClickAndFind,
   shouldFindAndContain,
   shouldFindAndHaveValue,
+  shouldFindAndScrollTo,
   shouldFindButton,
   shouldFindCheckbox,
   shouldNotExist,
@@ -27,8 +29,17 @@ describe(pageName, () => {
     shouldBeVisible("existing-deployment"),
     shouldBeVisible("existing-deployment-checkboxes"),
     shouldNotExist("backups-banner"),
+
+    // About
+    shouldFindAndContain("active-tab", "About"),
     shouldFindAndContain("owner-select", ["Owner", ownerName]),
     shouldFindAndHaveValue("deployment-name-input", "us-jails-1"),
+    shouldFindAndScrollTo("next-about"),
+    shouldFindButton("next-about", false),
+    shouldClickAndFind("next-about", "cloud-select"),
+
+    // Instance
+    shouldFindAndContain("active-tab", "Instance"),
     shouldFindAndContain("cloud-select", ["Cloud Provider", "AWS"]),
     shouldFindAndContain("zone-select", ["Zone", "us-west-2"]),
     shouldFindAndContain("instance-type-select-with-details", [
@@ -37,12 +48,22 @@ describe(pageName, () => {
     ]),
     shouldFindAndContain("storage-select", ["Storage", "EBS GP3"]),
     shouldFindAndHaveValue("volume-size-input", 100),
+    scrollToPosition("#main-content", "bottom"),
+    shouldClickAndFind("next-instance", "web-pki-cert-checkbox"),
+
+    // Advanced
+    shouldFindAndContain("active-tab", "Advanced"),
     ...shouldFindCheckbox("web-pki-cert-checkbox", true),
     ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", true),
     ...shouldFindCheckbox("workbench-users-checkbox", true),
     ...(isDev
       ? shouldFindCheckbox("deployment-flag-checkbox", false)
       : [shouldNotExist("deployment-flag-checkbox")]),
+    shouldClickAndFind("next-advanced", "create-deployment-button"),
+
+    // Confirm
+    shouldFindAndContain("active-tab", "Confirm"),
+    shouldNotExist("error-msg"),
     scrollToPosition("#main-content", "bottom"),
     shouldFindAndContain("hourly-cost", ["Hourly cost:", "$0.67 + egress"]),
     shouldFindButton("create-deployment-button"),
