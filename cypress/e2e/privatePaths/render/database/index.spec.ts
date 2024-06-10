@@ -22,7 +22,7 @@ import { runTestsForDevices } from "@utils/index";
 import {
   shouldBeVisible,
   shouldNotExist,
-  typingExpectation,
+  shouldTypeString,
 } from "@utils/sharedTests/sharedFunctionsAndVariables";
 import { Tests } from "@utils/types";
 
@@ -65,7 +65,7 @@ describe(pageName, () => {
       [
         newClickFlow(
           "[data-cy=create-view-button]",
-          [typingExpectation("testQueryName", "[data-cy=query-name]")],
+          [shouldTypeString("query-name", "testQueryName")],
           "[data-cy=close-modal]",
         ),
       ],

@@ -115,6 +115,21 @@ export const shouldFindButton = (
     newShouldArgs(disabled ? "be.disabled" : "be.enabled"),
   );
 
+export const shouldClickAndFind = (
+  dataCyToClick: string,
+  dataCyToFind: string,
+): Expectation =>
+  newExpectationWithClickFlows(
+    `should find and click ${getDesc(dataCyToClick)}`,
+    `[data-cy=${dataCyToClick}]`,
+    beVisible,
+    [
+      newClickFlow(`[data-cy=${dataCyToClick}]`, [
+        shouldBeVisible(dataCyToFind),
+      ]),
+    ],
+  );
+
 export const shouldNotExist = (dataCy: string): Expectation =>
   newExpectation(
     `should not find ${getDesc(dataCy)}`,
@@ -182,10 +197,10 @@ function getDesc(dataCy: string): string {
   return dataCy.replace(/-/g, " ");
 }
 
-export const typingExpectation = (value: string, selectorStr: string) =>
+export const shouldTypeString = (dataCy: string, value: string) =>
   newExpectationWithTypeString(
-    `should write description in textbox`,
-    selectorStr,
+    `should type in ${getDesc(dataCy)} input`,
+    `[data-cy=${dataCy}]`,
     beVisible,
     { value },
   );
