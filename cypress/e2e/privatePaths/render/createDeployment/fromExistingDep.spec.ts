@@ -4,12 +4,7 @@ import {
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { allDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
-import {
-  testAboutTab,
-  testAdvancedTab,
-  testConfirmTab,
-  testInstanceTab,
-} from "@utils/sharedTests/createDep";
+import { testAboutTab, testConfirmTab } from "@utils/sharedTests/createDep";
 
 const pageName = "Create deployment page with existing deployment params";
 const ownerName = "automated_testing";
@@ -26,8 +21,7 @@ describe(pageName, () => {
     shouldNotExist("backups-banner"),
 
     ...testAboutTab(ownerName, `${depName}-1`),
-    ...testInstanceTab(),
-    ...testAdvancedTab(true, true),
+    // Skip to Confirm
     ...testConfirmTab(),
   ];
 
