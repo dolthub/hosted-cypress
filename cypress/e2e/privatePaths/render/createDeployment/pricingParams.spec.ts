@@ -23,8 +23,8 @@ describe(pageName, () => {
   const tests = [
     shouldBeVisible("no-subscription-banner"),
     shouldNotExist("no-perm-banner"),
-    shouldNotExist("existing-deployment"),
-    shouldNotExist("backups-banner"),
+    shouldNotExist("existing-creation-method"),
+    shouldNotExist("from-backup-link"),
 
     ...testAboutTab("cypresstesting", "test-dep", true),
     ...testInstanceTab(zone, instanceType, "Trial 50GB EBS"),
