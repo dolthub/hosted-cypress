@@ -17,9 +17,9 @@ describe(pageName, () => {
   const tests = [
     shouldNotExist("no-subscription-banner"),
     shouldBeVisible("no-perm-banner"),
-    shouldBeVisible("existing-deployment"),
+    shouldBeVisible("existing-creation-method"),
     shouldBeVisible("existing-deployment-checkboxes"),
-    shouldBeVisible("backups-banner"),
+    shouldBeVisible("from-backup-link"),
 
     ...testAboutTab(ownerName, `${depName}-1`),
     // Skip to Confirm

@@ -32,9 +32,13 @@ export const testAboutTab = (
       ];
 
   return [
-    shouldFindAndContain("page-title", "Create Deployment"),
+    shouldFindAndContain("create-deployment-header", [
+      "Create Deployment",
+      "Exit",
+    ]),
     shouldFindAndContain("active-tab", "About"),
     shouldFindAndContain("owner-select", ["Owner", ownerName]),
+    shouldFindAndScrollTo("deployment-name-input"),
     ...depNameTests,
     shouldFindButton("next-about", false),
     shouldClickAndFind("next-about", "cloud-select"),
@@ -60,6 +64,7 @@ export const testInstanceTab = (
 ];
 
 export const testAdvancedTab = (webPKI = false, remotesapi = false): Tests => [
+  scrollToPosition("#main-content", "top"),
   shouldFindAndContain("active-tab", "Advanced"),
   ...shouldFindCheckbox("web-pki-cert-checkbox", webPKI),
   ...shouldFindCheckbox(
@@ -67,20 +72,21 @@ export const testAdvancedTab = (webPKI = false, remotesapi = false): Tests => [
     remotesapi,
     !webPKI,
   ),
+  scrollToPosition("#main-content", "bottom"),
   ...shouldFindCheckbox("workbench-users-checkbox", true),
   ...(isDev
     ? shouldFindCheckbox("deployment-flag-checkbox", false)
     : [shouldNotExist("deployment-flag-checkbox")]),
-  shouldClickAndFind("next-advanced", "create-deployment-button"),
+  shouldClickAndFind("next-advanced", "confirm-deployment"),
 ];
 
 export const testConfirmTab = (cost?: string): Tests => [
+  scrollToPosition("#main-content", "top"),
   shouldFindAndContain("active-tab", "Confirm"),
   shouldNotExist("error-msg"),
-  scrollToPosition("#main-content", "bottom"),
   shouldFindAndContain("hourly-cost", [
     "Hourly cost:",
     `$${cost ?? "0.67"} + egress`,
   ]),
-  shouldFindButton("create-deployment-button"),
+  shouldFindAndScrollTo("create-deployment-button"),
 ];
