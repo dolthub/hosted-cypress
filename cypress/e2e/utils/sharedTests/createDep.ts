@@ -63,16 +63,12 @@ export const testInstanceTab = (
   shouldClickAndFind("next-instance", "web-pki-cert-checkbox"),
 ];
 
-export const testAdvancedTab = (webPKI = false, remotesapi = false): Tests => [
-  scrollToPosition("#main-content", "top"),
+export const testAdvancedTab = (mobile = false): Tests => [
+  ...(mobile ? [scrollToPosition("#main-content", "top")] : []),
   shouldFindAndContain("active-tab", "Advanced"),
-  ...shouldFindCheckbox("web-pki-cert-checkbox", webPKI),
-  ...shouldFindCheckbox(
-    "expose-remotesapi-endpoint-checkbox",
-    remotesapi,
-    !webPKI,
-  ),
-  scrollToPosition("#main-content", "bottom"),
+  ...shouldFindCheckbox("web-pki-cert-checkbox", false),
+  ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
+  ...(mobile ? [scrollToPosition("#main-content", "bottom")] : []),
   ...shouldFindCheckbox("workbench-users-checkbox", true),
   ...(isDev
     ? shouldFindCheckbox("deployment-flag-checkbox", false)

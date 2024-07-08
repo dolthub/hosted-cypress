@@ -16,7 +16,7 @@ const currentPage = "/create-deployment";
 const loggedIn = true;
 
 describe(pageName, () => {
-  const tests = [
+  const tests = (mobile = false) => [
     shouldBeVisible("no-subscription-banner"),
     shouldNotExist("no-perm-banner"),
     shouldNotExist("from-backup-link"),
@@ -24,10 +24,10 @@ describe(pageName, () => {
 
     ...testAboutTab("cypresstesting", "test-dep", true),
     ...testInstanceTab(),
-    ...testAdvancedTab(),
+    ...testAdvancedTab(mobile),
     ...testConfirmTab(),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, loggedIn });
 });

@@ -20,7 +20,7 @@ const currentPage = `/create-deployment?zone=${zone}&instanceId=${instanceId}`;
 const loggedIn = true;
 
 describe(pageName, () => {
-  const tests = [
+  const tests = (mobile = false) => [
     shouldBeVisible("no-subscription-banner"),
     shouldNotExist("no-perm-banner"),
     shouldNotExist("existing-creation-method"),
@@ -28,10 +28,10 @@ describe(pageName, () => {
 
     ...testAboutTab("cypresstesting", "test-dep", true),
     ...testInstanceTab(zone, instanceType, "Trial 50GB EBS"),
-    ...testAdvancedTab(),
+    ...testAdvancedTab(mobile),
     ...testConfirmTab("0.07"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests, tests);
+  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
