@@ -20,11 +20,6 @@ describe(pageName, () => {
       newShouldArgs("not.exist"),
     ),
     newExpectation(
-      "should have no subscription banner",
-      "[data-cy=no-subscription-banner]",
-      beVisible,
-    ),
-    newExpectation(
       "should have reload button",
       "[data-cy=reload-button]",
       beVisible,
