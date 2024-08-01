@@ -229,9 +229,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/cli@npm:^7.24.7":
-  version: 7.24.7
-  resolution: "@babel/cli@npm:7.24.7"
+"@babel/cli@npm:^7.24.8":
+  version: 7.24.8
+  resolution: "@babel/cli@npm:7.24.8"
   dependencies:
     "@jridgewell/trace-mapping": "npm:^0.3.25"
     "@nicolo-ribaudo/chokidar-2": "npm:2.1.8-no-fsevents.3"
@@ -252,7 +252,7 @@ __metadata:
   bin:
     babel: ./bin/babel.js
     babel-external-helpers: ./bin/babel-external-helpers.js
-  checksum: 10/021bf34d7347a24a84d63c282f25d16c14da566c58326e291983877fc62de7e292267e336a753d4d50aacd16b95879aaa6b3f560407fe002969a14e68832980d
+  checksum: 10/f65f62ac91dcef3e8832f0c15215dd331f6b31233d4f61f61fb96936e94b5deb38b956b866d842725b3b6b34658bc105110117cc8c11dafc22849855dfe77423
   languageName: node
   linkType: hard
 
@@ -4386,7 +4386,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "hosted-cypress@workspace:."
   dependencies:
-    "@babel/cli": "npm:^7.24.7"
+    "@babel/cli": "npm:^7.24.8"
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-env": "npm:^7.24.7"
     "@babel/preset-typescript": "npm:^7.24.7"
