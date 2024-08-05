@@ -2,6 +2,7 @@ import {
   beVisibleAndContain,
   shouldFindAndCloseModal,
   shouldFindAndContain,
+  shouldFindAndScrollTo,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { allDevicesForAppLayout } from "@utils/devices";
 import { newClickFlow, newExpectationWithClickFlows } from "@utils/helpers";
@@ -32,12 +33,13 @@ describe(pageName, () => {
     newExpectationWithClickFlows(
       `should find Add member`,
       `[data-cy=add-member-button]`,
-      beVisibleAndContain("Add member"),
+      beVisibleAndContain("Add Member"),
       [newClickFlow(`[data-cy=add-member-button]`, [])],
     ),
     shouldFindAndContain("modal-title", "Add organization member"),
 
     shouldFindAndCloseModal,
+    shouldFindAndScrollTo("edit-button-cypresstesting"),
 
     newExpectationWithClickFlows(
       `should find Edit`,
