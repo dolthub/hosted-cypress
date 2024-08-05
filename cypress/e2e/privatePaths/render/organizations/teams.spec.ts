@@ -16,9 +16,9 @@ describe(pageName, () => {
     shouldFindAndContain("organization-header", "organizations / testorg"),
 
     newExpectationWithClickFlows(
-      `should find Create Team`,
+      `should find Add Team`,
       `[data-cy=create-team-button]`,
-      beVisibleAndContain("Create Team"),
+      beVisibleAndContain("Add Team"),
       [newClickFlow(`[data-cy=create-team-button]`, [])],
     ),
 

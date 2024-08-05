@@ -24,12 +24,12 @@ const organizationPageFindAndContains = [
   {
     tabDataCy: "teams",
     datacy: "add-member-button",
-    text: "Add member",
+    text: "Add Member",
   },
   {
     tabDataCy: "billing",
     datacy: "create-team-button",
-    text: "Create Team",
+    text: "Add Team",
   },
 ];
 
