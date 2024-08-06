@@ -24,7 +24,7 @@ const actionsClickFlow = (isStopped = false) =>
       ),
       shouldBeVisible("create-new-dep-button"),
       shouldBeVisible("reboot-instance-button"),
-      shouldBeVisible("restart-dolt-button"),
+      shouldBeVisible("restart-app-button"),
       shouldBeVisible("create-support-ticket"),
       shouldFindButton("destroy-button", isStopped),
     ],
