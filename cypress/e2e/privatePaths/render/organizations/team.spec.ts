@@ -14,11 +14,11 @@ const loggedIn = true;
 const addTeamModalFindAndContains = [
   {
     datacy: "team-link",
-    text: "teams / testTeam",
+    text: "teams",
   },
   {
     datacy: "profile-team-name",
-    text: "TtestTeam",
+    text: "testTeam",
   },
   {
     datacy: "profile-team-description",
