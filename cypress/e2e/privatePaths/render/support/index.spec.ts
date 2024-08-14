@@ -27,9 +27,11 @@ const skip = false;
 
 describe(pageName, () => {
   const tests = [
-    shouldFindAndContain("create-support-ticket", "Create a support ticket"),
-    shouldBeVisible("active-tab-new-ticket"),
-    shouldBeVisible("tab-view-tickets"),
+    shouldBeVisible("no-incidents"),
+    shouldFindAndContain(
+      "create-support-ticket-header",
+      "Create a support ticket",
+    ),
     shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),
