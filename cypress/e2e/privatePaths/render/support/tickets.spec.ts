@@ -1,4 +1,7 @@
-import { shouldBeVisible } from "@sharedTests/sharedFunctionsAndVariables";
+import {
+  shouldBeVisible,
+  shouldNotExist,
+} from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
 
@@ -8,10 +11,9 @@ const loggedIn = true;
 
 describe(pageName, () => {
   const tests = [
-    shouldBeVisible("tab-new-ticket"),
-    shouldBeVisible("active-tab-view-tickets"),
+    shouldNotExist("create-support-ticket-header"),
+    shouldNotExist("support-form"),
     shouldBeVisible("no-incidents"),
-    shouldBeVisible("reload-button"),
   ];
 
   const devices = desktopDevicesForAppLayout(pageName, tests);
