@@ -67,13 +67,13 @@ describe(pageName, () => {
       ],
     ),
     shouldNotExist("critical-err"),
+    scrollToPosition("#main-content", "bottom"),
     newExpectationWithTypeString(
       "should add title",
       "input[name=title]",
       beVisible,
       { value: "HELP ME" },
     ),
-    scrollToPosition("#main-content", "bottom"),
     newExpectationWithTypeString(
       "should add summary",
       "textarea[name=summary]",
