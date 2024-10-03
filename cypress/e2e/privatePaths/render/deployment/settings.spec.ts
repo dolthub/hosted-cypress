@@ -1,4 +1,7 @@
-import { allDevicesForAppLayout } from "@utils/devices";
+import {
+  desktopDevicesForAppLayout,
+  iPhoneXForAppLayout,
+} from "@utils/devices";
 import {
   newClickFlow,
   newExpectation,
@@ -95,6 +98,9 @@ describe(pageName, () => {
     shouldFindAndScrollTo("advanced-settings"),
   ];
 
-  const devices = allDevicesForAppLayout(pageName, tests(), tests(true));
+  const devices = [
+    ...desktopDevicesForAppLayout(pageName, tests()),
+    iPhoneXForAppLayout(pageName, tests(true)),
+  ];
   runTestsForDevices({ currentPage, devices, loggedIn });
 });
