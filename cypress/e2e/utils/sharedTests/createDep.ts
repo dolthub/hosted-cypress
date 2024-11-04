@@ -66,8 +66,8 @@ export const testInstanceTab = (
 export const testAdvancedTab = (mobile = false): Tests => [
   ...(mobile ? [scrollToPosition("#main-content", "top")] : []),
   shouldFindAndContain("active-tab", "Advanced"),
-  ...shouldFindCheckbox("web-pki-cert-checkbox", false),
-  ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false, true),
+  ...shouldFindCheckbox("web-pki-cert-checkbox", true),
+  ...shouldFindCheckbox("expose-remotesapi-endpoint-checkbox", false),
   ...(mobile ? [scrollToPosition("#main-content", "bottom")] : []),
   ...shouldFindCheckbox("workbench-users-checkbox", true),
   ...(isDev
