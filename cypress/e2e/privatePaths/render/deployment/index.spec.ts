@@ -37,7 +37,6 @@ const supportedOverrides = [
   "listener_max_connections",
   "listener_read_timeout_millis",
   "listener_write_timeout_millis",
-  "perf_query_parallelism",
   "max_logged_query_len",
   "log_level",
 ];
