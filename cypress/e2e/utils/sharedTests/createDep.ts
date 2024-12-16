@@ -11,7 +11,7 @@ import {
   shouldTypeString,
 } from "./sharedFunctionsAndVariables";
 
-const isDev =
+export const isDev =
   Cypress.env("LOCAL") ||
   Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
 
