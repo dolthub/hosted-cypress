@@ -18,6 +18,7 @@ import {
   scrollToPosition,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
+import { isDev } from "@utils/sharedTests/createDep";
 
 const pageName = "New support ticket page";
 const currentPage = "/support";
@@ -44,11 +45,12 @@ describe(pageName, () => {
     ),
     shouldSelectOption("Critical", "impact-select", 2, 1),
     shouldBeVisible("critical-err"),
+
     ...shouldTypeAndSelectOption(
       "automated_testing/us-jails",
       "deployment-select",
       3,
-      1,
+      isDev ? 0 : 1,
       "us-jails",
       true,
     ),
@@ -79,6 +81,20 @@ describe(pageName, () => {
       "textarea[name=summary]",
       beVisible,
       { value: "More details about helping me" },
+    ),
+    shouldBeVisible("discord-radio"),
+    shouldBeVisible("email-radio"),
+    newExpectationWithTypeString(
+      "should add title",
+      "[data-cy=contact-input]",
+      beVisible,
+      { value: "testuser" },
+    ),
+    newExpectationWithClickFlows(
+      "should check joined Discord checkbox",
+      "[data-cy=joined-discord-checkbox]",
+      beVisible,
+      [newClickFlow("[data-cy=joined-discord-checkbox]", [])],
     ),
     newExpectation(
       "should have enabled submit button",
