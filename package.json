@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "cypress": "^13.17.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
