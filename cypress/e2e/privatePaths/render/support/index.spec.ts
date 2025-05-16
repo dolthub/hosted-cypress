@@ -50,7 +50,7 @@ describe(pageName, () => {
       "automated_testing/us-jails",
       "deployment-select",
       3,
-      isDev ? 0 : 1,
+      isDev ? 0 : 2,
       "us-jails",
       true,
     ),
