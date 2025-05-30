@@ -15,6 +15,6 @@
       "@sharedTests/*": ["cypress/e2e/utils/sharedTests/*"]
     }
   },
-  "exclude": ["dist"],
+  "exclude": ["dist", "cypress.config.ts"],
   "include": ["cypress"]
 }
