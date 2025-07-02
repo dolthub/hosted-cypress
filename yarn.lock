@@ -3316,9 +3316,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^14.4.0":
-  version: 14.4.0
-  resolution: "cypress@npm:14.4.0"
+"cypress@npm:^14.5.1":
+  version: 14.5.1
+  resolution: "cypress@npm:14.5.1"
   dependencies:
     "@cypress/request": "npm:^3.0.8"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3346,6 +3346,7 @@ __metadata:
     figures: "npm:^3.2.0"
     fs-extra: "npm:^9.1.0"
     getos: "npm:^3.2.1"
+    hasha: "npm:5.2.2"
     is-installed-globally: "npm:~0.4.0"
     lazy-ass: "npm:^1.6.0"
     listr2: "npm:^3.8.3"
@@ -3365,7 +3366,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/0fd3197ca611f14e36ad3ae3ae1890b4a2c79719a4125a329f63d2c84dc88284fafad9eb4edc01a9ec2b5a5d558b261734c8c185273495c71aed787c9039ed60
+  checksum: 10/5318b5e5b7b0e0326fd1b904048fbe54db5baca6cce59f336f0a3413925584dd2bf1620f874ff267ad87952bfe1811dc7ecda708f4f4f18a1550ec5920a6a34d
   languageName: node
   linkType: hard
 
@@ -4918,7 +4919,7 @@ __metadata:
     "@eslint/js": "npm:^9.30.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.35.1"
     "@typescript-eslint/parser": "npm:^8.33.0"
-    cypress: "npm:^14.4.0"
+    cypress: "npm:^14.5.1"
     eslint: "npm:^9.28.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-config-airbnb-typescript: "npm:^18.0.0"
