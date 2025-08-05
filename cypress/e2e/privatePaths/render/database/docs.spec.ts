@@ -38,7 +38,7 @@ describe(pageName, () => {
     newExpectation(
       "should find docs list",
       "[data-cy=db-docs-list] > li",
-      newShouldArgs("be.visible.and.have.length", 2),
+      newShouldArgs("be.visible.and.have.length", 3),
     ),
     newExpectation(
       "should find doc markdown",
