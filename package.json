@@ -36,5 +36,8 @@
     "eslint-plugin-import": "^2.32.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2"
+  },
+  "resolutions": {
+    "form-data": "4.0.4"
   }
 }
