@@ -12,18 +12,37 @@ const pageName = "Organization page: Members tab";
 const currentPage = "/organizations/testorg?tab=members";
 const loggedIn = true;
 
-const editMemberFindAndContains = [
+const editRoleTests = [
   {
-    datacy: "cypresstesting-member",
+    datacy: "update-cypresstesting-member",
     text: "Member",
   },
   {
-    datacy: "cypresstesting-owner",
+    datacy: "update-cypresstesting-owner",
     text: "Owner",
   },
   {
     datacy: "cypresstesting-remove",
     text: "Remove",
+  },
+];
+
+const editDepRoleTests = [
+  {
+    datacy: "update-dep-cypresstesting-admin",
+    text: "Admin",
+  },
+  {
+    datacy: "update-dep-cypresstesting-reader",
+    text: "Reader",
+  },
+  {
+    datacy: "update-dep-cypresstesting-readerandpulls",
+    text: "Pull Request",
+  },
+  {
+    datacy: "update-dep-cypresstesting-writer",
+    text: "Writer",
   },
 ];
 
@@ -37,18 +56,25 @@ describe(pageName, () => {
       [newClickFlow(`[data-cy=add-member-button]`, [])],
     ),
     shouldFindAndContain("modal-title", "Add organization member"),
-
     shouldFindAndCloseModal,
-    shouldFindAndScrollTo("edit-button-cypresstesting"),
 
+    shouldFindAndScrollTo("edit-role-button-cypresstesting"),
     newExpectationWithClickFlows(
       `should find Edit`,
-      `[data-cy=edit-button-cypresstesting]`,
-      beVisibleAndContain("Edit"),
-      [newClickFlow(`[data-cy=edit-button-cypresstesting]`, [])],
+      `[data-cy=edit-role-button-cypresstesting]`,
+      beVisibleAndContain("Owner"),
+      [newClickFlow(`[data-cy=edit-role-button-cypresstesting]`, [])],
     ),
+    ...editRoleTests.map(test => shouldFindAndContain(test.datacy, test.text)),
 
-    ...editMemberFindAndContains.map(test =>
+    shouldFindAndScrollTo("edit-dep-button-cypresstesting"),
+    newExpectationWithClickFlows(
+      `should find Edit`,
+      `[data-cy=edit-dep-button-cypresstesting]`,
+      beVisibleAndContain("Admin"),
+      [newClickFlow(`[data-cy=edit-dep-button-cypresstesting]`, [])],
+    ),
+    ...editDepRoleTests.map(test =>
       shouldFindAndContain(test.datacy, test.text),
     ),
   ];
