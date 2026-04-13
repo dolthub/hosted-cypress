@@ -1,0 +1,69 @@
+import { allDevicesForAppLayout } from "@utils/devices";
+import { runTestsForDevices } from "@utils/index";
+import { deploymentHeaderTests } from "@utils/sharedTests/deploymentHeader";
+import {
+  shouldBeVisible,
+  shouldFindAndContain,
+  shouldFindAndScrollTo,
+  shouldFindAndScrollToWithText,
+  shouldFindButton,
+  shouldFindCheckbox,
+  shouldNotExist,
+} from "@utils/sharedTests/sharedFunctionsAndVariables";
+
+const pageName = "Doltgres deployment page";
+const ownerName = "automated_testing";
+const depName = "doltgres-test";
+const currentPage = `/deployments/${ownerName}/${depName}`;
+
+const loggedIn = true;
+
+const connectivityTests = [
+  { dataCy: "copyable-field-host", text: "Host" },
+  { dataCy: "copyable-field-port", text: "Port" },
+  { dataCy: "copyable-field-username", text: "Username" },
+  { dataCy: "copyable-field-password", text: "Password" },
+  { dataCy: "copyable-field-certificate", text: "Certificate" },
+  { dataCy: "connect-instructions", text: "PostgreSQL Client" },
+  { dataCy: "docs-link", text: "Read the docs" },
+];
+
+const supportedOverrides = [
+  "behavior_auto_commit",
+  "behavior_dolt_transaction_commit",
+  "behavior_read_only",
+  "behavior_sysvar_persistence",
+  "behavior_disable_multistatements",
+  "listener_max_connections",
+  "listener_read_timeout_millis",
+  "listener_write_timeout_millis",
+  "max_logged_query_len",
+  "log_level",
+];
+
+describe(pageName, () => {
+  const tests = (isMobile = false) => [
+    ...deploymentHeaderTests(ownerName, depName, false, isMobile, false),
+    shouldNotExist("must-admin-msg"),
+    shouldNotExist("must-started-msg"),
+    shouldFindAndContain("active-tab-database", "Database"),
+    shouldBeVisible("deployment-summary"),
+    shouldNotExist("deployment-destroyed-at"),
+    shouldFindAndScrollTo("deployment-created-at"),
+    ...connectivityTests.map(test =>
+      shouldFindAndScrollToWithText(test.dataCy, test.text),
+    ),
+    ...supportedOverrides.map(supportedOverride =>
+      shouldFindAndScrollTo(supportedOverride),
+    ),
+  ];
+
+  const devices = allDevicesForAppLayout(
+    pageName,
+    tests(),
+    tests(true),
+    false,
+    true,
+  );
+  runTestsForDevices({ currentPage, devices, loggedIn });
+});

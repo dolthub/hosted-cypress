@@ -36,15 +36,16 @@ export const deploymentHeaderTests = (
   depName: string,
   isStopped = false,
   isMobile = false,
+  hasWorkbench = true,
 ) => [
   isMobile ? shouldNotBeVisible("utc-time") : shouldBeVisible("utc-time"),
   shouldFindAndContain("deployment-breadcrumbs", [ownerName, depName]),
   shouldBeVisible(`deployment-state-${isStopped ? "stopped" : "started"}`),
   shouldNotExist("deployment-starting-msg"),
   shouldBeVisible("dolt-version"),
-  isStopped
-    ? shouldNotExist("launch-workbench-button")
-    : shouldBeVisible("launch-workbench-button"),
+  hasWorkbench && !isStopped
+    ? shouldBeVisible("launch-workbench-button")
+    : shouldNotExist("launch-workbench-button"),
   newExpectationWithClickFlows(
     "should have actions button with items",
     "[data-cy=actions-button]",
