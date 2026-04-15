@@ -160,7 +160,7 @@ export const configurationTests = (): Expectation[] => [
     ],
   ),
   newExpectation(
-    "should no multiple inputs after cancel",
+    "should have no inputs after cancel",
     "[data-cy=config-table] input",
     notExist,
   ),
