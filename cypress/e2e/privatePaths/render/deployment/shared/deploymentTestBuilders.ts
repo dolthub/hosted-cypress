@@ -436,13 +436,13 @@ const buildTabTest =
     ];
 
     if (t.hasDataCy) {
-      tests.concat(t.hasDataCy.map(dataCy => shouldBeVisible(dataCy)));
+      tests.push(...t.hasDataCy.map(dataCy => shouldBeVisible(dataCy)));
     }
     if (t.notExistDataCy) {
-      tests.concat(t.notExistDataCy.map(dataCy => shouldNotExist(dataCy)));
+      tests.push(...t.notExistDataCy.map(dataCy => shouldNotExist(dataCy)));
     }
     if (t.exp) {
-      tests.concat(t.exp);
+      tests.push(...t.exp);
     }
 
     if (i < tabs.length - 1) {
