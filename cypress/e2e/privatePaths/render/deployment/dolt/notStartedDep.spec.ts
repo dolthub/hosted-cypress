@@ -1,18 +1,18 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
-import { doltgresConfig } from "../shared/deploymentConfigs";
-import { indexTests } from "../shared/deploymentTestBuilders";
+import { doltConfig } from "../shared/deploymentConfigs";
+import { notStartedDepTests } from "../shared/deploymentTestBuilders";
 
-const pageName = "Doltgres deployment page";
-const { ownerName, depName } = doltgresConfig;
+const pageName = "Deployment page for stopped deployment";
+const { ownerName, depName } = doltConfig.stoppedDep;
 const currentPage = `/deployments/${ownerName}/${depName}`;
 const loggedIn = true;
 
 describe(pageName, () => {
   const devices = allDevicesForAppLayout(
     pageName,
-    indexTests(doltgresConfig),
-    indexTests(doltgresConfig, true),
+    notStartedDepTests(doltConfig),
+    notStartedDepTests(doltConfig, true),
     false,
     true,
   );

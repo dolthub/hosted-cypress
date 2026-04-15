@@ -1,10 +1,10 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
-import { doltgresConfig } from "../shared/deploymentConfigs";
+import { doltConfig } from "../shared/deploymentConfigs";
 import { configurationTests } from "../shared/deploymentTestBuilders";
 
-const pageName = "Doltgres deployment database page, configuration section";
-const { ownerName, depName } = doltgresConfig;
+const pageName = "Deployment database page, configuration section";
+const { ownerName, depName } = doltConfig;
 const currentPage = `/deployments/${ownerName}/${depName}?tab=configuration`;
 const loggedIn = true;
 

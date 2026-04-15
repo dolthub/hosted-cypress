@@ -1,10 +1,10 @@
 import { allDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
-import { doltgresConfig } from "../shared/deploymentConfigs";
+import { doltConfig } from "../shared/deploymentConfigs";
 import { logsTests } from "../shared/deploymentTestBuilders";
 
-const pageName = "Doltgres deployment logs page";
-const { ownerName, depName } = doltgresConfig;
+const pageName = "Deployment logs page";
+const { ownerName, depName } = doltConfig;
 const currentPage = `/deployments/${ownerName}/${depName}?tab=logs`;
 const loggedIn = true;
 
@@ -14,8 +14,8 @@ const skip = true;
 describe(pageName, () => {
   const devices = allDevicesForAppLayout(
     pageName,
-    logsTests(doltgresConfig),
-    logsTests(doltgresConfig, true),
+    logsTests(doltConfig),
+    logsTests(doltConfig, true),
   );
   runTestsForDevices({ currentPage, devices, skip, loggedIn });
 });
