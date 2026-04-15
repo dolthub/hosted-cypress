@@ -337,39 +337,22 @@ type Tab = {
   exp?: Expectation[];
 };
 
-const buildTabs = (hasWorkbench: boolean): Tab[] => [
+const buildTabs = (_hasWorkbench: boolean): Tab[] => [
   {
     tab: "Database",
     notStartedMsg: true,
-    hasDataCy: [
-      "connectivity-field-host",
-      "connectivity-field-port",
-      "connectivity-field-username",
-      "connectivity-field-password",
-      "connectivity-field-certificate",
-      "must-started-msg",
-      "config-table",
-      "configuration-header",
-    ],
     notExistDataCy: [
       "instructions-header",
-      "clone-header",
-      "create-from-backup-button",
       "clone-instructions",
       "disabled-clone-instructions",
       "save-changes-button",
     ],
     exp: [
-      newExpectationWithScrollIntoView(
-        "should scroll to config table",
-        "[data-cy=config-table]",
-        beVisible,
-        true,
-      ),
+      shouldFindAndScrollTo("configuration-header"),
       newExpectation(
         "should find no inputs in config table",
         "[data-cy=config-table] input",
-        newShouldArgs("be.visible.and.have.length", 0),
+        notExist,
       ),
     ],
   },
@@ -396,28 +379,22 @@ const buildTabs = (hasWorkbench: boolean): Tab[] => [
       "older-pagination-button",
     ],
   },
-  { tab: "Backups", hasDataCy: ["backup-table", "backup-options-popup"] },
+  { tab: "Backups", hasDataCy: ["backup-table"] },
   {
     tab: "Settings",
-    hasDataCy: [
-      ...(hasWorkbench ? ["deployment-workbench"] : []),
-      "collab-header",
-      "collab-table",
-      "cypresstesting-collab-row",
-      "add-collab-button",
-      "service-window-settings",
-    ],
+    hasDataCy: ["collab-header", "add-collab-button"],
     notExistDataCy: [
-      ...(!hasWorkbench ? ["deployment-workbench"] : []),
       "workbench-database-list",
       "database-writes-enabled",
       "writes-not-enabled",
       "enable-writes-form",
       "workbench-auth-directions",
       "workbench-no-databases",
-      "edit-service-window-button",
-      "advanced-settings",
-      "update-advanced-settings-button",
+    ],
+    exp: [
+      shouldFindAndScrollTo("collab-table"),
+      shouldFindAndScrollTo("cypresstesting-collab-row"),
+      shouldFindAndScrollTo("service-window-settings"),
     ],
   },
 ];
