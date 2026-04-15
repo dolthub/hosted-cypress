@@ -73,10 +73,9 @@ Cypress.Commands.add("visitAndWait", (path: string) => {
 Cypress.Commands.add(
   "loginAsCypressTestingAfterNavigateToSignin",
   (redirectValue?: string) => {
-    cy.env<{ TEST_USERNAME: string; TEST_PASSWORD: string }>([
-      "TEST_USERNAME",
-      "TEST_PASSWORD",
-    ]).then(({ TEST_USERNAME: username, TEST_PASSWORD: password }) => {
+    cy.env(["TEST_USERNAME", "TEST_PASSWORD"]).then(envs => {
+      const username = envs["TEST_USERNAME"] as string;
+      const password = envs["TEST_PASSWORD"] as string;
       if (!password || !username) {
         throw new Error("Username or password env not set");
       }
