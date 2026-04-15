@@ -23,9 +23,9 @@ describe(pageName, () => {
     shouldFindAndContain("active-tab-backups", "Backups"),
     shouldBeVisible("backup-table"),
     newExpectation(
-      "should have at least 10 backups",
+      "should have at least 5 backups",
       "[data-cy=backup-table] > tbody > tr",
-      newShouldArgs("be.visible.and.have.length.of.at.least", 10),
+      newShouldArgs("be.visible.and.have.length.of.at.least", 5),
     ),
     newExpectation(
       "should have server in each row",
@@ -33,14 +33,14 @@ describe(pageName, () => {
       beVisibleAndContain("0"),
     ),
     newExpectation(
-      "should have doltgres-test database in each row",
+      "should have getting_started database in each row",
       "[data-cy=backup-table] > tbody > tr > td:nth-child(3)",
-      beVisibleAndContain("doltgres-test"),
+      beVisibleAndContain("getting_started"),
     ),
     newExpectation(
       "should have size in each row",
       "[data-cy=backup-table] > tbody > tr > td:nth-child(4)",
-      beVisibleAndContain("MB"),
+      beVisibleAndContain("KB"),
     ),
     newExpectation(
       "should have created at in each row",

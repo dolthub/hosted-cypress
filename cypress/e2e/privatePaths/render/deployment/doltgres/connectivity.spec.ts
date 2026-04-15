@@ -18,7 +18,7 @@ const connectivityTests = [
   { dataCy: "copyable-field-username", text: "Username" },
   { dataCy: "copyable-field-password", text: "Password" },
   { dataCy: "copyable-field-certificate", text: "Certificate" },
-  { dataCy: "connect-instructions", text: "PostgreSQL Client" },
+  { dataCy: "connect-instructions", text: "Psql Client" },
   { dataCy: "docs-link", text: "Read the docs" },
 ];
 
