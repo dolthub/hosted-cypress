@@ -260,9 +260,7 @@ const collabFormClickFlow = newClickFlow("[data-cy=add-collab-button]", [
       `should find ${findCy}`,
       `[data-cy=${clickCy}]`,
       beVisible,
-      [
-        newClickFlow(`[data-cy=${clickCy}]`, [shouldBeVisible(findCy)]),
-      ],
+      [newClickFlow(`[data-cy=${clickCy}]`, [shouldBeVisible(findCy)])],
     ),
   ),
 ]);
