@@ -23,9 +23,6 @@ export const clickOpts: Partial<Cypress.ClickOptions> = {
   scrollBehavior: false,
 };
 
-const username = Cypress.env("TEST_USERNAME");
-const password = Cypress.env("TEST_PASSWORD");
-
 export const deviceDimensions: Record<
   Cypress.ViewportPreset,
   Cypress.Viewport
@@ -97,9 +94,7 @@ export function runTestsForDevices({
   });
 
   devices.forEach(d => {
-    // Skip tests that require login if username and password not found
-    const skipForLogin = loggedIn && (!username || !password);
-    if (skip || skipForLogin) {
+    if (skip) {
       xit(d.description, deviceDimensions[d.device], () => {
         runTests(d);
       });
