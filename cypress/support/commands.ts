@@ -30,9 +30,6 @@ const opts: Partial<Cypress.Timeoutable> = {
 };
 const clickOpts: Partial<Cypress.ClickOptions> = { scrollBehavior: false };
 
-const username = Cypress.env("TEST_USERNAME");
-const password = Cypress.env("TEST_PASSWORD");
-
 // Ensures page has loaded before running tests
 // Reference: https://www.cypress.io/blog/2018/02/05/when-can-the-test-start/
 Cypress.Commands.add("visitAndWait", (path: string) => {
@@ -76,26 +73,30 @@ Cypress.Commands.add("visitAndWait", (path: string) => {
 Cypress.Commands.add(
   "loginAsCypressTestingAfterNavigateToSignin",
   (redirectValue?: string) => {
-    if (!password || !username) {
-      throw new Error("Username or password env not set");
-    }
-    cy.session(
-      "hostedLogin",
-      () => {
-        cy.visitAndWait("/signin");
-        completeLoginForCypressTesting();
-        ensureSuccessfulLogin(redirectValue);
-      },
-      {
-        cacheAcrossSpecs: true,
-      },
-    );
+    cy.env(["TEST_USERNAME", "TEST_PASSWORD"]).then(envs => {
+      const username = envs["TEST_USERNAME"] as string;
+      const password = envs["TEST_PASSWORD"] as string;
+      if (!password || !username) {
+        throw new Error("Username or password env not set");
+      }
+      cy.session(
+        "hostedLogin",
+        () => {
+          cy.visitAndWait("/signin");
+          completeLoginForCypressTesting(username, password);
+          ensureSuccessfulLogin(redirectValue);
+        },
+        {
+          cacheAcrossSpecs: true,
+        },
+      );
+    });
   },
 );
 
 function ensureSuccessfulLogin(redirectValue?: string) {
   // Must set cookie for localhost so navbar renders correctly
-  if (Cypress.env("LOCAL")) {
+  if (Cypress.expose("LOCAL")) {
     cy.setCookie("hostedToken", "fake-token");
   }
   if (redirectValue) {
@@ -105,7 +106,7 @@ function ensureSuccessfulLogin(redirectValue?: string) {
   }
 }
 
-function completeLoginForCypressTesting() {
+function completeLoginForCypressTesting(username: string, password: string) {
   // Check that email form has rendered
   cy.get("[data-cy=signin-email-form]", opts).should("be.visible");
   // Enter username and password in inputs

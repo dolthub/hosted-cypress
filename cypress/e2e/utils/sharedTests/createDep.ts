@@ -12,7 +12,7 @@ import {
 } from "./sharedFunctionsAndVariables";
 
 export const isDev =
-  Cypress.env("LOCAL") ||
+  Cypress.expose("LOCAL") ||
   Cypress.config().baseUrl?.includes("hosteddoltdb.hosteddev.ld-corp.com");
 
 export const testAboutTab = (
