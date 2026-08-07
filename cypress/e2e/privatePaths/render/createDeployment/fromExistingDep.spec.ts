@@ -4,7 +4,10 @@ import {
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { allDevicesForAppLayout } from "@utils/devices";
 import { runTestsForDevices } from "@utils/index";
-import { testAboutTab, testConfirmTab } from "@utils/sharedTests/createDep";
+import {
+  testAboutTab,
+  testConfirmTabWithoutCostPerms,
+} from "@utils/sharedTests/createDep";
 
 const pageName = "Create deployment page with existing deployment params";
 const ownerName = "automated_testing";
@@ -22,7 +25,7 @@ describe(pageName, () => {
 
     ...testAboutTab(ownerName, `${depName}-1`),
     // Skip to Confirm
-    ...testConfirmTab(),
+    ...testConfirmTabWithoutCostPerms(ownerName),
   ];
 
   const devices = allDevicesForAppLayout(pageName, tests, tests);

@@ -77,13 +77,30 @@ export const testAdvancedTab = (mobile = false): Tests => [
   shouldClickAndFind("next-advanced", "confirm-deployment"),
 ];
 
+// Costs are quoted with the billing owner's pricing multiplier, which defaults
+// to 10x. Owners predating that default are grandfathered into a lower
+// multiplier, so a grandfathered owner needs its cost passed in explicitly.
 export const testConfirmTab = (cost?: string): Tests => [
   scrollToPosition("#main-content", "top"),
   shouldFindAndContain("active-tab", "Confirm"),
   shouldNotExist("error-msg"),
   shouldFindAndContain("hourly-cost", [
     "Hourly cost:",
-    `$${cost ?? "0.67"} + egress`,
+    `$${cost ?? "1.11"} + egress`,
   ]),
+  shouldFindAndScrollTo("create-deployment-button"),
+];
+
+// Quoting costs needs the owner's pricing multiplier, so it is only allowed for
+// owners of the organization the deployment would belong to. Non-owners get an
+// error in place of the cost breakdown.
+export const testConfirmTabWithoutCostPerms = (ownerName: string): Tests => [
+  scrollToPosition("#main-content", "top"),
+  shouldFindAndContain("active-tab", "Confirm"),
+  shouldNotExist("hourly-cost"),
+  shouldFindAndContain(
+    "error-msg",
+    `Must be an owner of the organization '${ownerName}' to calculate deployment costs.`,
+  ),
   shouldFindAndScrollTo("create-deployment-button"),
 ];
