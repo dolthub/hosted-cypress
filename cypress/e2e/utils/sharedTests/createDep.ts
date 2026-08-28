@@ -5,6 +5,7 @@ import {
   shouldFindAndContain,
   shouldFindAndHaveValue,
   shouldFindAndScrollTo,
+  shouldFindAndScrollToWithText,
   shouldFindButton,
   shouldFindCheckbox,
   shouldNotExist,
@@ -37,7 +38,9 @@ export const testAboutTab = (
       "Exit",
     ]),
     shouldFindAndContain("active-tab", "About"),
-    shouldFindAndContain("owner-select", ["Owner", ownerName]),
+    // Scrolled to rather than asserted in place: the creation method block above it is
+    // taller on a backup restore, which pushes this off a phone viewport.
+    shouldFindAndScrollToWithText("owner-select", ["Owner", ownerName]),
     shouldFindAndScrollTo("deployment-name-input"),
     ...depNameTests,
     shouldFindButton("next-about", false),
