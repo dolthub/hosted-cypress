@@ -6,7 +6,7 @@ import {
   shouldFindButton,
   shouldNotExist,
   shouldSelectOption,
-  shouldTypeAndSelectOption,
+  shouldTypeAndSelectOptionWithText,
 } from "@sharedTests/sharedFunctionsAndVariables";
 import { desktopDevicesForAppLayout } from "@utils/devices";
 import {
@@ -18,7 +18,6 @@ import {
   scrollToPosition,
 } from "@utils/helpers";
 import { runTestsForDevices } from "@utils/index";
-import { isDev } from "@utils/sharedTests/createDep";
 
 const pageName = "New support ticket page";
 const currentPage = "/support";
@@ -36,23 +35,24 @@ describe(pageName, () => {
     shouldBeVisible("support-form"),
     shouldNotExist("critical-err"),
     shouldFindButton("submit-button", true),
-    ...shouldTypeAndSelectOption(
+    ...shouldTypeAndSelectOptionWithText(
       "dolthub/us-jails-1",
       "deployment-select",
       3,
-      0,
       "us-jails-1",
     ),
     shouldSelectOption("Critical", "impact-select", 2, 1),
     shouldBeVisible("critical-err"),
 
-    ...shouldTypeAndSelectOption(
+    ...shouldTypeAndSelectOptionWithText(
       "automated_testing/us-jails",
       "deployment-select",
       3,
-      isDev ? 0 : 2,
       "us-jails",
       true,
+      // automated_testing/us-jails-1 also matches the search and this label is a prefix
+      // of it, so it has to be excluded by name.
+      "us-jails-1",
     ),
     newExpectationWithClickFlows(
       "should remove inactive deployment",

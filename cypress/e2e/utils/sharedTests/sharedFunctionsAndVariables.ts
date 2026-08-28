@@ -39,7 +39,7 @@ export const shouldFindAndScrollTo = (dataCy: string): Expectation =>
 
 export const shouldFindAndScrollToWithText = (
   dataCy: string,
-  text: string,
+  text: string | string[],
 ): Expectation =>
   newExpectationWithScrollIntoView(
     `should scroll to ${dataCy}`,
@@ -162,6 +162,37 @@ export function shouldTypeAndSelectOption(
           [],
         ),
       ],
+    ),
+  ];
+}
+
+// Matches the option by its text instead of its position, so a new deployment sorting
+// above the one under test does not change what gets selected.
+// excludeText disambiguates when one option's label is a prefix of another's, which
+// :contains alone cannot tell apart.
+export function shouldTypeAndSelectOptionWithText(
+  optionToSelect: string,
+  selectorDataCy: string,
+  selectorIdx: number,
+  typeString: string,
+  skipClear = false,
+  excludeText?: string,
+): Expectation[] {
+  const option =
+    `[id^=react-select-${selectorIdx}-option]:contains("${optionToSelect}")` +
+    (excludeText ? `:not(:contains("${excludeText}"))` : "");
+  return [
+    newExpectationWithTypeString(
+      `should search and select ${optionToSelect}`,
+      `[data-cy=${selectorDataCy}] input`,
+      beVisible,
+      { value: typeString, skipClear },
+    ),
+    newExpectationWithClickFlows(
+      `should have ${optionToSelect}`,
+      option,
+      beVisibleAndContain(optionToSelect),
+      [newClickFlow(option, [])],
     ),
   ];
 }
