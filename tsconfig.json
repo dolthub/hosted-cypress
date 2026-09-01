@@ -2,17 +2,16 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": true,
-    "target": "es5",
-    "lib": ["es5", "dom"],
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
     "outDir": "dist",
     "rootDir": "cypress",
-    "baseUrl": ".",
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "types": ["cypress", "node"],
     "paths": {
-      "@utils/*": ["cypress/e2e/utils/*"],
-      "@sharedTests/*": ["cypress/e2e/utils/sharedTests/*"]
+      "@utils/*": ["./cypress/e2e/utils/*"],
+      "@sharedTests/*": ["./cypress/e2e/utils/sharedTests/*"]
     }
   },
   "exclude": ["dist", "cypress.config.ts"],
