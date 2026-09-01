@@ -16,6 +16,26 @@ $ yarn && yarn compile
 $ softwareupdate --install-rosetta --agree-to-license
 ```
 
+### TypeScript 6 / 7 side-by-side
+
+`yarn compile` runs TypeScript 7 (the native Go compiler). typescript-eslint does not
+support the TS 7 API yet ([typescript-eslint#10940]), so the two live side-by-side:
+
+| package.json entry | resolves to | used by |
+| --- | --- | --- |
+| `typescript` (aliased to `@typescript/typescript6`) | TS 6 API, `tsc6` binary | `yarn lint`, Cypress, editors |
+| `typescript-7` (aliased to `typescript`) | TS 7, the `tsc` binary | `yarn compile` |
+
+This is the setup Microsoft recommends in the [TypeScript 7.0 announcement][ts7]. Once
+typescript-eslint supports TS 7, drop the `typescript-7` alias and point `typescript`
+back at the real package.
+
+Note that `yarn lint` type-aware rules are checked by TS 6 while `yarn compile` uses TS
+7, so in rare cases the two can disagree. `yarn compile` is the source of truth.
+
+[typescript-eslint#10940]: https://github.com/typescript-eslint/typescript-eslint/issues/10940
+[ts7]: https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/
+
 ## Running the tests
 
 You can either run our Cypress suite against our deployed production (`hosted.doltdb.com`), deployed development (`hosteddoltdb.hosteddev.ld-corp.com`) or against the local webserver (`localhost:3001`).

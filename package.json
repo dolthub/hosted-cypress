@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "cypress": "^15.21.1",
-    "typescript": "^7.0.2"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^8.0.4",
@@ -35,7 +35,8 @@
     "eslint-plugin-cypress": "^7.0.1",
     "eslint-plugin-import": "^2.32.0",
     "npm-run-all2": "^9.0.3",
-    "prettier": "^3.9.6"
+    "prettier": "^3.9.6",
+    "typescript-7": "npm:typescript@^7.0.2"
   },
   "resolutions": {
     "tar": "7.5.11",
