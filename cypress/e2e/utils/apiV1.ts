@@ -1,11 +1,11 @@
 // The Hosted API v1 read endpoints, as declared in
 // hosted-web/packages/hosted/openapi/v1.yaml.
 //
-// Every v1 endpoint requires `Authorization: Bearer <token>`, and there is no
+// Every v1 endpoint requires `Authorization: Bearer <token>` and there is no
 // session-cookie fallback, so these specs cover the contract a caller sees
-// *without* a token. The handler checks the Authorization header before it
-// resolves the owner, the deployment or the query parameters, so the
-// placeholders below are never looked up and need not exist.
+// without a credential. None of them gets past the credential or the method
+// check, so the owner and deployment below are never resolved and need not
+// exist.
 
 export interface ReadEndpoint {
   name: string;
@@ -19,9 +19,9 @@ const deploymentPath = `/api/v1/deployments/${owner}/${deployment}`;
 export const problemType =
   "https://docs.dolthub.com/products/hosted/api/v1/models/#model-errorcode";
 
-// `deployment-options` requires `cloud` and `pulls` requires `database`.
-// They are supplied so these paths exercise the same code path as the rest:
-// without them the request fails validation with a 400 before it is refused.
+// `deployment-options` requires `cloud` and `pulls` requires `database`. The
+// specs here are refused before either is read, but the catalogue describes
+// requests that are otherwise valid so authenticated tests can reuse it.
 export const readEndpoints: ReadEndpoint[] = [
   { name: "GET /user", path: "/api/v1/user" },
   {
@@ -59,6 +59,9 @@ export function expectProblem(
   expect(res.body["title"]).to.equal(title);
   expect(res.body["status"]).to.equal(status);
   expect(res.body["code"]).to.equal(code);
+  // `detail` is human-readable prose, so assert it is present and leave the
+  // wording alone -- v1 tells clients to branch on `code`, never on this.
+  expect(res.body["detail"]).to.be.a("string");
   expect(res.body["instance"]).to.equal(instance);
   expect(res.body["request_id"]).to.be.a("string");
 }

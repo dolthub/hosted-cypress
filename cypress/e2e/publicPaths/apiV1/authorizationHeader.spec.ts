@@ -1,9 +1,10 @@
 import { expectProblem } from "@utils/apiV1";
 
-const earl = "/api/v1/user";
+const url = "/api/v1/user";
 
-// An Authorization header the API cannot turn into a usable credential is
-// refused the same way a missing one is: 401 UNAUTHENTICATED, never 400 or 403.
+// Headers the API cannot turn into a usable credential, whether because they
+// are malformed or because the token is simply refused. All are turned away
+// the same way a missing header is: 401 UNAUTHENTICATED, never 400 or 403.
 const badHeaders = [
   {
     name: "a token that is not a real credential",
@@ -14,15 +15,15 @@ const badHeaders = [
   { name: "a lowercase bearer scheme", value: "bearer notarealtoken" },
 ];
 
-describe("Hosted API v1 rejects malformed Authorization headers", () => {
+describe("Hosted API v1 rejects unusable Authorization headers", () => {
   badHeaders.forEach(({ name, value }) => {
-    it(`${earl} with ${name} returns a 401 problem document`, () => {
+    it(`${url} with ${name} returns a 401 problem document`, () => {
       cy.request<Record<string, unknown>>({
-        url: earl,
+        url,
         headers: { Authorization: value },
         failOnStatusCode: false,
       }).then(res => {
-        expectProblem(res, 401, "UNAUTHENTICATED", "Unauthenticated", earl);
+        expectProblem(res, 401, "UNAUTHENTICATED", "Unauthenticated", url);
       });
     });
   });
@@ -35,13 +36,13 @@ describe("Hosted API v1 rejects malformed Authorization headers", () => {
   // credentials were missing or invalid".
   it("reports the same error code whether or not a credential was sent", () => {
     cy.request<Record<string, unknown>>({
-      url: earl,
+      url,
       failOnStatusCode: false,
     })
       .its("body.code")
       .should("equal", "UNAUTHENTICATED");
     cy.request<Record<string, unknown>>({
-      url: earl,
+      url,
       headers: { Authorization: "Bearer notarealtoken" },
       failOnStatusCode: false,
     })

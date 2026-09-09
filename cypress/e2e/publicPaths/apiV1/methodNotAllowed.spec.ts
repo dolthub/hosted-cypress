@@ -20,7 +20,6 @@ describe("Hosted API v1 read endpoints reject unsupported methods", () => {
         // Allow advertises what the path does support, and every read
         // endpoint supports at least GET.
         expect(res.headers["allow"]).to.contain("GET");
-        expect(res.body["detail"]).to.contain("Allowed:");
       });
     });
   });
