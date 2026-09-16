@@ -18,3 +18,12 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// jQuery's :contains() matches substrings, so it cannot tell an option apart from
+// one whose label merely starts with the same text -- picking "foo" out of a list
+// that also holds "foo-old" returns both, and cy.click() refuses two elements.
+// :exacttext() compares the trimmed text content instead.
+Cypress.$.expr.pseudos.exacttext = Cypress.$.expr.createPseudo(
+  (arg: string) => (el: Element) =>
+    (el.textContent ?? "").trim() === arg.replace(/^["']|["']$/g, ""),
+);

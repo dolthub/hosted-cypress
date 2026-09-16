@@ -50,9 +50,6 @@ describe(pageName, () => {
       3,
       "us-jails",
       true,
-      // automated_testing/us-jails-1 also matches the search and this label is a prefix
-      // of it, so it has to be excluded by name.
-      "us-jails-1",
     ),
     newExpectationWithClickFlows(
       "should remove inactive deployment",
