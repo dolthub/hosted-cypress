@@ -166,21 +166,17 @@ export function shouldTypeAndSelectOption(
   ];
 }
 
-// Matches the option by its text instead of its position, so a new deployment sorting
-// above the one under test does not change what gets selected.
-// excludeText disambiguates when one option's label is a prefix of another's, which
-// :contains alone cannot tell apart.
+// Matches the option by its exact text instead of its position, so neither a new
+// deployment sorting above the one under test nor one whose label merely starts with
+// the same text changes what gets selected. :exacttext is registered in support/e2e.
 export function shouldTypeAndSelectOptionWithText(
   optionToSelect: string,
   selectorDataCy: string,
   selectorIdx: number,
   typeString: string,
   skipClear = false,
-  excludeText?: string,
 ): Expectation[] {
-  const option =
-    `[id^=react-select-${selectorIdx}-option]:contains("${optionToSelect}")` +
-    (excludeText ? `:not(:contains("${excludeText}"))` : "");
+  const option = `[id^=react-select-${selectorIdx}-option]:exacttext("${optionToSelect}")`;
   return [
     newExpectationWithTypeString(
       `should search and select ${optionToSelect}`,
