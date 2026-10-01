@@ -40,6 +40,6 @@
   },
   "resolutions": {
     "tar": "7.5.11",
-    "undici": "6.28.0"
+    "undici": "6.28.1"
   }
 }
