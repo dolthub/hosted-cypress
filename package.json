@@ -36,7 +36,7 @@
     "eslint-plugin-cypress": "^7.0.2",
     "eslint-plugin-import": "^2.32.0",
     "npm-run-all2": "^9.0.3",
-    "prettier": "^3.9.9"
+    "prettier": "^3.9.10"
   },
   "resolutions": {
     "tar": "7.5.11",
