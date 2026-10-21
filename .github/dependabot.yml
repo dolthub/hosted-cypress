@@ -18,14 +18,13 @@ updates:
     typescript-eslint:
       patterns:
       - "@typescript-eslint/*"
-    # Batch routine lint/format updates; review major upgrades individually.
-    lint-and-format:
+    # Batch routine ESLint updates; review major upgrades individually.
+    eslint:
       patterns:
       - "eslint"
       - "@eslint/*"
       - "eslint-config-*"
       - "eslint-plugin-*"
-      - "prettier"
       update-types:
       - minor
       - patch
