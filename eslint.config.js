@@ -2,7 +2,6 @@ const js = require("@eslint/js");
 const typescriptEslint = require("@typescript-eslint/eslint-plugin");
 const tsParser = require("@typescript-eslint/parser");
 const cypress = require("eslint-plugin-cypress");
-const _import = require("eslint-plugin-import");
 
 module.exports = [
   js.configs.recommended,
@@ -14,7 +13,6 @@ module.exports = [
     plugins: {
       "@typescript-eslint": typescriptEslint,
       cypress,
-      import: _import,
     },
     languageOptions: {
       parser: tsParser,
@@ -94,7 +92,6 @@ module.exports = [
       "@typescript-eslint/promise-function-async": "error",
 
       // General rules
-      "import/prefer-default-export": "off",
       "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
       "no-sequences": "error",
       "no-underscore-dangle": "off",
@@ -102,13 +99,6 @@ module.exports = [
 
       // Cypress rules
       "cypress/no-unnecessary-waiting": "warn",
-    },
-    settings: {
-      "import/resolver": {
-        node: {
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
-        },
-      },
     },
   },
 ];
