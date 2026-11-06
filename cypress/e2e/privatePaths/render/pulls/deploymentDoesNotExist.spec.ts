@@ -1,5 +1,4 @@
 import {
-  shouldBeVisible,
   shouldFindAndContain,
   shouldNotExist,
 } from "@sharedTests/sharedFunctionsAndVariables";
@@ -18,8 +17,10 @@ const databasePage = true;
 
 describe(pageName, () => {
   const tests = [
-    shouldFindAndContain("404-page", "Database not found"),
-    shouldBeVisible("db-404-inner", "dep does not exist message"),
+    shouldFindAndContain(
+      "404-page",
+      `Deployment "${currentOwner}/${doesNotExistDep}" not found`,
+    ),
     shouldNotExist("pull-requests-table"),
   ];
 
